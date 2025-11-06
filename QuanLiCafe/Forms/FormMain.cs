@@ -2,6 +2,7 @@
 using QuanLiCafe.Data;
 using QuanLiCafe.Helpers;
 using QuanLiCafe.Models;
+using QuanLiCafe.Services;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,14 +11,23 @@ namespace QuanLiCafe.Forms
     public partial class FormMain : Form
     {
         private readonly CafeContext _context;
+        private readonly User _currentUser; // ✅ Current user
+        private readonly AuthService _authService;
+        
         private TableLayoutPanel tableLayoutPanel = null!;
         private Button btnReload = null!;
+        private Button btnInventory = null!;
+        private Button btnReport = null!; // ✅ Nút báo cáo
         private Label lblTitle = null!;
+        private Label lblUserInfo = null!; // ✅ Hiển thị user
         private Panel panelHeader = null!;
 
         public FormMain()
         {
             _context = Program.DbContext;
+            _currentUser = Program.CurrentUser!;
+            _authService = new AuthService(_context);
+            
             InitializeComponent();
             this.Load += FormMain_Load; // 🔹 Gắn sự kiện Load
         }
@@ -33,7 +43,7 @@ namespace QuanLiCafe.Forms
             panelHeader = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 80,
+                Height = 100, // Tăng chiều cao để chứa thêm user info
                 BackColor = Color.FromArgb(52, 73, 94)
             };
 
@@ -43,17 +53,61 @@ namespace QuanLiCafe.Forms
                 Font = new Font("Segoe UI", 20, FontStyle.Bold),
                 ForeColor = Color.White,
                 AutoSize = false,
-                Size = new Size(400, 50),
-                Location = new Point(20, 15),
+                Size = new Size(400, 40),
+                Location = new Point(20, 10),
                 TextAlign = ContentAlignment.MiddleLeft
             };
+
+            // ✅ Hiển thị thông tin user
+            lblUserInfo = new Label
+            {
+                Text = $"👤 {_currentUser.Username} ({_currentUser.Role})",
+                Font = new Font("Segoe UI", 12),
+                ForeColor = Color.White,
+                AutoSize = false,
+                Size = new Size(400, 25),
+                Location = new Point(20, 55),
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            // ✅ Nút Báo Cáo (chỉ hiện với Admin)
+            btnReport = new Button
+            {
+                Text = "📊 Báo Cáo",
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Size = new Size(120, 50),
+                Location = new Point(590, 25),
+                BackColor = Color.FromArgb(155, 89, 182),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand,
+                Visible = _authService.IsAdmin(_currentUser) // ✅ Chỉ Admin mới thấy
+            };
+            btnReport.FlatAppearance.BorderSize = 0;
+            btnReport.Click += BtnReport_Click;
+
+            // 🆕 Button Kho (chỉ hiện với Admin)
+            btnInventory = new Button
+            {
+                Text = "📦 Kho",
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Size = new Size(120, 50),
+                Location = new Point(720, 25),
+                BackColor = Color.FromArgb(243, 156, 18),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand,
+                Visible = _authService.IsAdmin(_currentUser) // ✅ Chỉ Admin mới thấy
+            };
+            btnInventory.FlatAppearance.BorderSize = 0;
+            btnInventory.Click += BtnInventory_Click;
 
             btnReload = new Button
             {
                 Text = "🔄 Tải Lại",
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Size = new Size(120, 50),
-                Location = new Point(850, 15),
+                Location = new Point(850, 25),
                 BackColor = Color.FromArgb(46, 204, 113),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -63,6 +117,9 @@ namespace QuanLiCafe.Forms
             btnReload.Click += BtnReload_Click;
 
             panelHeader.Controls.Add(lblTitle);
+            panelHeader.Controls.Add(lblUserInfo);
+            panelHeader.Controls.Add(btnReport);
+            panelHeader.Controls.Add(btnInventory);
             panelHeader.Controls.Add(btnReload);
 
             // 🔹 TableLayoutPanel (5 cột x 4 hàng = 20 bàn)
@@ -192,6 +249,26 @@ namespace QuanLiCafe.Forms
             LoadTables();
             MessageBox.Show("Đã tải lại trạng thái bàn!", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // ✅ Nút báo cáo
+        private void BtnReport_Click(object? sender, EventArgs e)
+        {
+            var formReport = new FormReport(_currentUser);
+            formReport.ShowDialog();
+        }
+
+        private void BtnInventory_Click(object? sender, EventArgs e)
+        {
+            if (!_authService.IsAdmin(_currentUser))
+            {
+                MessageBox.Show("Bạn không có quyền truy cập chức năng này!", "⚠️ Từ Chối",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var formInventory = new FormInventory();
+            formInventory.ShowDialog();
         }
     }
 }

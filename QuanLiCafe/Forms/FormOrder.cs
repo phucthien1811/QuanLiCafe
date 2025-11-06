@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLiCafe.Data;
 using QuanLiCafe.Models;
+using QuanLiCafe.Services;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace QuanLiCafe.Forms
         private readonly int _tableId;
         private Order? _currentOrder;
         private BindingList<OrderDetailViewModel> _orderDetails = new();
+        
+        // Services
+        private readonly IPaymentService _paymentService;
 
         // Controls
         private Label lblTableName = null!;
@@ -37,6 +41,11 @@ namespace QuanLiCafe.Forms
         {
             _context = Program.DbContext;
             _tableId = tableId;
+            
+            // Khởi tạo services
+            var orderService = new OrderService(_context);
+            _paymentService = new PaymentService(_context, orderService);
+            
             InitializeComponent();
             this.Load += FormOrder_Load;
         }
@@ -657,6 +666,7 @@ namespace QuanLiCafe.Forms
             {
                 try
                 {
+                    // Lưu OrderDetails vào database
                     var existingDetails = _context.OrderDetails
                         .Where(od => od.OrderId == _currentOrder.Id)
                         .ToList();
@@ -673,18 +683,62 @@ namespace QuanLiCafe.Forms
                             Note = item.Note
                         });
                     }
-
-                    _currentOrder.Discount = discountPercent;
-                    _currentOrder.VAT = vatPercent;
-                    _currentOrder.TotalAmount = total;
-
-                    var table = _context.Tables.Find(_tableId);
-                    if (table != null)
-                    {
-                        table.Status = "Free";
-                    }
-
                     _context.SaveChanges();
+
+                    // ✅ Xử lý thanh toán bằng PaymentService
+                    // (Tính tổng + Cập nhật trạng thái bàn = Closed)
+                    _paymentService.ProcessPayment(_currentOrder.Id, discountPercent, vatPercent);
+
+                    // ✅ Hỏi xuất hóa đơn
+                    var exportResult = MessageBox.Show(
+                        "Thanh toán thành công!\n\n" +
+                        "Bạn có muốn xuất hóa đơn không?\n\n" +
+                        "Yes = PDF\n" +
+                        "No = Excel\n" +
+                        "Cancel = Không xuất",
+                        "📄 Xuất Hóa Đơn",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question);
+
+                    if (exportResult != DialogResult.Cancel)
+                    {
+                        // Chọn thư mục lưu
+                        using (var folderDialog = new FolderBrowserDialog())
+                        {
+                            folderDialog.Description = "Chọn thư mục lưu hóa đơn";
+                            folderDialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                            if (folderDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                string outputFile = "";
+
+                                if (exportResult == DialogResult.Yes)
+                                {
+                                    // Xuất PDF
+                                    outputFile = _paymentService.ExportInvoiceToPDF(_currentOrder.Id, folderDialog.SelectedPath);
+                                    MessageBox.Show($"✅ Đã xuất hóa đơn PDF!\n\n{outputFile}",
+                                        "Thành Công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else if (exportResult == DialogResult.No)
+                                {
+                                    // Xuất Excel
+                                    outputFile = _paymentService.ExportInvoiceToExcel(_currentOrder.Id, folderDialog.SelectedPath);
+                                    MessageBox.Show($"✅ Đã xuất hóa đơn Excel!\n\n{outputFile}",
+                                        "Thành Công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+
+                                // Mở file vừa xuất
+                                if (!string.IsNullOrEmpty(outputFile) && File.Exists(outputFile))
+                                {
+                                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                                    {
+                                        FileName = outputFile,
+                                        UseShellExecute = true
+                                    });
+                                }
+                            }
+                        }
+                    }
 
                     MessageBox.Show($"✅ THANH TOÁN THÀNH CÔNG!\n\n" +
                                   $"Tổng tiền: {total:N0} ₫\n" +
@@ -696,8 +750,8 @@ namespace QuanLiCafe.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"❌ Lỗi thanh toán:\n{ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"❌ Lỗi thanh toán:\n{ex.Message}\n\n{ex.StackTrace}",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
