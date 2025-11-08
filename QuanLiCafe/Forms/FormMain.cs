@@ -34,7 +34,7 @@ namespace QuanLiCafe.Forms
 
         private void InitializeComponent()
         {
-            this.Text = "Quản Lý Quán Cafe - Sơ Đồ Bàn";
+            this.Text = "Cafe Management - Table Layout";
             this.Size = new Size(1000, 700);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.WhiteSmoke;
@@ -43,13 +43,13 @@ namespace QuanLiCafe.Forms
             panelHeader = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 100, // Tăng chiều cao để chứa thêm user info
+                Height = 100,
                 BackColor = Color.FromArgb(52, 73, 94)
             };
 
             lblTitle = new Label
             {
-                Text = "SƠ ĐỒ BÀN",
+                Text = "TABLE LAYOUT",
                 Font = new Font("Segoe UI", 20, FontStyle.Bold),
                 ForeColor = Color.White,
                 AutoSize = false,
@@ -58,7 +58,7 @@ namespace QuanLiCafe.Forms
                 TextAlign = ContentAlignment.MiddleLeft
             };
 
-            // ✅ Hiển thị thông tin user
+            // ✅ User info
             lblUserInfo = new Label
             {
                 Text = $"👤 {_currentUser.Username} ({_currentUser.Role})",
@@ -70,10 +70,10 @@ namespace QuanLiCafe.Forms
                 TextAlign = ContentAlignment.MiddleLeft
             };
 
-            // ✅ Nút Báo Cáo (chỉ hiện với Admin)
+            // ✅ Report button (Admin only)
             btnReport = new Button
             {
-                Text = "📊 Báo Cáo",
+                Text = "📊 Reports",
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Size = new Size(120, 50),
                 Location = new Point(590, 25),
@@ -81,15 +81,15 @@ namespace QuanLiCafe.Forms
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand,
-                Visible = _authService.IsAdmin(_currentUser) // ✅ Chỉ Admin mới thấy
+                Visible = _authService.IsAdmin(_currentUser)
             };
             btnReport.FlatAppearance.BorderSize = 0;
             btnReport.Click += BtnReport_Click;
 
-            // 🆕 Button Kho (chỉ hiện với Admin)
+            // 🆕 Inventory button (Admin only)
             btnInventory = new Button
             {
-                Text = "📦 Kho",
+                Text = "📦 Inventory",
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Size = new Size(120, 50),
                 Location = new Point(720, 25),
@@ -97,14 +97,14 @@ namespace QuanLiCafe.Forms
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand,
-                Visible = _authService.IsAdmin(_currentUser) // ✅ Chỉ Admin mới thấy
+                Visible = _authService.IsAdmin(_currentUser)
             };
             btnInventory.FlatAppearance.BorderSize = 0;
             btnInventory.Click += BtnInventory_Click;
 
             btnReload = new Button
             {
-                Text = "🔄 Tải Lại",
+                Text = "🔄 Reload",
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Size = new Size(120, 50),
                 Location = new Point(850, 25),
@@ -122,7 +122,7 @@ namespace QuanLiCafe.Forms
             panelHeader.Controls.Add(btnInventory);
             panelHeader.Controls.Add(btnReload);
 
-            // 🔹 TableLayoutPanel (5 cột x 4 hàng = 20 bàn)
+            // 🔹 TableLayoutPanel (5 columns x 4 rows = 20 tables)
             tableLayoutPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -164,14 +164,14 @@ namespace QuanLiCafe.Forms
                 .Take(20)
                 .ToList();
 
-            // Nếu chưa đủ 20 bàn, tạo thêm
+            // If not enough 20 tables, create more
             if (tables.Count < 20)
             {
                 for (int i = tables.Count + 1; i <= 20; i++)
                 {
                     var newTable = new Table
                     {
-                        Name = $"Bàn {i}",
+                        Name = $"Table {i}",
                         Status = "Free"
                     };
                     _context.Tables.Add(newTable);
@@ -247,11 +247,11 @@ namespace QuanLiCafe.Forms
         {
             _context.ChangeTracker.Clear();
             LoadTables();
-            MessageBox.Show("Đã tải lại trạng thái bàn!", "Thông báo",
+            MessageBox.Show("Table status reloaded!", "Notification",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // ✅ Nút báo cáo
+        // ✅ Report button
         private void BtnReport_Click(object? sender, EventArgs e)
         {
             var formReport = new FormReport(_currentUser);
@@ -262,7 +262,7 @@ namespace QuanLiCafe.Forms
         {
             if (!_authService.IsAdmin(_currentUser))
             {
-                MessageBox.Show("Bạn không có quyền truy cập chức năng này!", "⚠️ Từ Chối",
+                MessageBox.Show("You don't have permission to access this feature!", "⚠️ Access Denied",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

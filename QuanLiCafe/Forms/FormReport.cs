@@ -37,7 +37,7 @@ namespace QuanLiCafe.Forms
 
         private void InitializeComponent()
         {
-            this.Text = "?? Báo Cáo - Quán Cà Phê";
+            this.Text = "?? Reports - Cafe Management";
             this.Size = new Size(1400, 850);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.WhiteSmoke;
@@ -52,7 +52,7 @@ namespace QuanLiCafe.Forms
 
             var lblTitle = new Label
             {
-                Text = "?? BÁO CÁO DOANH THU",
+                Text = "?? REVENUE REPORTS",
                 Font = new Font("Segoe UI", 22, FontStyle.Bold),
                 ForeColor = Color.White,
                 Location = new Point(20, 10),
@@ -71,16 +71,16 @@ namespace QuanLiCafe.Forms
             // Date pickers
             var lblFrom = new Label
             {
-                Text = "T? ngày:",
+                Text = "From:",
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.White,
                 Location = new Point(20, 85),
-                Size = new Size(80, 25)
+                Size = new Size(60, 25)
             };
 
             dtpFrom = new DateTimePicker
             {
-                Location = new Point(110, 85),
+                Location = new Point(90, 85),
                 Size = new Size(200, 30),
                 Font = new Font("Segoe UI", 11),
                 Value = DateTime.Now.AddDays(-30)
@@ -88,16 +88,16 @@ namespace QuanLiCafe.Forms
 
             var lblTo = new Label
             {
-                Text = "??n ngày:",
+                Text = "To:",
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.White,
-                Location = new Point(330, 85),
-                Size = new Size(90, 25)
+                Location = new Point(310, 85),
+                Size = new Size(40, 25)
             };
 
             dtpTo = new DateTimePicker
             {
-                Location = new Point(430, 85),
+                Location = new Point(360, 85),
                 Size = new Size(200, 30),
                 Font = new Font("Segoe UI", 11),
                 Value = DateTime.Now
@@ -105,8 +105,8 @@ namespace QuanLiCafe.Forms
 
             btnRefresh = new Button
             {
-                Text = "?? T?i L?i",
-                Location = new Point(650, 80),
+                Text = "?? Reload",
+                Location = new Point(580, 80),
                 Size = new Size(150, 35),
                 BackColor = Color.FromArgb(46, 204, 113),
                 ForeColor = Color.White,
@@ -120,7 +120,7 @@ namespace QuanLiCafe.Forms
             // Summary labels
             lblTotalRevenue = new Label
             {
-                Text = "?? T?ng DT: 0 ?",
+                Text = "?? Total Revenue: $0",
                 Font = new Font("Segoe UI", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 Location = new Point(900, 40),
@@ -130,7 +130,7 @@ namespace QuanLiCafe.Forms
 
             lblTotalOrders = new Label
             {
-                Text = "?? T?ng ?H: 0",
+                Text = "?? Total Orders: 0",
                 Font = new Font("Segoe UI", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 Location = new Point(900, 75),
@@ -151,46 +151,46 @@ namespace QuanLiCafe.Forms
                 Padding = new Point(10, 10)
             };
 
-            // Tab 1: Doanh thu theo ngày
-            var tabRevenue = new TabPage("?? Doanh Thu Theo Ngày");
+            // Tab 1: Revenue by Date
+            var tabRevenue = new TabPage("?? Revenue by Date");
             dgvRevenueByDate = CreateDataGridView();
             dgvRevenueByDate.Columns.AddRange(new DataGridViewColumn[]
             {
-                new DataGridViewTextBoxColumn { HeaderText = "Ngày", DataPropertyName = "Date", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" } },
-                new DataGridViewTextBoxColumn { HeaderText = "Doanh Thu", DataPropertyName = "Revenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
-                new DataGridViewTextBoxColumn { HeaderText = "Doanh Thu (Formatted)", DataPropertyName = "RevenueFormatted", Width = 250 }
+                new DataGridViewTextBoxColumn { HeaderText = "Date", DataPropertyName = "Date", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" } },
+                new DataGridViewTextBoxColumn { HeaderText = "Revenue", DataPropertyName = "Revenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
+                new DataGridViewTextBoxColumn { HeaderText = "Revenue (Formatted)", DataPropertyName = "RevenueFormatted", Width = 250 }
             });
 
             panelRevenueByDate = new Panel { Dock = DockStyle.Fill, Padding = new Padding(10) };
             panelRevenueByDate.Controls.Add(dgvRevenueByDate);
             tabRevenue.Controls.Add(panelRevenueByDate);
 
-            // Tab 2: Top s?n ph?m
-            var tabProducts = new TabPage("?? Top S?n Ph?m Bán Ch?y");
+            // Tab 2: Top Products
+            var tabProducts = new TabPage("?? Top Selling Products");
             dgvTopProducts = CreateDataGridView();
             dgvTopProducts.Columns.AddRange(new DataGridViewColumn[]
             {
-                new DataGridViewTextBoxColumn { HeaderText = "STT", Width = 70, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
-                new DataGridViewTextBoxColumn { HeaderText = "Tên S?n Ph?m", DataPropertyName = "ProductName", Width = 300 },
-                new DataGridViewTextBoxColumn { HeaderText = "S? L??ng Bán", DataPropertyName = "TotalQuantity", Width = 150, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
-                new DataGridViewTextBoxColumn { HeaderText = "Doanh Thu", DataPropertyName = "TotalRevenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
-                new DataGridViewTextBoxColumn { HeaderText = "S? ??n", DataPropertyName = "OrderCount", Width = 100, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } }
+                new DataGridViewTextBoxColumn { HeaderText = "No.", Width = 70, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
+                new DataGridViewTextBoxColumn { HeaderText = "Product Name", DataPropertyName = "ProductName", Width = 300 },
+                new DataGridViewTextBoxColumn { HeaderText = "Quantity Sold", DataPropertyName = "TotalQuantity", Width = 150, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
+                new DataGridViewTextBoxColumn { HeaderText = "Revenue", DataPropertyName = "TotalRevenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
+                new DataGridViewTextBoxColumn { HeaderText = "Orders", DataPropertyName = "OrderCount", Width = 100, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } }
             });
 
             panelTopProducts = new Panel { Dock = DockStyle.Fill, Padding = new Padding(10) };
             panelTopProducts.Controls.Add(dgvTopProducts);
             tabProducts.Controls.Add(panelTopProducts);
 
-            // Tab 3: Doanh thu theo nhân viên
-            var tabStaff = new TabPage("?? Doanh Thu Theo Nhân Viên");
+            // Tab 3: Revenue by Staff
+            var tabStaff = new TabPage("?? Revenue by Staff");
             dgvRevenueByStaff = CreateDataGridView();
             dgvRevenueByStaff.Columns.AddRange(new DataGridViewColumn[]
             {
-                new DataGridViewTextBoxColumn { HeaderText = "STT", Width = 70, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
-                new DataGridViewTextBoxColumn { HeaderText = "Nhân Viên", DataPropertyName = "StaffName", Width = 250 },
-                new DataGridViewTextBoxColumn { HeaderText = "S? ??n", DataPropertyName = "TotalOrders", Width = 120, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
-                new DataGridViewTextBoxColumn { HeaderText = "T?ng Doanh Thu", DataPropertyName = "TotalRevenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
-                new DataGridViewTextBoxColumn { HeaderText = "TB/??n", DataPropertyName = "AverageOrderValue", Width = 180, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } }
+                new DataGridViewTextBoxColumn { HeaderText = "No.", Width = 70, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
+                new DataGridViewTextBoxColumn { HeaderText = "Staff Name", DataPropertyName = "StaffName", Width = 250 },
+                new DataGridViewTextBoxColumn { HeaderText = "Orders", DataPropertyName = "TotalOrders", Width = 120, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter } },
+                new DataGridViewTextBoxColumn { HeaderText = "Total Revenue", DataPropertyName = "TotalRevenue", Width = 200, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } },
+                new DataGridViewTextBoxColumn { HeaderText = "Avg/Order", DataPropertyName = "AverageOrderValue", Width = 180, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } }
             });
 
             panelRevenueByStaff = new Panel { Dock = DockStyle.Fill, Padding = new Padding(10) };
@@ -242,21 +242,21 @@ namespace QuanLiCafe.Forms
                 var totalRevenue = _reportService.GetTotalRevenue(fromDate, toDate);
                 var totalOrders = _reportService.GetTotalOrders(fromDate, toDate);
 
-                lblTotalRevenue.Text = $"?? T?ng DT: {totalRevenue:N0} ?";
-                lblTotalOrders.Text = $"?? T?ng ?H: {totalOrders}";
+                lblTotalRevenue.Text = $"?? Total Revenue: ${totalRevenue:N0}";
+                lblTotalOrders.Text = $"?? Total Orders: {totalOrders}";
 
-                // Tab 1: Doanh thu theo ngày
+                // Tab 1: Revenue by Date
                 var revenueByDate = _reportService.GetRevenueByDate(fromDate, toDate);
                 var revenueData = revenueByDate.Select((kvp, index) => new
                 {
                     STT = index + 1,
                     Date = kvp.Key,
                     Revenue = kvp.Value,
-                    RevenueFormatted = $"{kvp.Value:N0} ?"
+                    RevenueFormatted = $"${kvp.Value:N0}"
                 }).ToList();
                 dgvRevenueByDate.DataSource = revenueData;
 
-                // Tab 2: Top s?n ph?m
+                // Tab 2: Top Products
                 var topProducts = _reportService.GetTopSellingProducts(5);
                 var productsData = topProducts.Select((p, index) => new
                 {
@@ -268,7 +268,7 @@ namespace QuanLiCafe.Forms
                 }).ToList();
                 dgvTopProducts.DataSource = productsData;
 
-                // Tab 3: Doanh thu theo nhân viên
+                // Tab 3: Revenue by Staff
                 var revenueByStaff = _reportService.GetRevenueByStaff(fromDate, toDate);
                 var staffData = revenueByStaff.Select((s, index) => new
                 {
@@ -280,13 +280,13 @@ namespace QuanLiCafe.Forms
                 }).ToList();
                 dgvRevenueByStaff.DataSource = staffData;
 
-                // Thêm STT column vào ??u
+                // Add STT column at beginning
                 if (dgvRevenueByDate.Columns["STT"] == null && revenueData.Any())
                 {
                     dgvRevenueByDate.Columns.Insert(0, new DataGridViewTextBoxColumn
                     {
                         Name = "STT",
-                        HeaderText = "STT",
+                        HeaderText = "No.",
                         DataPropertyName = "STT",
                         Width = 70,
                         DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
@@ -295,7 +295,7 @@ namespace QuanLiCafe.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"L?i t?i báo cáo:\n{ex.Message}", "? L?i",
+                MessageBox.Show($"Error loading reports:\n{ex.Message}", "? Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

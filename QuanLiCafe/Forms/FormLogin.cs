@@ -28,7 +28,7 @@ namespace QuanLiCafe.Forms
 
         private void InitializeComponent()
         {
-            this.Text = "??ng Nh?p - Quán Cà Phê";
+            this.Text = "Login - Cafe Management";
             this.Size = new Size(500, 400);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.White;
@@ -45,7 +45,7 @@ namespace QuanLiCafe.Forms
 
             var lblTitle = new Label
             {
-                Text = "? ??NG NH?P",
+                Text = "? LOGIN",
                 Font = new Font("Segoe UI", 24, FontStyle.Bold),
                 ForeColor = Color.White,
                 AutoSize = false,
@@ -65,7 +65,7 @@ namespace QuanLiCafe.Forms
 
             var lblUsername = new Label
             {
-                Text = "?? Tên ??ng nh?p:",
+                Text = "?? Username:",
                 Location = new Point(0, 0),
                 Size = new Size(400, 30),
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
@@ -82,7 +82,7 @@ namespace QuanLiCafe.Forms
 
             var lblPassword = new Label
             {
-                Text = "?? M?t kh?u:",
+                Text = "?? Password:",
                 Location = new Point(0, 80),
                 Size = new Size(400, 30),
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
@@ -100,7 +100,7 @@ namespace QuanLiCafe.Forms
 
             chkShowPassword = new CheckBox
             {
-                Text = "Hi?n m?t kh?u",
+                Text = "Show password",
                 Location = new Point(0, 155),
                 Size = new Size(150, 25),
                 Font = new Font("Segoe UI", 10)
@@ -117,7 +117,7 @@ namespace QuanLiCafe.Forms
             // Buttons
             btnLogin = new Button
             {
-                Text = "?? ??NG NH?P",
+                Text = "?? LOGIN",
                 Location = new Point(50, 300),
                 Size = new Size(180, 50),
                 BackColor = Color.FromArgb(46, 204, 113),
@@ -133,7 +133,7 @@ namespace QuanLiCafe.Forms
 
             btnExit = new Button
             {
-                Text = "?? THOÁT",
+                Text = "?? EXIT",
                 Location = new Point(270, 300),
                 Size = new Size(180, 50),
                 BackColor = Color.FromArgb(231, 76, 60),
@@ -152,7 +152,7 @@ namespace QuanLiCafe.Forms
             this.Controls.Add(btnLogin);
             this.Controls.Add(btnExit);
 
-            // Enter key ?? login
+            // Enter key to login
             this.AcceptButton = btnLogin;
         }
 
@@ -163,7 +163,7 @@ namespace QuanLiCafe.Forms
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Vui lòng nh?p ??y ?? thông tin!", "?? C?nh Báo",
+                MessageBox.Show("Please enter all information!", "?? Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -174,7 +174,7 @@ namespace QuanLiCafe.Forms
 
                 if (user == null)
                 {
-                    MessageBox.Show("Tên ??ng nh?p ho?c m?t kh?u không ?úng!", "? L?i ??ng Nh?p",
+                    MessageBox.Show("Invalid username or password!", "? Login Failed",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtPassword.Clear();
                     txtPassword.Focus();
@@ -187,7 +187,7 @@ namespace QuanLiCafe.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"L?i ??ng nh?p:\n{ex.Message}", "? L?i",
+                MessageBox.Show($"Login error:\n{ex.Message}", "? Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
