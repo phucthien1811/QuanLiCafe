@@ -501,11 +501,8 @@ namespace QuanLiCafe.Forms
         {
             try
             {
-                // TODO: Implement FormReport
-                MessageBox.Show("Form thống kê doanh thu đang được phát triển!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // var formReport = new FormReport(_currentUser);
-                // formReport.ShowDialog();
+                var formRevenueEmployee = new ReportForm.RevenueEmployee();
+                formRevenueEmployee.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -517,7 +514,16 @@ namespace QuanLiCafe.Forms
         // Menu Lịch sử hóa đơn
         private void menuLichSuHoaDon_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng xem lịch sử hóa đơn đang phát triển!", "Thông báo");
+            try
+            {
+                var formHistory = new ReportForm.ReportForm();
+                formHistory.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở lịch sử hóa đơn:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
