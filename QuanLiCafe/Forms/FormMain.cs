@@ -109,7 +109,7 @@ namespace QuanLiCafe.Forms
             }
         }
 
-        // ===== LOAD ĐơN HÀNG CỦA BÀN =====
+        // ===== LOAD ĐƠN HÀNG CỦA BÀN =====
         private void LoadOrderForTable(int tableId)
         {
             // Tìm order đang phục vụ của bàn
@@ -330,7 +330,7 @@ namespace QuanLiCafe.Forms
             LoadProducts(txtTenDoUong.Text);
         }
 
-        // ===== MỞ FORM DEMO MOMO =====
+        // ===== ĐĂNG XUẤT =====
         private void BtnDX_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Bạn có muốn đăng xuất?", "Đăng xuất", 
@@ -362,21 +362,101 @@ namespace QuanLiCafe.Forms
 
         // ===== EVENT HANDLERS TỪ DESIGNER =====
         
+        // Quản lý nhân viên
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Mở FormEmployee để quản lý nhân viên
+            // Kiểm tra quyền Admin
+            if (_currentUser.Role != "Admin")
+            {
+                MessageBox.Show("Chỉ Admin mới có quyền quản lý nhân viên!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var formEmployee = new FormEmployee();
             formEmployee.ShowDialog();
-            
-            // Refresh thông tin user sau khi đóng form
             UpdateUserInfo();
         }
 
+        // Menu Danh mục
         private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Empty
+            // Empty - menu cha
         }
 
+        // Menu Loại đồ uống
+        private void menuLDU_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Chức năng quản lý loại đồ uống đang phát triển!", "Thông báo");
+        }
+
+        // Menu Đồ uống - Mở FormProductManagement
+        private void menuDoUong_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra quyền
+            if (_currentUser.Role != "Admin")
+            {
+                MessageBox.Show("Chỉ Admin mới có quyền quản lý đồ uống!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var formDrink = new DrinkForm.FormMain();
+                formDrink.ShowDialog();
+                LoadProducts(); // Refresh danh sách đồ uống sau khi đóng form
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở quản lý đồ uống:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Bàn
+        private void menuBan_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra quyền
+            if (_currentUser.Role != "Admin")
+            {
+                MessageBox.Show("Chỉ Admin mới có quyền quản lý bàn!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var formTable = new TableForm.TableForm();
+                formTable.ShowDialog();
+                LoadTables(); // Refresh danh sách bàn sau khi đóng form
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở quản lý bàn:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Quản lý kho
+        private void menuKho_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // TODO: Implement FormInventory
+                MessageBox.Show("Form quản lý kho đang được phát triển!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // var formInventory = new FormInventory();
+                // formInventory.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở quản lý kho:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Thông tin cá nhân
         private void menuThongTinCaNhan_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"Thông tin đăng nhập:\n\n" +
@@ -386,14 +466,58 @@ namespace QuanLiCafe.Forms
                           "Thông tin cá nhân");
         }
 
-        private void menuDoanhThuNgay_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Chức năng đang phát triển!", "Thông báo");
-        }
-
+        // Menu Khách hàng
         private void menuKH_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng đang phát triển!", "Thông báo");
+            try
+            {
+                var formCustomer = new MemberForm.CustomerForm();
+                formCustomer.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở quản lý khách hàng:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Thống kê doanh thu theo ngày
+        private void menuDoanhThuNgay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var formRevenue = new ReportForm.RevenueEDay();
+                formRevenue.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở báo cáo:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Thống kê doanh thu theo nhân viên
+        private void menuThongKeDoanhThuNV_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // TODO: Implement FormReport
+                MessageBox.Show("Form thống kê doanh thu đang được phát triển!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // var formReport = new FormReport(_currentUser);
+                // formReport.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở báo cáo:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Menu Lịch sử hóa đơn
+        private void menuLichSuHoaDon_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Chức năng xem lịch sử hóa đơn đang phát triển!", "Thông báo");
         }
     }
 }

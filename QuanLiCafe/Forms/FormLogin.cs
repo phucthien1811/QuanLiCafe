@@ -19,7 +19,7 @@ namespace QuanLiCafe.Forms
             _context = Program.DbContext;
             _authService = new AuthService(_context);
             InitializeComponent();
-            
+
             // Gán event handlers
             btnDangNhap.Click += BtnDangNhap_Click;
             btnThoat.Click += BtnThoat_Click;
@@ -64,6 +64,11 @@ namespace QuanLiCafe.Forms
         private void BtnThoat_Click(object? sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtMaDangNhap_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,6 +15,7 @@ namespace QuanLiCafe.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ImportHistory> ImportHistories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public CafeContext(DbContextOptions<CafeContext> options) : base(options) { }
 
@@ -23,7 +24,7 @@ namespace QuanLiCafe.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=LAPTOP-PHUCTHIEN\\SQLEXPRESS;Database=CafeDB;Trusted_Connection=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-B04TJ4O\\SQLEXPRESS;Database=CafeDB;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }
 
@@ -131,6 +132,16 @@ namespace QuanLiCafe.Data
                     .WithMany(i => i.ImportHistories)
                     .HasForeignKey(e => e.MaterialId)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Customer Configuration
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.ToTable("Customers");
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Gender).HasMaxLength(10);
+                entity.Property(e => e.PhoneNumber).IsRequired().HasMaxLength(15);
+                entity.HasIndex(e => e.PhoneNumber); // Index cho tìm kiếm nhanh
             });
 
             // Seed dữ liệu ban đầu

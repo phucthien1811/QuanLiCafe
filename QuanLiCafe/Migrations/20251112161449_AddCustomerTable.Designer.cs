@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLiCafe.Data;
 
@@ -11,9 +12,11 @@ using QuanLiCafe.Data;
 namespace QuanLiCafe.Migrations
 {
     [DbContext(typeof(CafeContext))]
-    partial class CafeContextModelSnapshot : ModelSnapshot
+    [Migration("20251112161449_AddCustomerTable")]
+    partial class AddCustomerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

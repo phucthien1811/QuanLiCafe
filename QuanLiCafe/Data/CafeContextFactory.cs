@@ -8,7 +8,7 @@ namespace QuanLiCafe.Data
         public CafeContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CafeContext>();
-            optionsBuilder.UseSqlServer("Server=LAPTOP-PHUCTHIE\\SQLEXPRESS;Database=QuanLiCafeDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-B04TJ4O\\SQLEXPRESS;Database=QuanLiCafeDB;Trusted_Connection=True;TrustServerCertificate=True;");
 
             return new CafeContext(optionsBuilder.Options);
         }
