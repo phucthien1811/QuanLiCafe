@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLiCafe.Data;
-using QuanLiCafe.Helpers;
 using QuanLiCafe.Models;
 using QuanLiCafe.Services;
 using System;
@@ -15,6 +14,9 @@ namespace QuanLiCafe.Forms
         private readonly CafeContext _context;
         private readonly User _currentUser;
         private readonly AuthService _authService;
+        
+        private int _selectedTableId = 0;
+        private Order? _currentOrder = null;
 
         public FormMain()
         {
@@ -25,129 +27,373 @@ namespace QuanLiCafe.Forms
             InitializeComponent();
         }
 
-        // ========== EVENT HANDLERS - TỰ TẠO TRONG DESIGNER ==========
-
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // Gọi khi form load - tạo 20 buttons tự động
+            // Load dữ liệu ban đầu
             LoadTables();
+            LoadProducts();
+            UpdateUserInfo();
+            
+            // Set ngày hiện tại
+            dtNgayOrder.Value = DateTime.Now;
+            txtMaNV.Text = $"{_currentUser.Id} - {_currentUser.Username}";
+        }
 
-            // Set user info nếu có label
-            if (this.Controls.Find("lblUserInfo", true).FirstOrDefault() is Label lbl)
+        // ===== LOAD DANH SÁCH BÀN =====
+        private void LoadTables()
+        {
+            listViewBan.Clear();
+            listViewBan.View = View.LargeIcon;
+            
+            var tables = _context.Tables.OrderBy(t => t.Id).ToList();
+            
+            foreach (var table in tables)
             {
-                lbl.Text = $"👤 {_currentUser.Username} ({_currentUser.Role})";
+                var item = new ListViewItem
+                {
+                    Text = table.Name,
+                    Tag = table.Id,
+                    // ImageIndex: 0 = bàn trống, 1 = bàn đang phục vụ
+                    ImageIndex = table.Status == "Free" ? 0 : 1
+                };
+                
+                listViewBan.Items.Add(item);
             }
-
-            // Ẩn/hiện buttons theo role
-            if (this.Controls.Find("btnReport", true).FirstOrDefault() is Button btnRpt)
+            
+            // Event click bàn
+            listViewBan.SelectedIndexChanged += (s, e) =>
             {
-                btnRpt.Visible = _authService.IsAdmin(_currentUser);
+                if (listViewBan.SelectedItems.Count > 0)
+                {
+                    var selectedItem = listViewBan.SelectedItems[0];
+                    _selectedTableId = (int)selectedItem.Tag;
+                    
+                    var table = _context.Tables.Find(_selectedTableId);
+                    btnBanDaChon.Text = table?.Name ?? "Chưa chọn bàn";
+                    
+                    LoadOrderForTable(_selectedTableId);
+                }
+            };
+        }
+
+        // ===== LOAD SẢN PHẨM =====
+        private void LoadProducts(string searchText = "")
+        {
+            var query = _context.Products
+                .Include(p => p.Category)
+                .AsQueryable();
+            
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                query = query.Where(p => p.Name.Contains(searchText));
             }
-
-            if (this.Controls.Find("btnInventory", true).FirstOrDefault() is Button btnInv)
+            
+            var products = query.OrderBy(p => p.Name).ToList();
+            
+            dtgvDoUong.Rows.Clear();
+            foreach (var product in products)
             {
-                btnInv.Visible = _authService.IsAdmin(_currentUser);
+                int rowIndex = dtgvDoUong.Rows.Add();
+                var row = dtgvDoUong.Rows[rowIndex];
+                
+                // Load hình ảnh nếu có
+                if (!string.IsNullOrEmpty(product.ImageUrl) && System.IO.File.Exists(product.ImageUrl))
+                {
+                    row.Cells["HinhAnh"].Value = Image.FromFile(product.ImageUrl);
+                }
+                
+                row.Cells["MaDoUong"].Value = product.Id;
+                row.Cells["TenDoUong"].Value = product.Name;
+                row.Cells["GiaTien"].Value = product.Price.ToString("N0") + " ₫";
+                row.Tag = product; // Lưu object product
             }
         }
 
-        // ========== LOGIC CODE - TẠO 20 BUTTONS TỰ ĐỘNG ==========
-
-        public void LoadTables()
+        // ===== LOAD ĐơN HÀNG CỦA BÀN =====
+        private void LoadOrderForTable(int tableId)
         {
-            // Tìm TableLayoutPanel trong form (phải có tên = "tableLayoutPanel")
-            if (this.Controls.Find("tableLayoutPanel", true).FirstOrDefault() is TableLayoutPanel tlp)
+            // Tìm order đang phục vụ của bàn
+            _currentOrder = _context.Orders
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                .Where(o => o.TableId == tableId && o.Table.Status == "Serving")
+                .OrderByDescending(o => o.CreatedAt)
+                .FirstOrDefault();
+            
+            if (_currentOrder == null)
             {
-                tlp.Controls.Clear();
-
-                var tables = _context.Tables
-                    .OrderBy(t => t.Id)
-                    .Take(20)
-                    .ToList();
-
-                // Nếu chưa đủ 20 bàn, tạo thêm
-                if (tables.Count < 20)
+                // Tạo order mới
+                var table = _context.Tables.Find(tableId);
+                if (table != null)
                 {
-                    for (int i = tables.Count + 1; i <= 20; i++)
+                    _currentOrder = new Order
                     {
-                        var newTable = new Table
-                        {
-                            Name = $"Table {i}",
-                            Status = "Free"
-                        };
-                        _context.Tables.Add(newTable);
-                    }
+                        TableId = tableId,
+                        StaffId = _currentUser.Id,
+                        CreatedAt = DateTime.Now,
+                        Discount = 0,
+                        VAT = 10,
+                        TotalAmount = 0
+                    };
+                    
+                    table.Status = "Serving";
+                    _context.Orders.Add(_currentOrder);
                     _context.SaveChanges();
-
-                    tables = _context.Tables
-                        .OrderBy(t => t.Id)
-                        .Take(20)
-                        .ToList();
                 }
+            }
+            
+            LoadOrderDetails();
+            CalculateTotal();
+        }
 
-                // Thêm 20 buttons vào TableLayoutPanel (5 cột x 4 hàng)
-                int row = 0, col = 0;
-                foreach (var table in tables)
+        // ===== LOAD CHI TIẾT ĐƠN HÀNG =====
+        private void LoadOrderDetails()
+        {
+            dtgvHoaDon.Rows.Clear();
+            
+            if (_currentOrder == null) return;
+            
+            dtgvHoaDon.Columns.Clear();
+            dtgvHoaDon.Columns.Add("ProductName", "Tên món");
+            dtgvHoaDon.Columns.Add("Quantity", "SL");
+            dtgvHoaDon.Columns.Add("UnitPrice", "Đơn giá");
+            dtgvHoaDon.Columns.Add("Total", "Thành tiền");
+            dtgvHoaDon.Columns[1].Width = 50;
+            
+            foreach (var detail in _currentOrder.OrderDetails)
+            {
+                int rowIndex = dtgvHoaDon.Rows.Add();
+                var row = dtgvHoaDon.Rows[rowIndex];
+                
+                row.Cells["ProductName"].Value = detail.Product.Name;
+                row.Cells["Quantity"].Value = detail.Quantity;
+                row.Cells["UnitPrice"].Value = detail.UnitPrice.ToString("N0") + " ₫";
+                row.Cells["Total"].Value = (detail.Quantity * detail.UnitPrice).ToString("N0") + " ₫";
+                row.Tag = detail; // Lưu object OrderDetail
+            }
+        }
+
+        // ===== THÊM MÓN VÀO ĐƠN =====
+        private void BtnThem_Click(object sender, EventArgs e)
+        {
+            if (_selectedTableId == 0)
+            {
+                MessageBox.Show("Vui lòng chọn bàn!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            if (dtgvDoUong.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn đồ uống!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            var selectedRow = dtgvDoUong.SelectedRows[0];
+            var product = selectedRow.Tag as Product;
+            
+            if (product == null) return;
+            
+            int quantity = (int)nmSoLuong.Value;
+            
+            // Kiểm tra món đã có trong order chưa
+            var existingDetail = _currentOrder?.OrderDetails
+                .FirstOrDefault(od => od.ProductId == product.Id);
+            
+            if (existingDetail != null)
+            {
+                // Cộng thêm số lượng
+                existingDetail.Quantity += quantity;
+            }
+            else
+            {
+                // Thêm món mới
+                var newDetail = new OrderDetail
                 {
-                    var btnTable = CreateTableButton(table);
-                    tlp.Controls.Add(btnTable, col, row);
+                    OrderId = _currentOrder!.Id,
+                    ProductId = product.Id,
+                    Quantity = quantity,
+                    UnitPrice = product.Price,
+                    Note = ""
+                };
+                
+                _context.OrderDetails.Add(newDetail);
+                _currentOrder.OrderDetails.Add(newDetail);
+            }
+            
+            _context.SaveChanges();
+            LoadOrderDetails();
+            CalculateTotal();
+            
+            // Reset số lượng
+            nmSoLuong.Value = 1;
+        }
 
-                    col++;
-                    if (col >= 5)
-                    {
-                        col = 0;
-                        row++;
-                    }
+        // ===== XÓA MÓN KHỎI ĐƠN =====
+        private void BtnXoa_Click(object sender, EventArgs e)
+        {
+            if (dtgvHoaDon.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn món cần xóa!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            var result = MessageBox.Show("Xác nhận xóa món này?", "Xác nhận", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (result == DialogResult.Yes)
+            {
+                var selectedRow = dtgvHoaDon.SelectedRows[0];
+                var detail = selectedRow.Tag as OrderDetail;
+                
+                if (detail != null)
+                {
+                    _context.OrderDetails.Remove(detail);
+                    _currentOrder?.OrderDetails.Remove(detail);
+                    _context.SaveChanges();
+                    
+                    LoadOrderDetails();
+                    CalculateTotal();
                 }
             }
         }
 
-        public Button CreateTableButton(Table table)
+        // ===== TÍNH TỔNG TIỀN =====
+        private void CalculateTotal()
         {
-            var btn = new Button
+            if (_currentOrder == null)
             {
-                Text = $"{table.Name}\n{TableStatusHelper.GetStatusText(table.Status)}",
-                Tag = table.Id,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                BackColor = TableStatusHelper.GetColorByStatus(table.Status),
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                Margin = new Padding(5)
-            };
-
-            btn.FlatAppearance.BorderSize = 2;
-            btn.FlatAppearance.BorderColor = Color.Gray;
-            btn.Click += BtnTable_Click;
-
-            // Hover effect
-            btn.MouseEnter += (s, e) =>
-            {
-                btn.FlatAppearance.BorderColor = Color.FromArgb(52, 152, 219);
-                btn.FlatAppearance.BorderSize = 3;
-            };
-
-            btn.MouseLeave += (s, e) =>
-            {
-                btn.FlatAppearance.BorderColor = Color.Gray;
-                btn.FlatAppearance.BorderSize = 2;
-            };
-
-            return btn;
+                lblTongTien.Text = "0 VNĐ";
+                return;
+            }
+            
+            decimal subTotal = _currentOrder.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            decimal discountAmount = subTotal * _currentOrder.Discount / 100;
+            decimal afterDiscount = subTotal - discountAmount;
+            decimal vatAmount = afterDiscount * _currentOrder.VAT / 100;
+            decimal total = afterDiscount + vatAmount;
+            
+            _currentOrder.TotalAmount = total;
+            _context.SaveChanges();
+            
+            lblTongTien.Text = total.ToString("N0") + " VNĐ";
         }
 
-        private void BtnTable_Click(object sender, EventArgs e)
+        // ===== THANH TOÁN =====
+        private void BtnThanhToan_Click(object sender, EventArgs e)
         {
-            if (sender is Button btn && btn.Tag is int tableId)
+            if (_currentOrder == null || !_currentOrder.OrderDetails.Any())
             {
-                var formOrder = new FormOrder(tableId);
-                formOrder.ShowDialog();
-                LoadTables(); // Reload sau khi đóng FormOrder
+                MessageBox.Show("Chưa có món nào trong đơn!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            var confirmMsg = $"Xác nhận thanh toán?\n\n" +
+                            $"Bàn: {btnBanDaChon.Text}\n" +
+                            $"Tổng tiền: {lblTongTien.Text}\n" +
+                            $"Ngày: {dtNgayOrder.Value:dd/MM/yyyy HH:mm}";
+            
+            var result = MessageBox.Show(confirmMsg, "Thanh toán", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (result == DialogResult.Yes)
+            {
+                // Cập nhật trạng thái bàn
+                var table = _context.Tables.Find(_selectedTableId);
+                if (table != null)
+                {
+                    table.Status = "Closed";
+                }
+                
+                _context.SaveChanges();
+                
+                MessageBox.Show("Thanh toán thành công!", "Thành công", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                // Reset
+                _selectedTableId = 0;
+                _currentOrder = null;
+                btnBanDaChon.Text = "Chưa chọn bàn";
+                dtgvHoaDon.Rows.Clear();
+                lblTongTien.Text = "0 VNĐ";
+                
+                LoadTables(); // Refresh danh sách bàn
             }
         }
 
+        // ===== TÌM KIẾM ĐỒ UỐNG =====
+        private void BtnTim_Click(object sender, EventArgs e)
+        {
+            LoadProducts(txtTenDoUong.Text);
+        }
+
+        // ===== MỞ FORM DEMO MOMO =====
+        private void BtnDX_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Bạn có muốn đăng xuất?", "Đăng xuất", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                var loginForm = new FormLogin();
+                loginForm.ShowDialog();
+                
+                if (loginForm.LoggedInUser != null)
+                {
+                    Program.CurrentUser = loginForm.LoggedInUser;
+                    Application.Restart();
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+        }
+
+        // ===== CẬP NHẬT THÔNG TIN USER =====
+        private void UpdateUserInfo()
+        {
+            this.Text = $"Phần mềm quản lý quán cafe - {_currentUser.Username} ({_currentUser.Role})";
+        }
+
+        // ===== EVENT HANDLERS TỪ DESIGNER =====
+        
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Mở FormEmployee để quản lý nhân viên
+            var formEmployee = new FormEmployee();
+            formEmployee.ShowDialog();
+            
+            // Refresh thông tin user sau khi đóng form
+            UpdateUserInfo();
+        }
 
+        private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Empty
+        }
+
+        private void menuThongTinCaNhan_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Thông tin đăng nhập:\n\n" +
+                          $"Username: {_currentUser.Username}\n" +
+                          $"Role: {_currentUser.Role}\n" +
+                          $"ID: {_currentUser.Id}", 
+                          "Thông tin cá nhân");
+        }
+
+        private void menuDoanhThuNgay_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Chức năng đang phát triển!", "Thông báo");
+        }
+
+        private void menuKH_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Chức năng đang phát triển!", "Thông báo");
         }
     }
 }

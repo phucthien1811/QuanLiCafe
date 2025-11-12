@@ -19,30 +19,16 @@ namespace QuanLiCafe.Forms
             _context = Program.DbContext;
             _authService = new AuthService(_context);
             InitializeComponent();
+            
+            // Gán event handlers
+            btnDangNhap.Click += BtnDangNhap_Click;
+            btnThoat.Click += BtnThoat_Click;
         }
 
-        // ========== EVENT HANDLERS FROM DESIGNER ==========
-
-        private void lblTitle_Click(object sender, EventArgs e)
+        private void BtnDangNhap_Click(object? sender, EventArgs e)
         {
-            // Empty event handler
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            // Empty event handler
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            // Empty event handler
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // ??NG NH?P button
-            var username = txbUserName.Text.Trim();
-            var password = txbPassword.Text;
+            var username = txtMaDangNhap.Text.Trim();
+            var password = txtMatKhau.Text;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -59,8 +45,8 @@ namespace QuanLiCafe.Forms
                 {
                     MessageBox.Show("Tên ??ng nh?p ho?c m?t kh?u không ?úng!", "? ??ng Nh?p Th?t B?i",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPassword.Clear();
-                    txbPassword.Focus();
+                    txtMatKhau.Clear();
+                    txtMatKhau.Focus();
                     return;
                 }
 
@@ -75,9 +61,8 @@ namespace QuanLiCafe.Forms
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BtnThoat_Click(object? sender, EventArgs e)
         {
-            // THOÁT button
             Application.Exit();
         }
     }

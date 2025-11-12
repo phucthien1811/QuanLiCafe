@@ -18,6 +18,7 @@ namespace QuanLiCafe.Forms
         
         // Services
         private readonly IPaymentService _paymentService;
+        private readonly IMoMoPaymentService _momoService;
 
         // Controls
         private Label lblTableName = null!;
@@ -35,6 +36,7 @@ namespace QuanLiCafe.Forms
         private Button btnAddProduct = null!;
         private Button btnRemoveProduct = null!;
         private Button btnPayment = null!;
+        private Button btnPayWithMoMo = null!;
         private Button btnCancel = null!;
 
         public FormOrder(int tableId)
@@ -45,6 +47,7 @@ namespace QuanLiCafe.Forms
             // Khởi tạo services
             var orderService = new OrderService(_context);
             _paymentService = new PaymentService(_context, orderService);
+            _momoService = new MoMoPaymentService(_context);
             
             InitializeComponent();
             this.Load += FormOrder_Load;
@@ -387,12 +390,12 @@ namespace QuanLiCafe.Forms
 
             btnPayment = new Button
             {
-                Text = "💳 THANH TOÁN",
-                Location = new Point(740, 720),
+                Text = "💵 THANH TOÁN TIỀN MẶT",
+                Location = new Point(520, 720),
                 Size = new Size(200, 55),
                 BackColor = Color.FromArgb(52, 152, 219),
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand
             };
@@ -401,10 +404,26 @@ namespace QuanLiCafe.Forms
             btnPayment.MouseEnter += (s, e) => btnPayment.BackColor = Color.FromArgb(41, 128, 185);
             btnPayment.MouseLeave += (s, e) => btnPayment.BackColor = Color.FromArgb(52, 152, 219);
 
+            btnPayWithMoMo = new Button
+            {
+                Text = "💳 THANH TOÁN MOMO",
+                Location = new Point(740, 720),
+                Size = new Size(200, 55),
+                BackColor = Color.FromArgb(168, 50, 121), // MoMo Pink
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+            btnPayWithMoMo.FlatAppearance.BorderSize = 0;
+            btnPayWithMoMo.Click += BtnPayWithMoMo_Click;
+            btnPayWithMoMo.MouseEnter += (s, e) => btnPayWithMoMo.BackColor = Color.FromArgb(140, 40, 100);
+            btnPayWithMoMo.MouseLeave += (s, e) => btnPayWithMoMo.BackColor = Color.FromArgb(168, 50, 121);
+
             btnCancel = new Button
             {
                 Text = "✖️ HỦY",
-                Location = new Point(520, 720),
+                Location = new Point(300, 720),
                 Size = new Size(200, 55),
                 BackColor = Color.FromArgb(149, 165, 166),
                 ForeColor = Color.White,
@@ -419,7 +438,7 @@ namespace QuanLiCafe.Forms
 
             panelRight.Controls.AddRange(new Control[] {
                 lblOrderTitle, dgvOrderDetails, btnRemoveProduct,
-                panelPayment, btnPayment, btnCancel
+                panelPayment, btnPayment, btnPayWithMoMo, btnCancel
             });
 
             this.Controls.Add(panelRight);
@@ -752,6 +771,124 @@ namespace QuanLiCafe.Forms
                 {
                     MessageBox.Show($"❌ Lỗi thanh toán:\n{ex.Message}\n\n{ex.StackTrace}",
                         "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async void BtnPayWithMoMo_Click(object? sender, EventArgs e)
+        {
+            if (_currentOrder == null || !_orderDetails.Any())
+            {
+                MessageBox.Show("Chưa có món nào trong đơn hàng!", "⚠️ Thông Báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal subTotal = _orderDetails.Sum(od => od.SubTotal);
+            decimal discountPercent = decimal.TryParse(txtDiscount.Text, out var d) ? d : 0;
+            decimal vatPercent = decimal.TryParse(txtVAT.Text, out var v) ? v : 0;
+            decimal discountAmount = subTotal * discountPercent / 100;
+            decimal afterDiscount = subTotal - discountAmount;
+            decimal vatAmount = afterDiscount * vatPercent / 100;
+            decimal total = afterDiscount + vatAmount;
+
+            var confirmMsg = $"══════════════════════════\n" +
+                            $"💳 XÁC NHẬN THANH TOÁN MOMO\n" +
+                            $"══════════════════════════\n\n" +
+                            $"Tạm tính:        {subTotal:N0} ₫\n" +
+                            $"Giảm giá ({discountPercent}%):  -{discountAmount:N0} ₫\n" +
+                            $"VAT ({vatPercent}%):       +{vatAmount:N0} ₫\n" +
+                            $"──────────────────────────\n" +
+                            $"💰 TỔNG CỘNG:  {total:N0} ₫\n\n" +
+                            $"Thanh toán qua MoMo?";
+
+            var result = MessageBox.Show(confirmMsg, "💳 Thanh Toán MoMo",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    btnPayWithMoMo.Enabled = false;
+                    btnPayWithMoMo.Text = "⏳ Đang tạo link...";
+
+                    // Lưu OrderDetails vào database trước
+                    var existingDetails = _context.OrderDetails
+                        .Where(od => od.OrderId == _currentOrder.Id)
+                        .ToList();
+                    _context.OrderDetails.RemoveRange(existingDetails);
+
+                    foreach (var item in _orderDetails)
+                    {
+                        _context.OrderDetails.Add(new OrderDetail
+                        {
+                            OrderId = _currentOrder.Id,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity,
+                            UnitPrice = item.UnitPrice,
+                            Note = item.Note
+                        });
+                    }
+
+                    // Cập nhật Order
+                    _currentOrder.Discount = discountPercent;
+                    _currentOrder.VAT = vatPercent;
+                    _currentOrder.TotalAmount = total;
+                    _context.SaveChanges();
+
+                    // Tạo link MoMo
+                    string payUrl = await _momoService.CreatePaymentUrl(_currentOrder.Id);
+
+                    MessageBox.Show(
+                        "✅ ĐÃ TẠO LINK THANH TOÁN MOMO!\n\n" +
+                        "🌐 Trình duyệt sẽ tự động mở.\n" +
+                        "📱 Quét mã QR bằng app MoMo.\n\n" +
+                        $"💰 Số tiền: {total:N0} ₫",
+                        "✅ Thành Công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    // Mở link MoMo
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = payUrl,
+                        UseShellExecute = true
+                    });
+
+                    // Cập nhật trạng thái bàn về Closed
+                    var table = _context.Tables.Find(_tableId);
+                    if (table != null)
+                    {
+                        table.Status = "Closed";
+                        _context.SaveChanges();
+                    }
+
+                    MessageBox.Show(
+                        "🎉 THANH TOÁN MOMO HOÀN TẤT!\n\n" +
+                        "ℹ️ Đây là môi trường test MoMo Sandbox.\n" +
+                        "Bạn có thể dùng app MoMo test để quét mã.\n\n" +
+                        "Cảm ơn quý khách!",
+                        "🎉 Thành Công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"❌ LỖI THANH TOÁN MOMO:\n\n{ex.Message}",
+                        "❌ Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+                finally
+                {
+                    btnPayWithMoMo.Enabled = true;
+                    btnPayWithMoMo.Text = "💳 THANH TOÁN MOMO";
                 }
             }
         }
