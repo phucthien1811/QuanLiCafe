@@ -23,11 +23,11 @@ namespace TableForm
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
             _tableId = tableId;
-            
+
             this.Load += Delete_Table_Load;
             btn_luu.Click += Btn_luu_Click;
             btn_huy.Click += Btn_huy_Click;
-            
+
             // Đổi text nút Lưu thành Xóa
             btn_luu.Text = "Xóa";
             btn_luu.BackColor = Color.Red;
@@ -37,12 +37,12 @@ namespace TableForm
         {
             // Load thông tin bàn
             LoadTableInfo();
-            
+
             // Disable các textbox để không cho sửa
             txb_SoBan.Enabled = false;
             txb_TenBan.Enabled = false;
             cb_GioiTinh.Enabled = false;
-            
+
             // Load danh sách vị trí
             cb_GioiTinh.Items.Clear();
             cb_GioiTinh.Items.Add("Tầng 1");
@@ -90,14 +90,14 @@ namespace TableForm
                     var table = _context.Tables
                         .Include(t => t.Orders)
                         .FirstOrDefault(t => t.Id == _tableId);
-                    
+
                     if (table == null)
                     {
                         MessageBox.Show("Không tìm thấy bàn!", "Lỗi",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    
+
                     // Kiểm tra bàn có đơn hàng không
                     if (table.Orders.Any())
                     {
@@ -106,14 +106,14 @@ namespace TableForm
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    
+
                     // Xóa bàn
                     _context.Tables.Remove(table);
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Xóa bàn thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -129,6 +129,11 @@ namespace TableForm
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void Delete_Table_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace QuanLiCafe.Forms
         {
             _context = Program.DbContext;
             _authService = new AuthService(_context);
-            
+
             InitializeComponent();
             this.Load += FormEmployee_Load;
         }
@@ -35,28 +35,28 @@ namespace QuanLiCafe.Forms
         {
             dtgvData.AutoGenerateColumns = false;
             dtgvData.Columns.Clear();
-            
+
             dtgvData.Columns.Add(new DataGridViewTextBoxColumn
             {
                 HeaderText = "ID",
                 DataPropertyName = "Id",
                 Width = 50
             });
-            
+
             dtgvData.Columns.Add(new DataGridViewTextBoxColumn
             {
                 HeaderText = "Username",
                 DataPropertyName = "Username",
                 Width = 150
             });
-            
+
             dtgvData.Columns.Add(new DataGridViewTextBoxColumn
             {
                 HeaderText = "Role",
                 DataPropertyName = "Role",
                 Width = 100
             });
-            
+
             // Event khi click vào row
             dtgvData.SelectionChanged += DtgvData_SelectionChanged;
         }
@@ -65,12 +65,12 @@ namespace QuanLiCafe.Forms
         private void LoadUsers(string searchText = "")
         {
             var query = _context.Users.AsQueryable();
-            
+
             if (!string.IsNullOrWhiteSpace(searchText))
             {
                 query = query.Where(u => u.Username.Contains(searchText));
             }
-            
+
             var users = query.OrderBy(u => u.Id).ToList();
             dtgvData.DataSource = users;
         }
@@ -82,7 +82,7 @@ namespace QuanLiCafe.Forms
             {
                 var selectedRow = dtgvData.SelectedRows[0];
                 var user = selectedRow.DataBoundItem as User;
-                
+
                 if (user != null)
                 {
                     _editingUserId = user.Id;
@@ -99,7 +99,7 @@ namespace QuanLiCafe.Forms
         private void MenuThem_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            
+
             // Kiểm tra username đã tồn tại
             if (_context.Users.Any(u => u.Username == txtTenNV.Text.Trim()))
             {
@@ -107,7 +107,7 @@ namespace QuanLiCafe.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             try
             {
                 var newUser = new User
@@ -116,13 +116,13 @@ namespace QuanLiCafe.Forms
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(txtMatKhau.Text),
                     Role = txtSDT.Text.Trim() // Lấy từ field SDT tạm thời
                 };
-                
+
                 _context.Users.Add(newUser);
                 _context.SaveChanges();
-                
+
                 MessageBox.Show("Thêm nhân viên thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 LoadUsers();
                 ClearForm();
             }
@@ -142,9 +142,9 @@ namespace QuanLiCafe.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             if (!ValidateInput()) return;
-            
+
             try
             {
                 var user = _context.Users.Find(_editingUserId);
@@ -154,7 +154,7 @@ namespace QuanLiCafe.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 // Kiểm tra username trùng (trừ chính nó)
                 if (_context.Users.Any(u => u.Username == txtTenNV.Text.Trim() && u.Id != _editingUserId))
                 {
@@ -162,21 +162,21 @@ namespace QuanLiCafe.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 user.Username = txtTenNV.Text.Trim();
                 user.Role = txtSDT.Text.Trim();
-                
+
                 // Chỉ update password nếu có nhập
                 if (!string.IsNullOrWhiteSpace(txtMatKhau.Text))
                 {
                     user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(txtMatKhau.Text);
                 }
-                
+
                 _context.SaveChanges();
-                
+
                 MessageBox.Show("Cập nhật thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 LoadUsers();
                 ClearForm();
             }
@@ -196,17 +196,17 @@ namespace QuanLiCafe.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             var result = MessageBox.Show("Xác nhận xóa nhân viên này?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            
+
             if (result == DialogResult.Yes)
             {
                 try
                 {
                     var user = _context.Users.Find(_editingUserId);
                     if (user == null) return;
-                    
+
                     // Kiểm tra có đơn hàng không
                     if (_context.Orders.Any(o => o.StaffId == _editingUserId))
                     {
@@ -214,13 +214,13 @@ namespace QuanLiCafe.Forms
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    
+
                     _context.Users.Remove(user);
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Xóa thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     LoadUsers();
                     ClearForm();
                 }
@@ -271,7 +271,7 @@ namespace QuanLiCafe.Forms
                 txtTenNV.Focus();
                 return false;
             }
-            
+
             // Chỉ check password khi thêm mới
             if (_editingUserId == 0 && string.IsNullOrWhiteSpace(txtMatKhau.Text))
             {
@@ -280,7 +280,7 @@ namespace QuanLiCafe.Forms
                 txtMatKhau.Focus();
                 return false;
             }
-            
+
             if (string.IsNullOrWhiteSpace(txtSDT.Text))
             {
                 MessageBox.Show("Vui lòng nhập Role (Admin/Staff)!", "Thông báo",
@@ -288,7 +288,7 @@ namespace QuanLiCafe.Forms
                 txtSDT.Focus();
                 return false;
             }
-            
+
             // Validate Role
             string role = txtSDT.Text.Trim();
             if (role != "Admin" && role != "Staff")
@@ -298,8 +298,13 @@ namespace QuanLiCafe.Forms
                 txtSDT.Focus();
                 return false;
             }
-            
+
             return true;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

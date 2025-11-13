@@ -23,11 +23,11 @@ namespace MemberForm
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
             _customerId = null;
-            
+
             this.Load += AddCustomer_Load;
             btn_luu.Click += Btn_luu_Click;
             btn_huy.Click += Btn_huy_Click;
-            
+
             this.Text = "Thêm khách hàng";
         }
 
@@ -46,7 +46,7 @@ namespace MemberForm
             cb_GioiTinh.Items.Add("Nữ");
             cb_GioiTinh.Items.Add("Khác");
             cb_GioiTinh.SelectedIndex = 0;
-            
+
             // Nếu là chỉnh sửa, load thông tin khách hàng
             if (_customerId.HasValue)
             {
@@ -130,7 +130,7 @@ namespace MemberForm
                         customer.Gender = cb_GioiTinh.Text;
                         customer.PhoneNumber = txb_SDT.Text.Trim();
                         _context.SaveChanges();
-                        
+
                         MessageBox.Show("Cập nhật khách hàng thành công!", "Thành công",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -152,14 +152,14 @@ namespace MemberForm
                         Gender = cb_GioiTinh.Text,
                         PhoneNumber = txb_SDT.Text.Trim()
                     };
-                    
+
                     _context.Customers.Add(newCustomer);
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Thêm khách hàng mới thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -189,6 +189,16 @@ namespace MemberForm
         private void label_TenKhachHang_Click(object sender, EventArgs e)
         {
             // Event handler đã có sẵn
+        }
+
+        private void label_ThongTin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_huy_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

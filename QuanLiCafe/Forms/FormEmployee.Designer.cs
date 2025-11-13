@@ -145,7 +145,7 @@
             label5.Location = new Point(25, 149);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(61, 20);
+            label5.Size = new Size(67, 20);
             label5.TabIndex = 23;
             label5.Text = "Ghi chú";
             // 
@@ -166,9 +166,10 @@
             label4.Location = new Point(484, 104);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(120, 20);
+            label4.Size = new Size(48, 20);
             label4.TabIndex = 21;
-            label4.Text = "Role (Admin/Staff)";
+            label4.Text = "Role ";
+            label4.Click += label4_Click;
             // 
             // txtMatKhau
             // 
@@ -207,7 +208,7 @@
             label2.Location = new Point(25, 108);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(85, 20);
+            label2.Size = new Size(86, 20);
             label2.TabIndex = 17;
             label2.Text = "Username";
             // 

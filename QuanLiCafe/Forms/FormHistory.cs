@@ -21,7 +21,7 @@ namespace ReportForm
         {
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
-            
+
             // Đăng ký sự kiện
             this.Load += ReportForm_Load;
             btn_LocDuLieu.Click += Btn_LocDuLieu_Click;
@@ -34,10 +34,10 @@ namespace ReportForm
             // Thiết lập ngày mặc định
             dtp_TuNgay.Value = DateTime.Today; // Ngày hôm nay
             dtp_DenNgay.Value = DateTime.Today; // Ngày hôm nay
-            
+
             // Load logo (nếu có)
             LoadLogo();
-            
+
             // Load dữ liệu ngày hôm nay
             LoadOrderHistory(DateTime.Today, DateTime.Today);
         }
@@ -60,30 +60,30 @@ namespace ReportForm
             try
             {
                 dgv_HoaDon.Rows.Clear();
-                
+
                 // Thiết lập thời gian bắt đầu và kết thúc
                 DateTime startDate = fromDate.Date; // 00:00:00
                 DateTime endDate = toDate.Date.AddDays(1).AddSeconds(-1); // 23:59:59
-                
+
                 // Lấy tất cả OrderDetails trong khoảng thời gian
                 var orderDetails = _context.OrderDetails
                     .Include(od => od.Order)
                         .ThenInclude(o => o.Staff)
                     .Include(od => od.Product)
-                    .Where(od => od.Order.CreatedAt >= startDate 
+                    .Where(od => od.Order.CreatedAt >= startDate
                                 && od.Order.CreatedAt <= endDate
                                 && od.Order.TotalAmount > 0)
                     .OrderByDescending(od => od.Order.CreatedAt)
                     .ToList();
-                
+
                 int stt = 1;
                 decimal tongTien = 0;
-                
+
                 foreach (var detail in orderDetails)
                 {
                     int rowIndex = dgv_HoaDon.Rows.Add();
                     var row = dgv_HoaDon.Rows[rowIndex];
-                    
+
                     row.Cells["STT"].Value = stt++;
                     row.Cells["Ngay"].Value = detail.Order.CreatedAt.ToString("dd/MM/yyyy HH:mm");
                     row.Cells["MaPhieu"].Value = detail.Order.Id;
@@ -93,22 +93,22 @@ namespace ReportForm
                     row.Cells["MaDoUong"].Value = detail.ProductId;
                     row.Cells["TenDoUong"].Value = detail.Product.Name;
                     row.Tag = detail; // Lưu object detail
-                    
+
                     // Tính tổng tiền của từng dòng
                     decimal lineTotal = detail.Quantity * detail.UnitPrice;
                     tongTien += lineTotal;
                 }
-                
+
                 // Hiển thị tổng tiền
                 lb_TongTien.Text = tongTien.ToString("N0") + " ₫";
-                
+
                 // Hiển thị số lượng record
                 lb_Tong.Text = $"Tổng ({dgv_HoaDon.Rows.Count} dòng)";
-                
+
                 // Thông báo nếu không có dữ liệu
                 if (orderDetails.Count == 0)
                 {
-                    MessageBox.Show("Không có lịch sử hóa đơn trong khoảng thời gian này!", 
+                    MessageBox.Show("Không có lịch sử hóa đơn trong khoảng thời gian này!",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -124,15 +124,15 @@ namespace ReportForm
         {
             DateTime fromDate = dtp_TuNgay.Value.Date;
             DateTime toDate = dtp_DenNgay.Value.Date;
-            
+
             // Kiểm tra ngày hợp lệ
             if (fromDate > toDate)
             {
-                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!", 
+                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             // Load dữ liệu theo khoảng thời gian đã chọn
             LoadOrderHistory(fromDate, toDate);
         }
@@ -144,10 +144,10 @@ namespace ReportForm
             {
                 // Tạo báo cáo in
                 string reportContent = GenerateReport();
-                
+
                 // Hiển thị dialog in
-                MessageBox.Show("Chức năng in báo cáo đang được phát triển!\n\n" + 
-                    "Báo cáo sẽ được xuất ra file hoặc máy in.", 
+                MessageBox.Show("Chức năng in báo cáo đang được phát triển!\n\n" +
+                    "Báo cáo sẽ được xuất ra file hoặc máy in.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -169,18 +169,18 @@ namespace ReportForm
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                
+
                 // Tạo SaveFileDialog
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
                     saveFileDialog.Filter = "CSV Files|*.csv|Excel Files|*.xlsx";
                     saveFileDialog.Title = "Xuất lịch sử hóa đơn";
                     saveFileDialog.FileName = $"LichSuHoaDon_{DateTime.Now:ddMMyyyy_HHmmss}.csv";
-                    
+
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         ExportToExcel(saveFileDialog.FileName);
-                        MessageBox.Show($"Xuất file thành công!\n\nĐường dẫn: {saveFileDialog.FileName}", 
+                        MessageBox.Show($"Xuất file thành công!\n\nĐường dẫn: {saveFileDialog.FileName}",
                             "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -204,7 +204,7 @@ namespace ReportForm
             report.AppendLine();
             report.AppendLine("Chi tiết:");
             report.AppendLine();
-            
+
             foreach (DataGridViewRow row in dgv_HoaDon.Rows)
             {
                 report.AppendLine($"#{row.Cells["STT"].Value}");
@@ -215,7 +215,7 @@ namespace ReportForm
                 report.AppendLine($"Đồ uống: {row.Cells["TenDoUong"].Value} (Mã: {row.Cells["MaDoUong"].Value})");
                 report.AppendLine();
             }
-            
+
             return report.ToString();
         }
 
@@ -223,10 +223,10 @@ namespace ReportForm
         private void ExportToExcel(string filePath)
         {
             StringBuilder csv = new StringBuilder();
-            
+
             // Header
             csv.AppendLine("STT,Ngày,Mã Phiếu,Mã Phiếu Chi Tiết,Mã Nhân Viên,Mã Khách Hàng,Mã Đồ Uống,Tên Đồ Uống");
-            
+
             // Data
             foreach (DataGridViewRow row in dgv_HoaDon.Rows)
             {
@@ -239,12 +239,12 @@ namespace ReportForm
                     $"{row.Cells["MaDoUong"].Value}," +
                     $"\"{row.Cells["TenDoUong"].Value}\"");
             }
-            
+
             // Footer
             csv.AppendLine();
             csv.AppendLine($",,,,,,Tổng số dòng:,{dgv_HoaDon.Rows.Count}");
             csv.AppendLine($",,,,,,Tổng tiền:,\"{lb_TongTien.Text}\"");
-            
+
             // Ghi file
             System.IO.File.WriteAllText(filePath, csv.ToString(), Encoding.UTF8);
         }
@@ -262,6 +262,11 @@ namespace ReportForm
         private void btn_InBaoCao_Click(object sender, EventArgs e)
         {
             Btn_InBaoCao_Click(sender, e);
+        }
+
+        private void ReportForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

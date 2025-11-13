@@ -92,7 +92,7 @@
             // menuNhanVien
             // 
             menuNhanVien.Name = "menuNhanVien";
-            menuNhanVien.Size = new Size(302, 36);
+            menuNhanVien.Size = new Size(261, 28);
             menuNhanVien.Text = "Nhân viên - Tài khoản";
             menuNhanVien.Click += nhânViênToolStripMenuItem_Click;
             // 
@@ -101,35 +101,35 @@
             btnDanhMuc.DropDownItems.AddRange(new ToolStripItem[] { menuLDU, menuDoUong, menuBan, menuKho });
             btnDanhMuc.Image = (Image)resources.GetObject("btnDanhMuc.Image");
             btnDanhMuc.Name = "btnDanhMuc";
-            btnDanhMuc.Size = new Size(136, 32);
+            btnDanhMuc.Size = new Size(123, 27);
             btnDanhMuc.Text = "Danh mục";
             btnDanhMuc.Click += danhMụcToolStripMenuItem_Click;
             // 
             // menuLDU
             // 
             menuLDU.Name = "menuLDU";
-            menuLDU.Size = new Size(230, 36);
+            menuLDU.Size = new Size(195, 28);
             menuLDU.Text = "Loại đồ uống";
             menuLDU.Click += menuLDU_Click;
             // 
             // menuDoUong
             // 
             menuDoUong.Name = "menuDoUong";
-            menuDoUong.Size = new Size(230, 36);
+            menuDoUong.Size = new Size(195, 28);
             menuDoUong.Text = "Đồ uống";
             menuDoUong.Click += menuDoUong_Click;
             // 
             // menuBan
             // 
             menuBan.Name = "menuBan";
-            menuBan.Size = new Size(230, 36);
+            menuBan.Size = new Size(195, 28);
             menuBan.Text = "Bàn";
             menuBan.Click += menuBan_Click;
             // 
             // menuKho
             // 
             menuKho.Name = "menuKho";
-            menuKho.Size = new Size(230, 36);
+            menuKho.Size = new Size(195, 28);
             menuKho.Text = "Quản lý kho";
             menuKho.Click += menuKho_Click;
             // 
@@ -140,11 +140,11 @@
             groupBox1.Controls.Add(txtMaNV);
             groupBox1.Controls.Add(label6);
             groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(1265, 84);
-            groupBox1.Margin = new Padding(5, 6, 5, 6);
+            groupBox1.Location = new Point(1012, 43);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(5, 6, 5, 6);
-            groupBox1.Size = new Size(641, 215);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(513, 143);
             groupBox1.TabIndex = 590;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin hóa đơn";
@@ -153,57 +153,57 @@
             // 
             dtNgayOrder.Enabled = false;
             dtNgayOrder.Format = DateTimePickerFormat.Short;
-            dtNgayOrder.Location = new Point(310, 108);
-            dtNgayOrder.Margin = new Padding(5, 6, 5, 6);
+            dtNgayOrder.Location = new Point(248, 86);
+            dtNgayOrder.Margin = new Padding(4, 5, 4, 5);
             dtNgayOrder.Name = "dtNgayOrder";
-            dtNgayOrder.Size = new Size(319, 29);
+            dtNgayOrder.Size = new Size(256, 26);
             dtNgayOrder.TabIndex = 109;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(66, 116);
-            label7.Margin = new Padding(5, 0, 5, 0);
+            label7.Location = new Point(53, 93);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(121, 22);
+            label7.Size = new Size(101, 18);
             label7.TabIndex = 105;
             label7.Text = "Ngày hóa đơn";
             // 
             // txtMaNV
             // 
-            txtMaNV.Location = new Point(310, 65);
-            txtMaNV.Margin = new Padding(5, 6, 5, 6);
+            txtMaNV.Location = new Point(248, 52);
+            txtMaNV.Margin = new Padding(4, 5, 4, 5);
             txtMaNV.Name = "txtMaNV";
             txtMaNV.ReadOnly = true;
-            txtMaNV.Size = new Size(319, 29);
+            txtMaNV.Size = new Size(256, 26);
             txtMaNV.TabIndex = 104;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(66, 75);
-            label6.Margin = new Padding(5, 0, 5, 0);
+            label6.Location = new Point(53, 60);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(169, 22);
+            label6.Size = new Size(139, 18);
             label6.TabIndex = 103;
             label6.Text = "Nhân viên bán hàng";
             // 
             // menuThongTinCaNhan
             // 
             menuThongTinCaNhan.Name = "menuThongTinCaNhan";
-            menuThongTinCaNhan.Size = new Size(302, 36);
+            menuThongTinCaNhan.Size = new Size(261, 28);
             menuThongTinCaNhan.Text = "Thông tin cá nhân";
             menuThongTinCaNhan.Click += menuThongTinCaNhan_Click;
             // 
             // nmSoLuong
             // 
             nmSoLuong.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nmSoLuong.Location = new Point(842, 90);
-            nmSoLuong.Margin = new Padding(5, 6, 5, 6);
+            nmSoLuong.Location = new Point(674, 72);
+            nmSoLuong.Margin = new Padding(4, 5, 4, 5);
             nmSoLuong.Name = "nmSoLuong";
-            nmSoLuong.Size = new Size(101, 31);
+            nmSoLuong.Size = new Size(81, 27);
             nmSoLuong.TabIndex = 589;
             nmSoLuong.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -213,10 +213,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 163);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(638, 94);
-            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Location = new Point(523, 72);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(167, 30);
+            label1.Size = new Size(143, 25);
             label1.TabIndex = 588;
             label1.Text = "SỐ LƯỢNG :";
             // 
@@ -226,10 +226,10 @@
             btnXoa.FlatStyle = FlatStyle.Popup;
             btnXoa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXoa.ForeColor = Color.White;
-            btnXoa.Location = new Point(1268, 311);
-            btnXoa.Margin = new Padding(5, 6, 5, 6);
+            btnXoa.Location = new Point(1145, 245);
+            btnXoa.Margin = new Padding(4, 5, 4, 5);
             btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(309, 58);
+            btnXoa.Size = new Size(247, 46);
             btnXoa.TabIndex = 587;
             btnXoa.Text = "Xóa đồ uống";
             btnXoa.UseVisualStyleBackColor = false;
@@ -241,10 +241,10 @@
             btnThem.FlatStyle = FlatStyle.Popup;
             btnThem.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThem.ForeColor = Color.White;
-            btnThem.Location = new Point(954, 84);
-            btnThem.Margin = new Padding(5, 6, 5, 6);
+            btnThem.Location = new Point(763, 67);
+            btnThem.Margin = new Padding(4, 5, 4, 5);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(161, 58);
+            btnThem.Size = new Size(129, 46);
             btnThem.TabIndex = 586;
             btnThem.Text = "Thêm mới";
             btnThem.UseVisualStyleBackColor = false;
@@ -255,27 +255,27 @@
             thốngKêToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuDoanhThuNgay, menuThongKeDoanhThuNV, menuLichSuHoaDon });
             thốngKêToolStripMenuItem.Image = (Image)resources.GetObject("thốngKêToolStripMenuItem.Image");
             thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
-            thốngKêToolStripMenuItem.Size = new Size(129, 32);
+            thốngKêToolStripMenuItem.Size = new Size(115, 27);
             thốngKêToolStripMenuItem.Text = "Thống kê";
             // 
             // menuDoanhThuNgay
             // 
             menuDoanhThuNgay.Name = "menuDoanhThuNgay";
-            menuDoanhThuNgay.Size = new Size(424, 36);
+            menuDoanhThuNgay.Size = new Size(370, 28);
             menuDoanhThuNgay.Text = "Thống kê doanh thu theo ngày";
             menuDoanhThuNgay.Click += menuDoanhThuNgay_Click;
             // 
             // menuThongKeDoanhThuNV
             // 
             menuThongKeDoanhThuNV.Name = "menuThongKeDoanhThuNV";
-            menuThongKeDoanhThuNV.Size = new Size(424, 36);
+            menuThongKeDoanhThuNV.Size = new Size(370, 28);
             menuThongKeDoanhThuNV.Text = "Thống kê doanh thu theo nhân viên";
             menuThongKeDoanhThuNV.Click += menuThongKeDoanhThuNV_Click;
             // 
             // menuLichSuHoaDon
             // 
             menuLichSuHoaDon.Name = "menuLichSuHoaDon";
-            menuLichSuHoaDon.Size = new Size(424, 36);
+            menuLichSuHoaDon.Size = new Size(370, 28);
             menuLichSuHoaDon.Text = "Xem lịch sử hóa đơn";
             menuLichSuHoaDon.Click += menuLichSuHoaDon_Click;
             // 
@@ -285,10 +285,10 @@
             btnTim.FlatStyle = FlatStyle.Popup;
             btnTim.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTim.ForeColor = Color.White;
-            btnTim.Location = new Point(1139, 174);
-            btnTim.Margin = new Padding(5, 6, 5, 6);
+            btnTim.Location = new Point(911, 139);
+            btnTim.Margin = new Padding(4, 5, 4, 5);
             btnTim.Name = "btnTim";
-            btnTim.Size = new Size(116, 58);
+            btnTim.Size = new Size(93, 46);
             btnTim.TabIndex = 594;
             btnTim.Text = "Tìm";
             btnTim.UseVisualStyleBackColor = false;
@@ -299,10 +299,10 @@
             txtTenDoUong.CharacterCasing = CharacterCasing.Upper;
             txtTenDoUong.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtTenDoUong.ForeColor = Color.Black;
-            txtTenDoUong.Location = new Point(874, 179);
-            txtTenDoUong.Margin = new Padding(5, 6, 5, 6);
+            txtTenDoUong.Location = new Point(699, 143);
+            txtTenDoUong.Margin = new Padding(4, 5, 4, 5);
             txtTenDoUong.Name = "txtTenDoUong";
-            txtTenDoUong.Size = new Size(253, 29);
+            txtTenDoUong.Size = new Size(203, 26);
             txtTenDoUong.TabIndex = 593;
             // 
             // label3
@@ -310,10 +310,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(648, 186);
-            label3.Margin = new Padding(5, 0, 5, 0);
+            label3.Location = new Point(518, 149);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(203, 24);
+            label3.Size = new Size(170, 21);
             label3.TabIndex = 592;
             label3.Text = "Tìm theo tên đồ uống";
             // 
@@ -323,13 +323,14 @@
             btnIn.FlatStyle = FlatStyle.Popup;
             btnIn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnIn.ForeColor = Color.White;
-            btnIn.Location = new Point(1948, 1151);
-            btnIn.Margin = new Padding(5, 6, 5, 6);
+            btnIn.Location = new Point(1611, 693);
+            btnIn.Margin = new Padding(4, 5, 4, 5);
             btnIn.Name = "btnIn";
-            btnIn.Size = new Size(244, 58);
+            btnIn.Size = new Size(158, 46);
             btnIn.TabIndex = 591;
             btnIn.Text = "In hóa đơn";
             btnIn.UseVisualStyleBackColor = false;
+            btnIn.Click += btnIn_Click;
             // 
             // btnBanDaChon
             // 
@@ -337,10 +338,10 @@
             btnBanDaChon.FlatStyle = FlatStyle.Popup;
             btnBanDaChon.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBanDaChon.ForeColor = Color.White;
-            btnBanDaChon.Location = new Point(288, 84);
-            btnBanDaChon.Margin = new Padding(5, 6, 5, 6);
+            btnBanDaChon.Location = new Point(230, 67);
+            btnBanDaChon.Margin = new Padding(4, 5, 4, 5);
             btnBanDaChon.Name = "btnBanDaChon";
-            btnBanDaChon.Size = new Size(244, 58);
+            btnBanDaChon.Size = new Size(195, 46);
             btnBanDaChon.TabIndex = 585;
             btnBanDaChon.Text = "Chưa chọn bàn";
             btnBanDaChon.UseVisualStyleBackColor = false;
@@ -349,7 +350,7 @@
             // 
             btnDX.Image = (Image)resources.GetObject("btnDX.Image");
             btnDX.Name = "btnDX";
-            btnDX.Size = new Size(137, 32);
+            btnDX.Size = new Size(123, 27);
             btnDX.Text = "Đăng xuất";
             btnDX.Click += BtnDX_Click;
             // 
@@ -357,7 +358,7 @@
             // 
             menuKH.Image = (Image)resources.GetObject("menuKH.Image");
             menuKH.Name = "menuKH";
-            menuKH.Size = new Size(220, 32);
+            menuKH.Size = new Size(197, 27);
             menuKH.Text = "Quản lý khách hàng";
             menuKH.Click += menuKH_Click;
             // 
@@ -368,12 +369,12 @@
             dtgvDoUong.BackgroundColor = Color.White;
             dtgvDoUong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvDoUong.Columns.AddRange(new DataGridViewColumn[] { HinhAnh, MaDoUong, TenDoUong, GiaTien });
-            dtgvDoUong.Location = new Point(540, 241);
-            dtgvDoUong.Margin = new Padding(5, 6, 5, 6);
+            dtgvDoUong.Location = new Point(432, 193);
+            dtgvDoUong.Margin = new Padding(4, 5, 4, 5);
             dtgvDoUong.Name = "dtgvDoUong";
             dtgvDoUong.ReadOnly = true;
             dtgvDoUong.RowHeadersWidth = 51;
-            dtgvDoUong.Size = new Size(716, 982);
+            dtgvDoUong.Size = new Size(620, 558);
             dtgvDoUong.TabIndex = 595;
             dtgvDoUong.CellContentClick += dtgvDoUong_CellContentClick;
             // 
@@ -416,10 +417,10 @@
             label8.AutoSize = true;
             label8.Font = new Font("Times New Roman", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 163);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(0, 94);
-            label8.Margin = new Padding(5, 0, 5, 0);
+            label8.Location = new Point(0, 78);
+            label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(253, 30);
+            label8.Size = new Size(214, 25);
             label8.TabIndex = 584;
             label8.Text = "BÀN ĐANG CHỌN :";
             // 
@@ -429,12 +430,13 @@
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 163);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(1265, 1165);
-            label2.Margin = new Padding(5, 0, 5, 0);
+            label2.Location = new Point(1145, 707);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(97, 30);
+            label2.Size = new Size(84, 25);
             label2.TabIndex = 582;
             label2.Text = "TỔNG:";
+            label2.Click += label2_Click;
             // 
             // btnThanhToan
             // 
@@ -442,10 +444,10 @@
             btnThanhToan.FlatStyle = FlatStyle.Popup;
             btnThanhToan.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThanhToan.ForeColor = Color.White;
-            btnThanhToan.Location = new Point(1700, 1151);
-            btnThanhToan.Margin = new Padding(5, 6, 5, 6);
+            btnThanhToan.Location = new Point(1438, 693);
+            btnThanhToan.Margin = new Padding(4, 5, 4, 5);
             btnThanhToan.Name = "btnThanhToan";
-            btnThanhToan.Size = new Size(244, 58);
+            btnThanhToan.Size = new Size(159, 46);
             btnThanhToan.TabIndex = 581;
             btnThanhToan.Text = "Thanh toán";
             btnThanhToan.UseVisualStyleBackColor = false;
@@ -456,11 +458,11 @@
             dtgvHoaDon.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvHoaDon.BackgroundColor = Color.White;
             dtgvHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvHoaDon.Location = new Point(1265, 376);
-            dtgvHoaDon.Margin = new Padding(5, 6, 5, 6);
+            dtgvHoaDon.Location = new Point(1145, 301);
+            dtgvHoaDon.Margin = new Padding(4, 5, 4, 5);
             dtgvHoaDon.Name = "dtgvHoaDon";
             dtgvHoaDon.RowHeadersWidth = 51;
-            dtgvHoaDon.Size = new Size(945, 764);
+            dtgvHoaDon.Size = new Size(636, 384);
             dtgvHoaDon.TabIndex = 580;
             // 
             // listViewBan
@@ -469,19 +471,20 @@
             listViewBan.BackColor = Color.White;
             listViewBan.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listViewBan.LargeImageList = imageList1;
-            listViewBan.Location = new Point(4, 161);
-            listViewBan.Margin = new Padding(5, 6, 5, 6);
+            listViewBan.Location = new Point(3, 129);
+            listViewBan.Margin = new Padding(4, 5, 4, 5);
             listViewBan.Name = "listViewBan";
-            listViewBan.Size = new Size(524, 1060);
+            listViewBan.Size = new Size(420, 621);
             listViewBan.TabIndex = 578;
             listViewBan.UseCompatibleStateImageBehavior = false;
+            listViewBan.SelectedIndexChanged += listViewBan_SelectedIndexChanged;
             // 
             // hệThốngToolStripMenuItem
             // 
             hệThốngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuNhanVien, menuThongTinCaNhan });
             hệThốngToolStripMenuItem.Image = (Image)resources.GetObject("hệThốngToolStripMenuItem.Image");
             hệThốngToolStripMenuItem.Name = "hệThốngToolStripMenuItem";
-            hệThốngToolStripMenuItem.Size = new Size(130, 32);
+            hệThốngToolStripMenuItem.Size = new Size(116, 27);
             hệThốngToolStripMenuItem.Text = "Hệ thống";
             // 
             // lblTongTien
@@ -490,42 +493,43 @@
             lblTongTien.AutoSize = true;
             lblTongTien.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 163);
             lblTongTien.ForeColor = Color.Red;
-            lblTongTien.Location = new Point(1382, 1161);
-            lblTongTien.Margin = new Padding(5, 0, 5, 0);
+            lblTongTien.Location = new Point(1229, 707);
+            lblTongTien.Margin = new Padding(4, 0, 4, 0);
             lblTongTien.Name = "lblTongTien";
-            lblTongTien.Size = new Size(105, 32);
+            lblTongTien.Size = new Size(88, 26);
             lblTongTien.TabIndex = 583;
             lblTongTien.Text = "O VNĐ";
+            lblTongTien.Click += lblTongTien_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1918, 58);
-            pictureBox1.Margin = new Padding(5, 6, 5, 6);
+            pictureBox1.Location = new Point(1534, 46);
+            pictureBox1.Margin = new Padding(4, 5, 4, 5);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(294, 311);
+            pictureBox1.Size = new Size(235, 249);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 579;
             pictureBox1.TabStop = false;
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = SystemColors.Control;
+            menuStrip1.BackColor = Color.Wheat;
             menuStrip1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { hệThốngToolStripMenuItem, btnDanhMuc, menuKH, thốngKêToolStripMenuItem, btnDX });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(8, 2, 0, 2);
-            menuStrip1.Size = new Size(2211, 36);
+            menuStrip1.Size = new Size(1782, 31);
             menuStrip1.TabIndex = 577;
             menuStrip1.Text = "menuStrip1";
             // 
             // FormMain
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2211, 1225);
+            BackColor = Color.Wheat;
+            ClientSize = new Size(1782, 753);
             Controls.Add(groupBox1);
             Controls.Add(nmSoLuong);
             Controls.Add(label1);
@@ -536,7 +540,6 @@
             Controls.Add(label3);
             Controls.Add(btnIn);
             Controls.Add(btnBanDaChon);
-            Controls.Add(dtgvDoUong);
             Controls.Add(label8);
             Controls.Add(label2);
             Controls.Add(btnThanhToan);
@@ -545,7 +548,7 @@
             Controls.Add(lblTongTien);
             Controls.Add(pictureBox1);
             Controls.Add(menuStrip1);
-            Margin = new Padding(4, 4, 4, 4);
+            Controls.Add(dtgvDoUong);
             Name = "FormMain";
             Text = "Phần mềm quản lí quán cafe";
             Load += FormMain_Load;

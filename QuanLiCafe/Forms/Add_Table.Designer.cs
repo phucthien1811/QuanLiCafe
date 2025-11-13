@@ -28,121 +28,127 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cb_GioiTinh = new System.Windows.Forms.ComboBox();
-            this.btn_luu = new System.Windows.Forms.Button();
-            this.btn_huy = new System.Windows.Forms.Button();
-            this.txb_TenBan = new System.Windows.Forms.TextBox();
-            this.txb_SoBan = new System.Windows.Forms.TextBox();
-            this.label_ViTri = new System.Windows.Forms.Label();
-            this.label_TenBan = new System.Windows.Forms.Label();
-            this.label_SoBan = new System.Windows.Forms.Label();
-            this.label_ThongTin = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            cb_GioiTinh = new ComboBox();
+            btn_luu = new Button();
+            btn_huy = new Button();
+            txb_TenBan = new TextBox();
+            txb_SoBan = new TextBox();
+            label_ViTri = new Label();
+            label_TenBan = new Label();
+            label_SoBan = new Label();
+            label_ThongTin = new Label();
+            SuspendLayout();
             // 
             // cb_GioiTinh
             // 
-            this.cb_GioiTinh.FormattingEnabled = true;
-            this.cb_GioiTinh.Location = new System.Drawing.Point(130, 155);
-            this.cb_GioiTinh.Name = "cb_GioiTinh";
-            this.cb_GioiTinh.Size = new System.Drawing.Size(365, 24);
-            this.cb_GioiTinh.TabIndex = 33;
+            cb_GioiTinh.FormattingEnabled = true;
+            cb_GioiTinh.Location = new Point(130, 194);
+            cb_GioiTinh.Margin = new Padding(3, 4, 3, 4);
+            cb_GioiTinh.Name = "cb_GioiTinh";
+            cb_GioiTinh.Size = new Size(365, 28);
+            cb_GioiTinh.TabIndex = 33;
             // 
             // btn_luu
             // 
-            this.btn_luu.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_luu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_luu.Location = new System.Drawing.Point(383, 194);
-            this.btn_luu.Name = "btn_luu";
-            this.btn_luu.Size = new System.Drawing.Size(112, 49);
-            this.btn_luu.TabIndex = 32;
-            this.btn_luu.Text = "Lưu";
-            this.btn_luu.UseVisualStyleBackColor = false;
+            btn_luu.BackColor = Color.DeepSkyBlue;
+            btn_luu.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_luu.Location = new Point(386, 262);
+            btn_luu.Margin = new Padding(3, 4, 3, 4);
+            btn_luu.Name = "btn_luu";
+            btn_luu.Size = new Size(110, 41);
+            btn_luu.TabIndex = 32;
+            btn_luu.Text = "Lưu";
+            btn_luu.UseVisualStyleBackColor = false;
             // 
             // btn_huy
             // 
-            this.btn_huy.BackColor = System.Drawing.Color.Red;
-            this.btn_huy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_huy.Location = new System.Drawing.Point(240, 194);
-            this.btn_huy.Name = "btn_huy";
-            this.btn_huy.Size = new System.Drawing.Size(112, 49);
-            this.btn_huy.TabIndex = 31;
-            this.btn_huy.Text = "Hủy";
-            this.btn_huy.UseVisualStyleBackColor = false;
+            btn_huy.BackColor = Color.Red;
+            btn_huy.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_huy.Location = new Point(270, 262);
+            btn_huy.Margin = new Padding(3, 4, 3, 4);
+            btn_huy.Name = "btn_huy";
+            btn_huy.Size = new Size(110, 41);
+            btn_huy.TabIndex = 31;
+            btn_huy.Text = "Hủy";
+            btn_huy.UseVisualStyleBackColor = false;
             // 
             // txb_TenBan
             // 
-            this.txb_TenBan.Location = new System.Drawing.Point(130, 119);
-            this.txb_TenBan.Name = "txb_TenBan";
-            this.txb_TenBan.Size = new System.Drawing.Size(365, 22);
-            this.txb_TenBan.TabIndex = 29;
-            this.txb_TenBan.TextChanged += new System.EventHandler(this.txb_TenBan_TextChanged);
+            txb_TenBan.Location = new Point(130, 149);
+            txb_TenBan.Margin = new Padding(3, 4, 3, 4);
+            txb_TenBan.Name = "txb_TenBan";
+            txb_TenBan.Size = new Size(365, 27);
+            txb_TenBan.TabIndex = 29;
+            txb_TenBan.TextChanged += txb_TenBan_TextChanged;
             // 
             // txb_SoBan
             // 
-            this.txb_SoBan.Location = new System.Drawing.Point(130, 80);
-            this.txb_SoBan.Name = "txb_SoBan";
-            this.txb_SoBan.Size = new System.Drawing.Size(365, 22);
-            this.txb_SoBan.TabIndex = 28;
+            txb_SoBan.Location = new Point(130, 100);
+            txb_SoBan.Margin = new Padding(3, 4, 3, 4);
+            txb_SoBan.Name = "txb_SoBan";
+            txb_SoBan.Size = new Size(365, 27);
+            txb_SoBan.TabIndex = 28;
             // 
             // label_ViTri
             // 
-            this.label_ViTri.AutoSize = true;
-            this.label_ViTri.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ViTri.Location = new System.Drawing.Point(44, 159);
-            this.label_ViTri.Name = "label_ViTri";
-            this.label_ViTri.Size = new System.Drawing.Size(46, 20);
-            this.label_ViTri.TabIndex = 26;
-            this.label_ViTri.Text = "Vị trí";
+            label_ViTri.AutoSize = true;
+            label_ViTri.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_ViTri.Location = new Point(44, 199);
+            label_ViTri.Name = "label_ViTri";
+            label_ViTri.Size = new Size(46, 20);
+            label_ViTri.TabIndex = 26;
+            label_ViTri.Text = "Vị trí";
             // 
             // label_TenBan
             // 
-            this.label_TenBan.AutoSize = true;
-            this.label_TenBan.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_TenBan.Location = new System.Drawing.Point(44, 121);
-            this.label_TenBan.Name = "label_TenBan";
-            this.label_TenBan.Size = new System.Drawing.Size(69, 20);
-            this.label_TenBan.TabIndex = 25;
-            this.label_TenBan.Text = "Tên bàn";
+            label_TenBan.AutoSize = true;
+            label_TenBan.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_TenBan.Location = new Point(44, 151);
+            label_TenBan.Name = "label_TenBan";
+            label_TenBan.Size = new Size(69, 20);
+            label_TenBan.TabIndex = 25;
+            label_TenBan.Text = "Tên bàn";
             // 
             // label_SoBan
             // 
-            this.label_SoBan.AutoSize = true;
-            this.label_SoBan.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SoBan.Location = new System.Drawing.Point(44, 82);
-            this.label_SoBan.Name = "label_SoBan";
-            this.label_SoBan.Size = new System.Drawing.Size(59, 20);
-            this.label_SoBan.TabIndex = 24;
-            this.label_SoBan.Text = "Số bàn";
+            label_SoBan.AutoSize = true;
+            label_SoBan.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_SoBan.Location = new Point(44, 102);
+            label_SoBan.Name = "label_SoBan";
+            label_SoBan.Size = new Size(59, 20);
+            label_SoBan.TabIndex = 24;
+            label_SoBan.Text = "Số bàn";
             // 
             // label_ThongTin
             // 
-            this.label_ThongTin.AutoSize = true;
-            this.label_ThongTin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ThongTin.Location = new System.Drawing.Point(18, 16);
-            this.label_ThongTin.Name = "label_ThongTin";
-            this.label_ThongTin.Size = new System.Drawing.Size(79, 20);
-            this.label_ThongTin.TabIndex = 23;
-            this.label_ThongTin.Text = "Thông tin";
+            label_ThongTin.AutoSize = true;
+            label_ThongTin.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_ThongTin.Location = new Point(18, 20);
+            label_ThongTin.Name = "label_ThongTin";
+            label_ThongTin.Size = new Size(79, 20);
+            label_ThongTin.TabIndex = 23;
+            label_ThongTin.Text = "Thông tin";
             // 
             // Add_Table
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ClientSize = new System.Drawing.Size(511, 257);
-            this.Controls.Add(this.cb_GioiTinh);
-            this.Controls.Add(this.btn_luu);
-            this.Controls.Add(this.btn_huy);
-            this.Controls.Add(this.txb_TenBan);
-            this.Controls.Add(this.txb_SoBan);
-            this.Controls.Add(this.label_ViTri);
-            this.Controls.Add(this.label_TenBan);
-            this.Controls.Add(this.label_SoBan);
-            this.Controls.Add(this.label_ThongTin);
-            this.Name = "Add_Table";
-            this.Text = "Thêm mới bàn";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Wheat;
+            ClientSize = new Size(511, 321);
+            Controls.Add(cb_GioiTinh);
+            Controls.Add(btn_luu);
+            Controls.Add(btn_huy);
+            Controls.Add(txb_TenBan);
+            Controls.Add(txb_SoBan);
+            Controls.Add(label_ViTri);
+            Controls.Add(label_TenBan);
+            Controls.Add(label_SoBan);
+            Controls.Add(label_ThongTin);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Add_Table";
+            Text = "Thêm mới bàn";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

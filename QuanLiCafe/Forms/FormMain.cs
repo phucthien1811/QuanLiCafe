@@ -84,22 +84,22 @@ namespace QuanLiCafe.Forms
                 var query = _context.Products
                     .Include(p => p.Category)
                     .AsQueryable();
-                
+
                 if (!string.IsNullOrWhiteSpace(searchText))
                 {
                     query = query.Where(p => p.Name.Contains(searchText));
                 }
-                
+
                 var products = query.OrderBy(p => p.Name).ToList();
-                
+
                 // Clear rows only, keep columns from Designer
                 dtgvDoUong.Rows.Clear();
-                
+
                 foreach (var product in products)
                 {
                     int rowIndex = dtgvDoUong.Rows.Add();
                     var row = dtgvDoUong.Rows[rowIndex];
-                    
+
                     // Load hình ảnh nếu có
                     if (!string.IsNullOrEmpty(product.ImageUrl) && System.IO.File.Exists(product.ImageUrl))
                     {
@@ -112,7 +112,7 @@ namespace QuanLiCafe.Forms
                             row.Cells["HinhAnh"].Value = null;
                         }
                     }
-                    
+
                     row.Cells["MaDoUong"].Value = product.Id;
                     row.Cells["TenDoUong"].Value = product.Name;
                     row.Cells["GiaTien"].Value = product.Price.ToString("N0") + " ₫";
@@ -562,6 +562,26 @@ namespace QuanLiCafe.Forms
         }
 
         private void dtgvDoUong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblTongTien_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listViewBan_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

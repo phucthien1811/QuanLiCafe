@@ -28,146 +28,153 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cb_GioiTinh = new System.Windows.Forms.ComboBox();
-            this.btn_luu = new System.Windows.Forms.Button();
-            this.btn_huy = new System.Windows.Forms.Button();
-            this.txb_SDT = new System.Windows.Forms.TextBox();
-            this.txb_TenKhachHang = new System.Windows.Forms.TextBox();
-            this.txb_MaKhachHang = new System.Windows.Forms.TextBox();
-            this.label_SDT = new System.Windows.Forms.Label();
-            this.label_GioiTinh = new System.Windows.Forms.Label();
-            this.label_TenKhachHang = new System.Windows.Forms.Label();
-            this.label_MaKhachHang = new System.Windows.Forms.Label();
-            this.label_ThongTin = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            cb_GioiTinh = new ComboBox();
+            btn_luu = new Button();
+            btn_huy = new Button();
+            txb_SDT = new TextBox();
+            txb_TenKhachHang = new TextBox();
+            txb_MaKhachHang = new TextBox();
+            label_SDT = new Label();
+            label_GioiTinh = new Label();
+            label_TenKhachHang = new Label();
+            label_MaKhachHang = new Label();
+            label_ThongTin = new Label();
+            SuspendLayout();
             // 
             // cb_GioiTinh
             // 
-            this.cb_GioiTinh.FormattingEnabled = true;
-            this.cb_GioiTinh.Location = new System.Drawing.Point(182, 178);
-            this.cb_GioiTinh.Name = "cb_GioiTinh";
-            this.cb_GioiTinh.Size = new System.Drawing.Size(365, 24);
-            this.cb_GioiTinh.TabIndex = 44;
+            cb_GioiTinh.FormattingEnabled = true;
+            cb_GioiTinh.Location = new Point(182, 187);
+            cb_GioiTinh.Margin = new Padding(3, 4, 3, 4);
+            cb_GioiTinh.Name = "cb_GioiTinh";
+            cb_GioiTinh.Size = new Size(365, 28);
+            cb_GioiTinh.TabIndex = 44;
             // 
             // btn_luu
             // 
-            this.btn_luu.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_luu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_luu.Location = new System.Drawing.Point(435, 271);
-            this.btn_luu.Name = "btn_luu";
-            this.btn_luu.Size = new System.Drawing.Size(112, 49);
-            this.btn_luu.TabIndex = 43;
-            this.btn_luu.Text = "Lưu";
-            this.btn_luu.UseVisualStyleBackColor = false;
+            btn_luu.BackColor = Color.DeepSkyBlue;
+            btn_luu.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_luu.ForeColor = SystemColors.ButtonFace;
+            btn_luu.Location = new Point(414, 290);
+            btn_luu.Margin = new Padding(3, 4, 3, 4);
+            btn_luu.Name = "btn_luu";
+            btn_luu.Size = new Size(133, 44);
+            btn_luu.TabIndex = 43;
+            btn_luu.Text = "Lưu";
+            btn_luu.UseVisualStyleBackColor = false;
             // 
             // btn_huy
             // 
-            this.btn_huy.BackColor = System.Drawing.Color.Red;
-            this.btn_huy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_huy.Location = new System.Drawing.Point(270, 271);
-            this.btn_huy.Name = "btn_huy";
-            this.btn_huy.Size = new System.Drawing.Size(112, 49);
-            this.btn_huy.TabIndex = 42;
-            this.btn_huy.Text = "Hủy";
-            this.btn_huy.UseVisualStyleBackColor = false;
+            btn_huy.BackColor = Color.Red;
+            btn_huy.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_huy.ForeColor = SystemColors.ButtonFace;
+            btn_huy.Location = new Point(270, 290);
+            btn_huy.Margin = new Padding(3, 4, 3, 4);
+            btn_huy.Name = "btn_huy";
+            btn_huy.Size = new Size(138, 44);
+            btn_huy.TabIndex = 42;
+            btn_huy.Text = "Hủy";
+            btn_huy.UseVisualStyleBackColor = false;
+            btn_huy.Click += btn_huy_Click_1;
             // 
             // txb_SDT
             // 
-            this.txb_SDT.Location = new System.Drawing.Point(182, 219);
-            this.txb_SDT.Name = "txb_SDT";
-            this.txb_SDT.Size = new System.Drawing.Size(365, 22);
-            this.txb_SDT.TabIndex = 41;
-            this.txb_SDT.TextChanged += new System.EventHandler(this.txb_SDT_TextChanged);
+            txb_SDT.Location = new Point(182, 239);
+            txb_SDT.Margin = new Padding(3, 4, 3, 4);
+            txb_SDT.Name = "txb_SDT";
+            txb_SDT.Size = new Size(365, 27);
+            txb_SDT.TabIndex = 41;
             // 
             // txb_TenKhachHang
             // 
-            this.txb_TenKhachHang.Location = new System.Drawing.Point(182, 139);
-            this.txb_TenKhachHang.Name = "txb_TenKhachHang";
-            this.txb_TenKhachHang.Size = new System.Drawing.Size(365, 22);
-            this.txb_TenKhachHang.TabIndex = 40;
+            txb_TenKhachHang.Location = new Point(182, 139);
+            txb_TenKhachHang.Margin = new Padding(3, 4, 3, 4);
+            txb_TenKhachHang.Name = "txb_TenKhachHang";
+            txb_TenKhachHang.Size = new Size(365, 27);
+            txb_TenKhachHang.TabIndex = 40;
             // 
             // txb_MaKhachHang
             // 
-            this.txb_MaKhachHang.Location = new System.Drawing.Point(182, 98);
-            this.txb_MaKhachHang.Name = "txb_MaKhachHang";
-            this.txb_MaKhachHang.Size = new System.Drawing.Size(365, 22);
-            this.txb_MaKhachHang.TabIndex = 39;
+            txb_MaKhachHang.Location = new Point(182, 87);
+            txb_MaKhachHang.Margin = new Padding(3, 4, 3, 4);
+            txb_MaKhachHang.Name = "txb_MaKhachHang";
+            txb_MaKhachHang.Size = new Size(365, 27);
+            txb_MaKhachHang.TabIndex = 39;
             // 
             // label_SDT
             // 
-            this.label_SDT.AutoSize = true;
-            this.label_SDT.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SDT.Location = new System.Drawing.Point(38, 221);
-            this.label_SDT.Name = "label_SDT";
-            this.label_SDT.Size = new System.Drawing.Size(103, 20);
-            this.label_SDT.TabIndex = 38;
-            this.label_SDT.Text = "Số điện thoại";
-            this.label_SDT.Click += new System.EventHandler(this.label_SDT_Click);
+            label_SDT.AutoSize = true;
+            label_SDT.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_SDT.Location = new Point(38, 246);
+            label_SDT.Name = "label_SDT";
+            label_SDT.Size = new Size(103, 20);
+            label_SDT.TabIndex = 38;
+            label_SDT.Text = "Số điện thoại";
             // 
             // label_GioiTinh
             // 
-            this.label_GioiTinh.AutoSize = true;
-            this.label_GioiTinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_GioiTinh.Location = new System.Drawing.Point(38, 182);
-            this.label_GioiTinh.Name = "label_GioiTinh";
-            this.label_GioiTinh.Size = new System.Drawing.Size(73, 20);
-            this.label_GioiTinh.TabIndex = 37;
-            this.label_GioiTinh.Text = "Giới tính";
+            label_GioiTinh.AutoSize = true;
+            label_GioiTinh.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_GioiTinh.Location = new Point(38, 198);
+            label_GioiTinh.Name = "label_GioiTinh";
+            label_GioiTinh.Size = new Size(73, 20);
+            label_GioiTinh.TabIndex = 37;
+            label_GioiTinh.Text = "Giới tính";
             // 
             // label_TenKhachHang
             // 
-            this.label_TenKhachHang.AutoSize = true;
-            this.label_TenKhachHang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_TenKhachHang.Location = new System.Drawing.Point(38, 141);
-            this.label_TenKhachHang.Name = "label_TenKhachHang";
-            this.label_TenKhachHang.Size = new System.Drawing.Size(125, 20);
-            this.label_TenKhachHang.TabIndex = 36;
-            this.label_TenKhachHang.Text = "Tên khách hàng";
-            this.label_TenKhachHang.Click += new System.EventHandler(this.label_TenKhachHang_Click);
+            label_TenKhachHang.AutoSize = true;
+            label_TenKhachHang.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_TenKhachHang.Location = new Point(38, 146);
+            label_TenKhachHang.Name = "label_TenKhachHang";
+            label_TenKhachHang.Size = new Size(125, 20);
+            label_TenKhachHang.TabIndex = 36;
+            label_TenKhachHang.Text = "Tên khách hàng";
             // 
             // label_MaKhachHang
             // 
-            this.label_MaKhachHang.AutoSize = true;
-            this.label_MaKhachHang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_MaKhachHang.Location = new System.Drawing.Point(38, 98);
-            this.label_MaKhachHang.Name = "label_MaKhachHang";
-            this.label_MaKhachHang.Size = new System.Drawing.Size(120, 20);
-            this.label_MaKhachHang.TabIndex = 35;
-            this.label_MaKhachHang.Text = "Mã khách hàng";
+            label_MaKhachHang.AutoSize = true;
+            label_MaKhachHang.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_MaKhachHang.Location = new Point(38, 87);
+            label_MaKhachHang.Name = "label_MaKhachHang";
+            label_MaKhachHang.Size = new Size(120, 20);
+            label_MaKhachHang.TabIndex = 35;
+            label_MaKhachHang.Text = "Mã khách hàng";
             // 
             // label_ThongTin
             // 
-            this.label_ThongTin.AutoSize = true;
-            this.label_ThongTin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ThongTin.Location = new System.Drawing.Point(12, 21);
-            this.label_ThongTin.Name = "label_ThongTin";
-            this.label_ThongTin.Size = new System.Drawing.Size(79, 20);
-            this.label_ThongTin.TabIndex = 34;
-            this.label_ThongTin.Text = "Thông tin";
+            label_ThongTin.AutoSize = true;
+            label_ThongTin.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_ThongTin.Location = new Point(12, 31);
+            label_ThongTin.Name = "label_ThongTin";
+            label_ThongTin.Size = new Size(79, 20);
+            label_ThongTin.TabIndex = 34;
+            label_ThongTin.Text = "Thông tin";
             // 
-            // them
+            // AddCustomer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ClientSize = new System.Drawing.Size(570, 330);
-            this.Controls.Add(this.cb_GioiTinh);
-            this.Controls.Add(this.btn_luu);
-            this.Controls.Add(this.btn_huy);
-            this.Controls.Add(this.txb_SDT);
-            this.Controls.Add(this.txb_TenKhachHang);
-            this.Controls.Add(this.txb_MaKhachHang);
-            this.Controls.Add(this.label_SDT);
-            this.Controls.Add(this.label_GioiTinh);
-            this.Controls.Add(this.label_TenKhachHang);
-            this.Controls.Add(this.label_MaKhachHang);
-            this.Controls.Add(this.label_ThongTin);
-            this.Name = "them";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Thêm khách hàng";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            BackColor = Color.Wheat;
+            ClientSize = new Size(570, 349);
+            Controls.Add(cb_GioiTinh);
+            Controls.Add(btn_luu);
+            Controls.Add(btn_huy);
+            Controls.Add(txb_SDT);
+            Controls.Add(txb_TenKhachHang);
+            Controls.Add(txb_MaKhachHang);
+            Controls.Add(label_SDT);
+            Controls.Add(label_GioiTinh);
+            Controls.Add(label_TenKhachHang);
+            Controls.Add(label_MaKhachHang);
+            Controls.Add(label_ThongTin);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "AddCustomer";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Thêm khách hàng";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

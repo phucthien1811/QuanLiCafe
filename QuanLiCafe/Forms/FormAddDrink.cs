@@ -24,13 +24,13 @@ namespace DrinkForm
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
             _productId = null;
-            
+
             this.Load += EditDrinkForm_Load;
             btnLuu.Click += BtnLuu_Click;
             btnHuy.Click += BtnHuy_Click;
             llChonHinh.LinkClicked += LlChonHinh_LinkClicked;
             linkLabel1.LinkClicked += LinkLabel1_LinkClicked;
-            
+
             this.Text = "Thêm mới đồ uống";
         }
 
@@ -44,10 +44,10 @@ namespace DrinkForm
         private void EditDrinkForm_Load(object sender, EventArgs e)
         {
             LoadCategories();
-            
+
             // Cấu hình PictureBox
             picHinh.SizeMode = PictureBoxSizeMode.Zoom;
-            
+
             // Nếu là chỉnh sửa, load thông tin đồ uống
             if (_productId.HasValue)
             {
@@ -91,7 +91,7 @@ namespace DrinkForm
                     textBox3.Text = ""; // Mô tả nếu có thêm vào model
                     textBox4.Text = product.Price.ToString();
                     comboBox1.SelectedValue = product.CategoryId;
-                    
+
                     // Load hình ảnh
                     if (!string.IsNullOrEmpty(product.ImageUrl) && System.IO.File.Exists(product.ImageUrl))
                     {
@@ -115,7 +115,7 @@ namespace DrinkForm
                 {
                     openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
                     openFileDialog.Title = "Chọn hình ảnh đồ uống";
-                    
+
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         _selectedImagePath = openFileDialog.FileName;
@@ -182,9 +182,9 @@ namespace DrinkForm
                         product.Price = price;
                         product.CategoryId = (int)comboBox1.SelectedValue;
                         product.ImageUrl = _selectedImagePath;
-                        
+
                         _context.SaveChanges();
-                        
+
                         MessageBox.Show("Cập nhật đồ uống thành công!", "Thành công",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -199,14 +199,14 @@ namespace DrinkForm
                         CategoryId = (int)comboBox1.SelectedValue,
                         ImageUrl = _selectedImagePath
                     };
-                    
+
                     _context.Products.Add(newProduct);
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Thêm đồ uống mới thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -226,6 +226,11 @@ namespace DrinkForm
         private void button2_Click(object sender, EventArgs e)
         {
             BtnHuy_Click(sender, e);
+        }
+
+        private void Info_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
