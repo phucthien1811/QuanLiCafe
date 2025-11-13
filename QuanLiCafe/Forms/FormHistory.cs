@@ -7,29 +7,261 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLiCafe.Data;
+using QuanLiCafe.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReportForm
 {
     public partial class ReportForm : Form
     {
+        private readonly CafeContext _context;
+
         public ReportForm()
         {
             InitializeComponent();
+            _context = QuanLiCafe.Program.DbContext;
+            
+            // Đăng ký sự kiện
+            this.Load += ReportForm_Load;
+            btn_LocDuLieu.Click += Btn_LocDuLieu_Click;
+            btn_InBaoCao.Click += Btn_InBaoCao_Click;
+            btn_XuatExcel.Click += Btn_XuatExcel_Click;
+        }
+
+        private void ReportForm_Load(object sender, EventArgs e)
+        {
+            // Thiết lập ngày mặc định
+            dtp_TuNgay.Value = DateTime.Today; // Ngày hôm nay
+            dtp_DenNgay.Value = DateTime.Today; // Ngày hôm nay
+            
+            // Load logo (nếu có)
+            LoadLogo();
+            
+            // Load dữ liệu ngày hôm nay
+            LoadOrderHistory(DateTime.Today, DateTime.Today);
+        }
+
+        private void LoadLogo()
+        {
+            try
+            {
+                pb_Avatar.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch
+            {
+                // Nếu không có logo thì bỏ qua
+            }
+        }
+
+        // Load lịch sử hóa đơn chi tiết
+        private void LoadOrderHistory(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                dgv_HoaDon.Rows.Clear();
+                
+                // Thiết lập thời gian bắt đầu và kết thúc
+                DateTime startDate = fromDate.Date; // 00:00:00
+                DateTime endDate = toDate.Date.AddDays(1).AddSeconds(-1); // 23:59:59
+                
+                // Lấy tất cả OrderDetails trong khoảng thời gian
+                var orderDetails = _context.OrderDetails
+                    .Include(od => od.Order)
+                        .ThenInclude(o => o.Staff)
+                    .Include(od => od.Product)
+                    .Where(od => od.Order.CreatedAt >= startDate 
+                                && od.Order.CreatedAt <= endDate
+                                && od.Order.TotalAmount > 0)
+                    .OrderByDescending(od => od.Order.CreatedAt)
+                    .ToList();
+                
+                int stt = 1;
+                decimal tongTien = 0;
+                
+                foreach (var detail in orderDetails)
+                {
+                    int rowIndex = dgv_HoaDon.Rows.Add();
+                    var row = dgv_HoaDon.Rows[rowIndex];
+                    
+                    row.Cells["STT"].Value = stt++;
+                    row.Cells["Ngay"].Value = detail.Order.CreatedAt.ToString("dd/MM/yyyy HH:mm");
+                    row.Cells["MaPhieu"].Value = detail.Order.Id;
+                    row.Cells["MaPhieuChiTiet"].Value = detail.Id;
+                    row.Cells["MaNV"].Value = detail.Order.StaffId + " - " + detail.Order.Staff.Username;
+                    row.Cells["MaKH"].Value = "N/A"; // Nếu có bảng Customer thì map vào
+                    row.Cells["MaDoUong"].Value = detail.ProductId;
+                    row.Cells["TenDoUong"].Value = detail.Product.Name;
+                    row.Tag = detail; // Lưu object detail
+                    
+                    // Tính tổng tiền của từng dòng
+                    decimal lineTotal = detail.Quantity * detail.UnitPrice;
+                    tongTien += lineTotal;
+                }
+                
+                // Hiển thị tổng tiền
+                lb_TongTien.Text = tongTien.ToString("N0") + " ₫";
+                
+                // Hiển thị số lượng record
+                lb_Tong.Text = $"Tổng ({dgv_HoaDon.Rows.Count} dòng)";
+                
+                // Thông báo nếu không có dữ liệu
+                if (orderDetails.Count == 0)
+                {
+                    MessageBox.Show("Không có lịch sử hóa đơn trong khoảng thời gian này!", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải lịch sử hóa đơn:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút Lọc dữ liệu
+        private void Btn_LocDuLieu_Click(object sender, EventArgs e)
+        {
+            DateTime fromDate = dtp_TuNgay.Value.Date;
+            DateTime toDate = dtp_DenNgay.Value.Date;
+            
+            // Kiểm tra ngày hợp lệ
+            if (fromDate > toDate)
+            {
+                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!", 
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            // Load dữ liệu theo khoảng thời gian đã chọn
+            LoadOrderHistory(fromDate, toDate);
+        }
+
+        // Nút In báo cáo
+        private void Btn_InBaoCao_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Tạo báo cáo in
+                string reportContent = GenerateReport();
+                
+                // Hiển thị dialog in
+                MessageBox.Show("Chức năng in báo cáo đang được phát triển!\n\n" + 
+                    "Báo cáo sẽ được xuất ra file hoặc máy in.", 
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi in báo cáo:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút Xuất Excel
+        private void Btn_XuatExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra có dữ liệu không
+                if (dgv_HoaDon.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
+                // Tạo SaveFileDialog
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "CSV Files|*.csv|Excel Files|*.xlsx";
+                    saveFileDialog.Title = "Xuất lịch sử hóa đơn";
+                    saveFileDialog.FileName = $"LichSuHoaDon_{DateTime.Now:ddMMyyyy_HHmmss}.csv";
+                    
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        ExportToExcel(saveFileDialog.FileName);
+                        MessageBox.Show($"Xuất file thành công!\n\nĐường dẫn: {saveFileDialog.FileName}", 
+                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi xuất Excel:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Tạo nội dung báo cáo
+        private string GenerateReport()
+        {
+            StringBuilder report = new StringBuilder();
+            report.AppendLine("=== LỊCH SỬ HÓA ĐƠN BÁN HÀNG ===");
+            report.AppendLine($"Từ ngày: {dtp_TuNgay.Value:dd/MM/yyyy}");
+            report.AppendLine($"Đến ngày: {dtp_DenNgay.Value:dd/MM/yyyy}");
+            report.AppendLine($"Tổng số dòng: {dgv_HoaDon.Rows.Count}");
+            report.AppendLine($"Tổng tiền: {lb_TongTien.Text}");
+            report.AppendLine();
+            report.AppendLine("Chi tiết:");
+            report.AppendLine();
+            
+            foreach (DataGridViewRow row in dgv_HoaDon.Rows)
+            {
+                report.AppendLine($"#{row.Cells["STT"].Value}");
+                report.AppendLine($"Ngày: {row.Cells["Ngay"].Value}");
+                report.AppendLine($"Mã phiếu: {row.Cells["MaPhieu"].Value}");
+                report.AppendLine($"Mã chi tiết: {row.Cells["MaPhieuChiTiet"].Value}");
+                report.AppendLine($"Nhân viên: {row.Cells["MaNV"].Value}");
+                report.AppendLine($"Đồ uống: {row.Cells["TenDoUong"].Value} (Mã: {row.Cells["MaDoUong"].Value})");
+                report.AppendLine();
+            }
+            
+            return report.ToString();
+        }
+
+        // Xuất dữ liệu ra Excel/CSV
+        private void ExportToExcel(string filePath)
+        {
+            StringBuilder csv = new StringBuilder();
+            
+            // Header
+            csv.AppendLine("STT,Ngày,Mã Phiếu,Mã Phiếu Chi Tiết,Mã Nhân Viên,Mã Khách Hàng,Mã Đồ Uống,Tên Đồ Uống");
+            
+            // Data
+            foreach (DataGridViewRow row in dgv_HoaDon.Rows)
+            {
+                csv.AppendLine($"{row.Cells["STT"].Value}," +
+                    $"\"{row.Cells["Ngay"].Value}\"," +
+                    $"{row.Cells["MaPhieu"].Value}," +
+                    $"{row.Cells["MaPhieuChiTiet"].Value}," +
+                    $"\"{row.Cells["MaNV"].Value}\"," +
+                    $"\"{row.Cells["MaKH"].Value}\"," +
+                    $"{row.Cells["MaDoUong"].Value}," +
+                    $"\"{row.Cells["TenDoUong"].Value}\"");
+            }
+            
+            // Footer
+            csv.AppendLine();
+            csv.AppendLine($",,,,,,Tổng số dòng:,{dgv_HoaDon.Rows.Count}");
+            csv.AppendLine($",,,,,,Tổng tiền:,\"{lb_TongTien.Text}\"");
+            
+            // Ghi file
+            System.IO.File.WriteAllText(filePath, csv.ToString(), Encoding.UTF8);
         }
 
         private void lb_tieude_Click(object sender, EventArgs e)
         {
-
+            // Event handler đã có sẵn
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            // Event handler đã có sẵn
         }
 
         private void btn_InBaoCao_Click(object sender, EventArgs e)
         {
-
+            Btn_InBaoCao_Click(sender, e);
         }
     }
 }

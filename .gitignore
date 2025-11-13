@@ -218,7 +218,7 @@ rcf/
 AppPackages/
 BundleArtifacts/
 Package.StoreAssociation.xml
-_pkginfo.txt
+_pkginformation.txt
 *.appx
 *.appxbundle
 *.appxupload
@@ -361,3 +361,83 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# ===================================
+# Configuration & Sensitive Files
+# ===================================
+
+# appsettings files with sensitive data (connection strings, passwords, etc.)
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.*.json
+
+# IMPORTANT: Keep the example template for other developers
+!appsettings.example.json
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# Secrets
+secrets.json
+*.secrets
+
+# Database connection backup files
+*.connectionstrings
+
+# ===================================
+# Database Context & Factory Files
+# ===================================
+
+# Ignore Data folder containing sensitive DB context files
+**/Data/CafeContext.cs
+**/Data/CafeContextFactory.cs
+
+# Or ignore entire Data folder (uncomment if you want to ignore everything)
+# **/Data/
+
+# ===================================
+# Database & EF Core Migrations
+# ===================================
+
+# Ignore Migrations folder to avoid conflicts
+**/Migrations/
+
+# Each developer will create their own migrations based on their machine
+# To recreate migrations:
+# 1. Delete Migrations folder (if exists)
+# 2. Run: dotnet ef migrations add InitialCreate
+# 3. Run: dotnet ef database update
+
+# ===================================
+# Custom Project Ignores
+# ===================================
+
+# Uploaded files/images
+**/wwwroot/uploads/
+**/wwwroot/images/uploads/
+**/Images/uploads/
+
+# Temporary files
+**/Temp/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# SQLite databases (if used for testing)
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
