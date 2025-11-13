@@ -494,11 +494,16 @@ namespace QuanLiCafe.Forms
         // Menu Thông tin cá nhân
         private void menuThongTinCaNhan_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Thông tin đăng nhập:\n\n" +
-                          $"Username: {_currentUser.Username}\n" +
-                          $"Role: {_currentUser.Role}\n" +
-                          $"ID: {_currentUser.Id}",
-                          "Thông tin cá nhân");
+            try
+            {
+                var formInformation = new FormInformation();
+                formInformation.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở thông tin cá nhân:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Menu Khách hàng
