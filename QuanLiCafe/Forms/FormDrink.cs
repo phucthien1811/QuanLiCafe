@@ -156,18 +156,18 @@ namespace DrinkForm
             }
         }
 
-        // Nút Xóa - Mở form SuaLoaiDoUongForm (quản lý loại đồ uống)
+        // Nút Xóa - Mở form TypeDrink (quản lý loại đồ uống)
         private void BtnXoa_Click(object sender, EventArgs e)
         {
             try
             {
-                var categoryForm = new SuaLoaiDoUongForm();
-                categoryForm.ShowDialog();
+                var typeDrinkForm = new TypeDrink();
+                typeDrinkForm.ShowDialog();
                 LoadProducts(); // Refresh sau khi quản lý category
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi mở form quản lý loại đồ uống:\n{ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi mở form loại đồ uống:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
