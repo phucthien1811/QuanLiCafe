@@ -42,20 +42,21 @@
             // cb_GioiTinh
             // 
             cb_GioiTinh.FormattingEnabled = true;
-            cb_GioiTinh.Location = new Point(130, 194);
+            cb_GioiTinh.Location = new Point(130, 148);
             cb_GioiTinh.Margin = new Padding(3, 4, 3, 4);
             cb_GioiTinh.Name = "cb_GioiTinh";
-            cb_GioiTinh.Size = new Size(365, 28);
+            cb_GioiTinh.Size = new Size(296, 28);
             cb_GioiTinh.TabIndex = 33;
             // 
             // btn_luu
             // 
             btn_luu.BackColor = Color.DeepSkyBlue;
-            btn_luu.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_luu.Location = new Point(386, 262);
+            btn_luu.Font = new Font("Times New Roman", 10.8F);
+            btn_luu.ForeColor = SystemColors.ButtonFace;
+            btn_luu.Location = new Point(319, 197);
             btn_luu.Margin = new Padding(3, 4, 3, 4);
             btn_luu.Name = "btn_luu";
-            btn_luu.Size = new Size(110, 41);
+            btn_luu.Size = new Size(110, 50);
             btn_luu.TabIndex = 32;
             btn_luu.Text = "Lưu";
             btn_luu.UseVisualStyleBackColor = false;
@@ -63,37 +64,38 @@
             // btn_huy
             // 
             btn_huy.BackColor = Color.Red;
-            btn_huy.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_huy.Location = new Point(270, 262);
+            btn_huy.Font = new Font("Times New Roman", 10.8F);
+            btn_huy.ForeColor = SystemColors.ButtonFace;
+            btn_huy.Location = new Point(203, 197);
             btn_huy.Margin = new Padding(3, 4, 3, 4);
             btn_huy.Name = "btn_huy";
-            btn_huy.Size = new Size(110, 41);
+            btn_huy.Size = new Size(110, 50);
             btn_huy.TabIndex = 31;
             btn_huy.Text = "Hủy";
             btn_huy.UseVisualStyleBackColor = false;
             // 
             // txb_TenBan
             // 
-            txb_TenBan.Location = new Point(130, 149);
+            txb_TenBan.Location = new Point(130, 108);
             txb_TenBan.Margin = new Padding(3, 4, 3, 4);
             txb_TenBan.Name = "txb_TenBan";
-            txb_TenBan.Size = new Size(365, 27);
+            txb_TenBan.Size = new Size(296, 27);
             txb_TenBan.TabIndex = 29;
             txb_TenBan.TextChanged += txb_TenBan_TextChanged;
             // 
             // txb_SoBan
             // 
-            txb_SoBan.Location = new Point(130, 100);
+            txb_SoBan.Location = new Point(130, 68);
             txb_SoBan.Margin = new Padding(3, 4, 3, 4);
             txb_SoBan.Name = "txb_SoBan";
-            txb_SoBan.Size = new Size(365, 27);
+            txb_SoBan.Size = new Size(296, 27);
             txb_SoBan.TabIndex = 28;
             // 
             // label_ViTri
             // 
             label_ViTri.AutoSize = true;
             label_ViTri.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_ViTri.Location = new Point(44, 199);
+            label_ViTri.Location = new Point(44, 150);
             label_ViTri.Name = "label_ViTri";
             label_ViTri.Size = new Size(46, 20);
             label_ViTri.TabIndex = 26;
@@ -103,7 +105,7 @@
             // 
             label_TenBan.AutoSize = true;
             label_TenBan.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_TenBan.Location = new Point(44, 151);
+            label_TenBan.Location = new Point(44, 110);
             label_TenBan.Name = "label_TenBan";
             label_TenBan.Size = new Size(69, 20);
             label_TenBan.TabIndex = 25;
@@ -113,7 +115,7 @@
             // 
             label_SoBan.AutoSize = true;
             label_SoBan.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_SoBan.Location = new Point(44, 102);
+            label_SoBan.Location = new Point(44, 70);
             label_SoBan.Name = "label_SoBan";
             label_SoBan.Size = new Size(59, 20);
             label_SoBan.TabIndex = 24;
@@ -134,7 +136,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
-            ClientSize = new Size(511, 321);
+            ClientSize = new Size(457, 264);
             Controls.Add(cb_GioiTinh);
             Controls.Add(btn_luu);
             Controls.Add(btn_huy);
@@ -146,6 +148,7 @@
             Controls.Add(label_ThongTin);
             Margin = new Padding(3, 4, 3, 4);
             Name = "Add_Table";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Thêm mới bàn";
             ResumeLayout(false);
             PerformLayout();

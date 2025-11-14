@@ -1,4 +1,4 @@
-using QuanLiCafe.Data;
+﻿using QuanLiCafe.Data;
 using QuanLiCafe.Models;
 using QuanLiCafe.Services;
 using System;
@@ -20,7 +20,7 @@ namespace QuanLiCafe.Forms
             _authService = new AuthService(_context);
             InitializeComponent();
 
-            // G�n event handlers
+            // Gán event handlers
             btnDangNhap.Click += BtnDangNhap_Click;
             btnThoat.Click += BtnThoat_Click;
         }
@@ -32,7 +32,7 @@ namespace QuanLiCafe.Forms
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Vui l�ng nh?p ??y ?? th�ng tin!", "?? C?nh B�o",
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "?? Cảnh Báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -43,7 +43,7 @@ namespace QuanLiCafe.Forms
 
                 if (user == null)
                 {
-                    MessageBox.Show("T�n ??ng nh?p ho?c m?t kh?u kh�ng ?�ng!", "? ??ng Nh?p Th?t B?i",
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Đăng Nhập Thất Bại",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtMatKhau.Clear();
                     txtMatKhau.Focus();
@@ -56,7 +56,7 @@ namespace QuanLiCafe.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"L?i ??ng nh?p:\n{ex.Message}", "? L?i",
+                MessageBox.Show($"Lỗi đăng nhập:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

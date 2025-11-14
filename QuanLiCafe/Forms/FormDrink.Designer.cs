@@ -28,247 +28,236 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelLeft = new System.Windows.Forms.Panel();
-            this.btnThoat = new System.Windows.Forms.Button();
-            this.btnXuatExcel = new System.Windows.Forms.Button();
-            this.btnLamMoi = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.DanhMucDoUong = new System.Windows.Forms.DataGridView();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
-            this.labelTimKiem = new System.Windows.Forms.Label();
-            this.btnTimKiem = new System.Windows.Forms.Button();
-            this.colHinh = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colMaDoUong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenDoUong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMoTa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGiaTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DanhMucDoUong)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // panelLeft
-            // 
-            this.panelLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeft.Controls.Add(this.btnThoat);
-            this.panelLeft.Controls.Add(this.btnXuatExcel);
-            this.panelLeft.Controls.Add(this.btnLamMoi);
-            this.panelLeft.Controls.Add(this.btnXoa);
-            this.panelLeft.Controls.Add(this.btnSua);
-            this.panelLeft.Controls.Add(this.btnThem);
-            this.panelLeft.Location = new System.Drawing.Point(12, 12);
-            this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(170, 529);
-            this.panelLeft.TabIndex = 0;
-            this.panelLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // btnThoat
-            // 
-            this.btnThoat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnThoat.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(25, 445);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(111, 60);
-            this.btnThoat.TabIndex = 0;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = false;
-            // 
-            // btnXuatExcel
-            // 
-            this.btnXuatExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnXuatExcel.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXuatExcel.Location = new System.Drawing.Point(25, 362);
-            this.btnXuatExcel.Name = "btnXuatExcel";
-            this.btnXuatExcel.Size = new System.Drawing.Size(111, 60);
-            this.btnXuatExcel.TabIndex = 0;
-            this.btnXuatExcel.Text = "Xuất Excel";
-            this.btnXuatExcel.UseVisualStyleBackColor = false;
-            // 
-            // btnLamMoi
-            // 
-            this.btnLamMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnLamMoi.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.Location = new System.Drawing.Point(25, 272);
-            this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(111, 60);
-            this.btnLamMoi.TabIndex = 0;
-            this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.UseVisualStyleBackColor = false;
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnXoa.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Location = new System.Drawing.Point(25, 189);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(111, 60);
-            this.btnXoa.TabIndex = 0;
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.UseVisualStyleBackColor = false;
-            // 
-            // btnSua
-            // 
-            this.btnSua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnSua.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Location = new System.Drawing.Point(25, 105);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(111, 60);
-            this.btnSua.TabIndex = 0;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = false;
-            this.btnSua.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnThem
-            // 
-            this.btnThem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnThem.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Location = new System.Drawing.Point(25, 19);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(111, 60);
-            this.btnThem.TabIndex = 0;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = false;
+            DanhMucDoUong = new DataGridView();
+            colHinh = new DataGridViewImageColumn();
+            colMaDoUong = new DataGridViewTextBoxColumn();
+            colTenDoUong = new DataGridViewTextBoxColumn();
+            colMoTa = new DataGridViewTextBoxColumn();
+            colGiaTien = new DataGridViewTextBoxColumn();
+            colMaDanhMuc = new DataGridViewTextBoxColumn();
+            colTenDanhMuc = new DataGridViewTextBoxColumn();
+            txtTimKiem = new TextBox();
+            labelTimKiem = new Label();
+            btnTimKiem = new Button();
+            btnThem = new Button();
+            btnThoat = new Button();
+            btnXuatExcel = new Button();
+            btnLamMoi = new Button();
+            btnXoa = new Button();
+            btnSua = new Button();
+            ((System.ComponentModel.ISupportInitialize)DanhMucDoUong).BeginInit();
+            SuspendLayout();
             // 
             // DanhMucDoUong
             // 
-            this.DanhMucDoUong.AllowUserToAddRows = false;
-            this.DanhMucDoUong.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.DanhMucDoUong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DanhMucDoUong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colHinh,
-            this.colMaDoUong,
-            this.colTenDoUong,
-            this.colMoTa,
-            this.colGiaTien,
-            this.colMaDanhMuc,
-            this.colTenDanhMuc});
-            this.DanhMucDoUong.Location = new System.Drawing.Point(188, 12);
-            this.DanhMucDoUong.Name = "DanhMucDoUong";
-            this.DanhMucDoUong.RowHeadersWidth = 51;
-            this.DanhMucDoUong.RowTemplate.Height = 24;
-            this.DanhMucDoUong.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DanhMucDoUong.Size = new System.Drawing.Size(782, 404);
-            this.DanhMucDoUong.TabIndex = 1;
-            this.DanhMucDoUong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // txtTimKiem
-            // 
-            this.txtTimKiem.Location = new System.Drawing.Point(424, 485);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(382, 22);
-            this.txtTimKiem.TabIndex = 2;
-            // 
-            // labelTimKiem
-            // 
-            this.labelTimKiem.AutoSize = true;
-            this.labelTimKiem.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimKiem.Location = new System.Drawing.Point(234, 483);
-            this.labelTimKiem.Name = "labelTimKiem";
-            this.labelTimKiem.Size = new System.Drawing.Size(126, 22);
-            this.labelTimKiem.TabIndex = 3;
-            this.labelTimKiem.Text = "Tìm kiếm theo tên";
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnTimKiem.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.Location = new System.Drawing.Point(854, 478);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(92, 39);
-            this.btnTimKiem.TabIndex = 4;
-            this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = false;
+            DanhMucDoUong.AllowUserToAddRows = false;
+            DanhMucDoUong.BackgroundColor = SystemColors.ButtonFace;
+            DanhMucDoUong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DanhMucDoUong.Columns.AddRange(new DataGridViewColumn[] { colHinh, colMaDoUong, colTenDoUong, colMoTa, colGiaTien, colMaDanhMuc, colTenDanhMuc });
+            DanhMucDoUong.Location = new Point(122, 15);
+            DanhMucDoUong.Margin = new Padding(3, 4, 3, 4);
+            DanhMucDoUong.Name = "DanhMucDoUong";
+            DanhMucDoUong.RowHeadersWidth = 51;
+            DanhMucDoUong.RowTemplate.Height = 24;
+            DanhMucDoUong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DanhMucDoUong.Size = new Size(782, 460);
+            DanhMucDoUong.TabIndex = 1;
+            DanhMucDoUong.CellContentClick += dataGridView1_CellContentClick;
             // 
             // colHinh
             // 
-            this.colHinh.DataPropertyName = "Hinh";
-            this.colHinh.HeaderText = "Hình ảnh";
-            this.colHinh.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.colHinh.MinimumWidth = 6;
-            this.colHinh.Name = "colHinh";
-            this.colHinh.Width = 125;
+            colHinh.DataPropertyName = "Hinh";
+            colHinh.HeaderText = "Hình ảnh";
+            colHinh.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            colHinh.MinimumWidth = 6;
+            colHinh.Name = "colHinh";
+            colHinh.Width = 125;
             // 
             // colMaDoUong
             // 
-            this.colMaDoUong.DataPropertyName = "MaDoUong";
-            this.colMaDoUong.HeaderText = "Mã đồ uống";
-            this.colMaDoUong.MinimumWidth = 6;
-            this.colMaDoUong.Name = "colMaDoUong";
-            this.colMaDoUong.Width = 125;
+            colMaDoUong.DataPropertyName = "MaDoUong";
+            colMaDoUong.HeaderText = "Mã đồ uống";
+            colMaDoUong.MinimumWidth = 6;
+            colMaDoUong.Name = "colMaDoUong";
+            colMaDoUong.Width = 125;
             // 
             // colTenDoUong
             // 
-            this.colTenDoUong.DataPropertyName = "TenDoUong";
-            this.colTenDoUong.HeaderText = "Tên đồ uống";
-            this.colTenDoUong.MinimumWidth = 6;
-            this.colTenDoUong.Name = "colTenDoUong";
-            this.colTenDoUong.Width = 125;
+            colTenDoUong.DataPropertyName = "TenDoUong";
+            colTenDoUong.HeaderText = "Tên đồ uống";
+            colTenDoUong.MinimumWidth = 6;
+            colTenDoUong.Name = "colTenDoUong";
+            colTenDoUong.Width = 125;
             // 
             // colMoTa
             // 
-            this.colMoTa.DataPropertyName = "MoTa";
-            this.colMoTa.HeaderText = "Mô tả";
-            this.colMoTa.MinimumWidth = 6;
-            this.colMoTa.Name = "colMoTa";
-            this.colMoTa.Width = 125;
+            colMoTa.DataPropertyName = "MoTa";
+            colMoTa.HeaderText = "Mô tả";
+            colMoTa.MinimumWidth = 6;
+            colMoTa.Name = "colMoTa";
+            colMoTa.Width = 125;
             // 
             // colGiaTien
             // 
-            this.colGiaTien.DataPropertyName = "Gia";
-            this.colGiaTien.HeaderText = "Giá tiền";
-            this.colGiaTien.MinimumWidth = 6;
-            this.colGiaTien.Name = "colGiaTien";
-            this.colGiaTien.Width = 125;
+            colGiaTien.DataPropertyName = "Gia";
+            colGiaTien.HeaderText = "Giá tiền";
+            colGiaTien.MinimumWidth = 6;
+            colGiaTien.Name = "colGiaTien";
+            colGiaTien.Width = 125;
             // 
             // colMaDanhMuc
             // 
-            this.colMaDanhMuc.DataPropertyName = "MaDanhMuc";
-            this.colMaDanhMuc.HeaderText = "Mã danh mục";
-            this.colMaDanhMuc.MinimumWidth = 6;
-            this.colMaDanhMuc.Name = "colMaDanhMuc";
-            this.colMaDanhMuc.Width = 125;
+            colMaDanhMuc.DataPropertyName = "MaDanhMuc";
+            colMaDanhMuc.HeaderText = "Mã danh mục";
+            colMaDanhMuc.MinimumWidth = 6;
+            colMaDanhMuc.Name = "colMaDanhMuc";
+            colMaDanhMuc.Width = 125;
             // 
             // colTenDanhMuc
             // 
-            this.colTenDanhMuc.DataPropertyName = "TenDanhMuc";
-            this.colTenDanhMuc.HeaderText = "Tên danh mục";
-            this.colTenDanhMuc.MinimumWidth = 6;
-            this.colTenDanhMuc.Name = "colTenDanhMuc";
-            this.colTenDanhMuc.Width = 125;
+            colTenDanhMuc.DataPropertyName = "TenDanhMuc";
+            colTenDanhMuc.HeaderText = "Tên danh mục";
+            colTenDanhMuc.MinimumWidth = 6;
+            colTenDanhMuc.Name = "colTenDanhMuc";
+            colTenDanhMuc.Width = 125;
+            // 
+            // txtTimKiem
+            // 
+            txtTimKiem.Location = new Point(392, 508);
+            txtTimKiem.Margin = new Padding(3, 4, 3, 4);
+            txtTimKiem.Name = "txtTimKiem";
+            txtTimKiem.Size = new Size(382, 27);
+            txtTimKiem.TabIndex = 2;
+            // 
+            // labelTimKiem
+            // 
+            labelTimKiem.AutoSize = true;
+            labelTimKiem.Font = new Font("Times New Roman", 10.8F);
+            labelTimKiem.Location = new Point(221, 509);
+            labelTimKiem.Name = "labelTimKiem";
+            labelTimKiem.Size = new Size(143, 20);
+            labelTimKiem.TabIndex = 3;
+            labelTimKiem.Text = "Tìm kiếm theo tên";
+            // 
+            // btnTimKiem
+            // 
+            btnTimKiem.BackColor = Color.DeepSkyBlue;
+            btnTimKiem.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnTimKiem.ForeColor = SystemColors.ButtonFace;
+            btnTimKiem.Location = new Point(811, 500);
+            btnTimKiem.Margin = new Padding(3, 4, 3, 4);
+            btnTimKiem.Name = "btnTimKiem";
+            btnTimKiem.Size = new Size(97, 49);
+            btnTimKiem.TabIndex = 4;
+            btnTimKiem.Text = "Tìm kiếm";
+            btnTimKiem.UseVisualStyleBackColor = false;
+            // 
+            // btnThem
+            // 
+            btnThem.BackColor = Color.DeepSkyBlue;
+            btnThem.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnThem.ForeColor = SystemColors.ButtonFace;
+            btnThem.Location = new Point(14, 15);
+            btnThem.Margin = new Padding(3, 4, 3, 4);
+            btnThem.Name = "btnThem";
+            btnThem.Size = new Size(97, 49);
+            btnThem.TabIndex = 5;
+            btnThem.Text = "Thêm";
+            btnThem.UseVisualStyleBackColor = false;
+            // 
+            // btnThoat
+            // 
+            btnThoat.BackColor = Color.DeepSkyBlue;
+            btnThoat.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnThoat.ForeColor = SystemColors.ButtonFace;
+            btnThoat.Location = new Point(14, 314);
+            btnThoat.Margin = new Padding(3, 4, 3, 4);
+            btnThoat.Name = "btnThoat";
+            btnThoat.Size = new Size(97, 49);
+            btnThoat.TabIndex = 6;
+            btnThoat.Text = "Thoát";
+            btnThoat.UseVisualStyleBackColor = false;
+            // 
+            // btnXuatExcel
+            // 
+            btnXuatExcel.BackColor = Color.DeepSkyBlue;
+            btnXuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnXuatExcel.ForeColor = SystemColors.ButtonFace;
+            btnXuatExcel.Location = new Point(14, 250);
+            btnXuatExcel.Margin = new Padding(3, 4, 3, 4);
+            btnXuatExcel.Name = "btnXuatExcel";
+            btnXuatExcel.Size = new Size(97, 49);
+            btnXuatExcel.TabIndex = 7;
+            btnXuatExcel.Text = "Xuất Excel";
+            btnXuatExcel.UseVisualStyleBackColor = false;
+            // 
+            // btnLamMoi
+            // 
+            btnLamMoi.BackColor = Color.DeepSkyBlue;
+            btnLamMoi.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnLamMoi.ForeColor = SystemColors.ButtonFace;
+            btnLamMoi.Location = new Point(14, 188);
+            btnLamMoi.Margin = new Padding(3, 4, 3, 4);
+            btnLamMoi.Name = "btnLamMoi";
+            btnLamMoi.Size = new Size(97, 49);
+            btnLamMoi.TabIndex = 8;
+            btnLamMoi.Text = "Làm mới";
+            btnLamMoi.UseVisualStyleBackColor = false;
+            // 
+            // btnXoa
+            // 
+            btnXoa.BackColor = Color.DeepSkyBlue;
+            btnXoa.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnXoa.ForeColor = SystemColors.ButtonFace;
+            btnXoa.Location = new Point(14, 129);
+            btnXoa.Margin = new Padding(3, 4, 3, 4);
+            btnXoa.Name = "btnXoa";
+            btnXoa.Size = new Size(97, 49);
+            btnXoa.TabIndex = 9;
+            btnXoa.Text = "Xóa";
+            btnXoa.UseVisualStyleBackColor = false;
+            // 
+            // btnSua
+            // 
+            btnSua.BackColor = Color.DeepSkyBlue;
+            btnSua.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btnSua.ForeColor = SystemColors.ButtonFace;
+            btnSua.Location = new Point(14, 70);
+            btnSua.Margin = new Padding(3, 4, 3, 4);
+            btnSua.Name = "btnSua";
+            btnSua.Size = new Size(97, 49);
+            btnSua.TabIndex = 10;
+            btnSua.Text = "Sửa";
+            btnSua.UseVisualStyleBackColor = false;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(982, 553);
-            this.Controls.Add(this.btnTimKiem);
-            this.Controls.Add(this.labelTimKiem);
-            this.Controls.Add(this.txtTimKiem);
-            this.Controls.Add(this.DanhMucDoUong);
-            this.Controls.Add(this.panelLeft);
-            this.Name = "FormMain";
-            this.Text = "Danh Mục Đồ Uống";
-            this.Load += new System.EventHandler(this.FormMain_Load);
-            this.panelLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DanhMucDoUong)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Wheat;
+            ClientSize = new Size(962, 569);
+            Controls.Add(btnThem);
+            Controls.Add(btnThoat);
+            Controls.Add(btnXuatExcel);
+            Controls.Add(btnLamMoi);
+            Controls.Add(btnXoa);
+            Controls.Add(btnSua);
+            Controls.Add(btnTimKiem);
+            Controls.Add(labelTimKiem);
+            Controls.Add(txtTimKiem);
+            Controls.Add(DanhMucDoUong);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Danh Mục Đồ Uống";
+            Load += FormMain_Load;
+            ((System.ComponentModel.ISupportInitialize)DanhMucDoUong).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelLeft;
-        private System.Windows.Forms.Button btnThoat;
-        private System.Windows.Forms.Button btnXuatExcel;
-        private System.Windows.Forms.Button btnLamMoi;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnSua;
-        private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.DataGridView DanhMucDoUong;
         private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Label labelTimKiem;
@@ -280,6 +269,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGiaTien;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaDanhMuc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenDanhMuc;
+        private Button btnThem;
+        private Button btnThoat;
+        private Button btnXuatExcel;
+        private Button btnLamMoi;
+        private Button btnXoa;
+        private Button btnSua;
     }
 }
 

@@ -44,10 +44,10 @@
             // cb_GioiTinh
             // 
             cb_GioiTinh.FormattingEnabled = true;
-            cb_GioiTinh.Location = new Point(182, 187);
+            cb_GioiTinh.Location = new Point(182, 164);
             cb_GioiTinh.Margin = new Padding(3, 4, 3, 4);
             cb_GioiTinh.Name = "cb_GioiTinh";
-            cb_GioiTinh.Size = new Size(365, 28);
+            cb_GioiTinh.Size = new Size(269, 28);
             cb_GioiTinh.TabIndex = 44;
             // 
             // btn_luu
@@ -55,10 +55,10 @@
             btn_luu.BackColor = Color.DeepSkyBlue;
             btn_luu.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_luu.ForeColor = SystemColors.ButtonFace;
-            btn_luu.Location = new Point(414, 290);
+            btn_luu.Location = new Point(342, 248);
             btn_luu.Margin = new Padding(3, 4, 3, 4);
             btn_luu.Name = "btn_luu";
-            btn_luu.Size = new Size(133, 44);
+            btn_luu.Size = new Size(110, 50);
             btn_luu.TabIndex = 43;
             btn_luu.Text = "Lưu";
             btn_luu.UseVisualStyleBackColor = false;
@@ -68,10 +68,10 @@
             btn_huy.BackColor = Color.Red;
             btn_huy.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_huy.ForeColor = SystemColors.ButtonFace;
-            btn_huy.Location = new Point(270, 290);
+            btn_huy.Location = new Point(222, 249);
             btn_huy.Margin = new Padding(3, 4, 3, 4);
             btn_huy.Name = "btn_huy";
-            btn_huy.Size = new Size(138, 44);
+            btn_huy.Size = new Size(110, 50);
             btn_huy.TabIndex = 42;
             btn_huy.Text = "Hủy";
             btn_huy.UseVisualStyleBackColor = false;
@@ -79,18 +79,18 @@
             // 
             // txb_SDT
             // 
-            txb_SDT.Location = new Point(182, 239);
+            txb_SDT.Location = new Point(182, 203);
             txb_SDT.Margin = new Padding(3, 4, 3, 4);
             txb_SDT.Name = "txb_SDT";
-            txb_SDT.Size = new Size(365, 27);
+            txb_SDT.Size = new Size(269, 27);
             txb_SDT.TabIndex = 41;
             // 
             // txb_TenKhachHang
             // 
-            txb_TenKhachHang.Location = new Point(182, 139);
+            txb_TenKhachHang.Location = new Point(182, 125);
             txb_TenKhachHang.Margin = new Padding(3, 4, 3, 4);
             txb_TenKhachHang.Name = "txb_TenKhachHang";
-            txb_TenKhachHang.Size = new Size(365, 27);
+            txb_TenKhachHang.Size = new Size(269, 27);
             txb_TenKhachHang.TabIndex = 40;
             // 
             // txb_MaKhachHang
@@ -98,14 +98,14 @@
             txb_MaKhachHang.Location = new Point(182, 87);
             txb_MaKhachHang.Margin = new Padding(3, 4, 3, 4);
             txb_MaKhachHang.Name = "txb_MaKhachHang";
-            txb_MaKhachHang.Size = new Size(365, 27);
+            txb_MaKhachHang.Size = new Size(269, 27);
             txb_MaKhachHang.TabIndex = 39;
             // 
             // label_SDT
             // 
             label_SDT.AutoSize = true;
             label_SDT.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_SDT.Location = new Point(38, 246);
+            label_SDT.Location = new Point(38, 206);
             label_SDT.Name = "label_SDT";
             label_SDT.Size = new Size(103, 20);
             label_SDT.TabIndex = 38;
@@ -115,7 +115,7 @@
             // 
             label_GioiTinh.AutoSize = true;
             label_GioiTinh.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_GioiTinh.Location = new Point(38, 198);
+            label_GioiTinh.Location = new Point(39, 169);
             label_GioiTinh.Name = "label_GioiTinh";
             label_GioiTinh.Size = new Size(73, 20);
             label_GioiTinh.TabIndex = 37;
@@ -125,7 +125,7 @@
             // 
             label_TenKhachHang.AutoSize = true;
             label_TenKhachHang.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_TenKhachHang.Location = new Point(38, 146);
+            label_TenKhachHang.Location = new Point(38, 130);
             label_TenKhachHang.Name = "label_TenKhachHang";
             label_TenKhachHang.Size = new Size(125, 20);
             label_TenKhachHang.TabIndex = 36;
@@ -157,7 +157,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.Wheat;
-            ClientSize = new Size(570, 349);
+            ClientSize = new Size(480, 320);
             Controls.Add(cb_GioiTinh);
             Controls.Add(btn_luu);
             Controls.Add(btn_huy);
@@ -171,7 +171,7 @@
             Controls.Add(label_ThongTin);
             Margin = new Padding(3, 4, 3, 4);
             Name = "AddCustomer";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Thêm khách hàng";
             ResumeLayout(false);
             PerformLayout();

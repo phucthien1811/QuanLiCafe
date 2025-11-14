@@ -28,193 +28,199 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btn_them = new System.Windows.Forms.Button();
-            this.btn_sua = new System.Windows.Forms.Button();
-            this.btn_xoa = new System.Windows.Forms.Button();
-            this.btn_lamMoi = new System.Windows.Forms.Button();
-            this.btn_xuatExcel = new System.Windows.Forms.Button();
-            this.btn_thoat = new System.Windows.Forms.Button();
-            this.txb_timKiem = new System.Windows.Forms.TextBox();
-            this.btn_timKiem = new System.Windows.Forms.Button();
-            this.label_timKiem = new System.Windows.Forms.Label();
-            this.dgv_customer = new System.Windows.Forms.DataGridView();
-            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_customer)).BeginInit();
-            this.SuspendLayout();
+            btn_them = new Button();
+            btn_sua = new Button();
+            btn_xoa = new Button();
+            btn_lamMoi = new Button();
+            btn_xuatExcel = new Button();
+            btn_thoat = new Button();
+            txb_timKiem = new TextBox();
+            btn_timKiem = new Button();
+            label_timKiem = new Label();
+            dgv_customer = new DataGridView();
+            MaKH = new DataGridViewTextBoxColumn();
+            TenKH = new DataGridViewTextBoxColumn();
+            GioiTinh = new DataGridViewTextBoxColumn();
+            SDT = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgv_customer).BeginInit();
+            SuspendLayout();
             // 
             // btn_them
             // 
-            this.btn_them.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_them.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_them.Location = new System.Drawing.Point(12, 12);
-            this.btn_them.Name = "btn_them";
-            this.btn_them.Size = new System.Drawing.Size(97, 39);
-            this.btn_them.TabIndex = 0;
-            this.btn_them.Text = "Thêm";
-            this.btn_them.UseVisualStyleBackColor = false;
-            this.btn_them.Click += new System.EventHandler(this.button1_Click);
+            btn_them.BackColor = Color.DeepSkyBlue;
+            btn_them.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_them.ForeColor = SystemColors.ButtonFace;
+            btn_them.Location = new Point(12, 15);
+            btn_them.Margin = new Padding(3, 4, 3, 4);
+            btn_them.Name = "btn_them";
+            btn_them.Size = new Size(97, 49);
+            btn_them.TabIndex = 0;
+            btn_them.Text = "Thêm";
+            btn_them.UseVisualStyleBackColor = false;
+            btn_them.Click += button1_Click;
             // 
             // btn_sua
             // 
-            this.btn_sua.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_sua.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_sua.Location = new System.Drawing.Point(12, 57);
-            this.btn_sua.Name = "btn_sua";
-            this.btn_sua.Size = new System.Drawing.Size(97, 39);
-            this.btn_sua.TabIndex = 1;
-            this.btn_sua.Text = "Sửa";
-            this.btn_sua.UseVisualStyleBackColor = false;
+            btn_sua.BackColor = Color.DeepSkyBlue;
+            btn_sua.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_sua.ForeColor = SystemColors.ButtonFace;
+            btn_sua.Location = new Point(12, 71);
+            btn_sua.Margin = new Padding(3, 4, 3, 4);
+            btn_sua.Name = "btn_sua";
+            btn_sua.Size = new Size(97, 49);
+            btn_sua.TabIndex = 1;
+            btn_sua.Text = "Sửa";
+            btn_sua.UseVisualStyleBackColor = false;
             // 
             // btn_xoa
             // 
-            this.btn_xoa.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_xoa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_xoa.Location = new System.Drawing.Point(12, 102);
-            this.btn_xoa.Name = "btn_xoa";
-            this.btn_xoa.Size = new System.Drawing.Size(97, 39);
-            this.btn_xoa.TabIndex = 6;
-            this.btn_xoa.Text = "Xóa";
-            this.btn_xoa.UseVisualStyleBackColor = false;
+            btn_xoa.BackColor = Color.DeepSkyBlue;
+            btn_xoa.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_xoa.ForeColor = SystemColors.ButtonFace;
+            btn_xoa.Location = new Point(12, 128);
+            btn_xoa.Margin = new Padding(3, 4, 3, 4);
+            btn_xoa.Name = "btn_xoa";
+            btn_xoa.Size = new Size(97, 49);
+            btn_xoa.TabIndex = 6;
+            btn_xoa.Text = "Xóa";
+            btn_xoa.UseVisualStyleBackColor = false;
             // 
             // btn_lamMoi
             // 
-            this.btn_lamMoi.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_lamMoi.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_lamMoi.Location = new System.Drawing.Point(12, 147);
-            this.btn_lamMoi.Name = "btn_lamMoi";
-            this.btn_lamMoi.Size = new System.Drawing.Size(97, 39);
-            this.btn_lamMoi.TabIndex = 7;
-            this.btn_lamMoi.Text = "Làm mới";
-            this.btn_lamMoi.UseVisualStyleBackColor = false;
+            btn_lamMoi.BackColor = Color.DeepSkyBlue;
+            btn_lamMoi.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_lamMoi.ForeColor = SystemColors.ButtonFace;
+            btn_lamMoi.Location = new Point(12, 184);
+            btn_lamMoi.Margin = new Padding(3, 4, 3, 4);
+            btn_lamMoi.Name = "btn_lamMoi";
+            btn_lamMoi.Size = new Size(97, 49);
+            btn_lamMoi.TabIndex = 7;
+            btn_lamMoi.Text = "Làm mới";
+            btn_lamMoi.UseVisualStyleBackColor = false;
             // 
             // btn_xuatExcel
             // 
-            this.btn_xuatExcel.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_xuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_xuatExcel.Location = new System.Drawing.Point(12, 192);
-            this.btn_xuatExcel.Name = "btn_xuatExcel";
-            this.btn_xuatExcel.Size = new System.Drawing.Size(97, 39);
-            this.btn_xuatExcel.TabIndex = 8;
-            this.btn_xuatExcel.Text = "Xuất Excel";
-            this.btn_xuatExcel.UseVisualStyleBackColor = false;
+            btn_xuatExcel.BackColor = Color.DeepSkyBlue;
+            btn_xuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_xuatExcel.ForeColor = SystemColors.ButtonFace;
+            btn_xuatExcel.Location = new Point(12, 240);
+            btn_xuatExcel.Margin = new Padding(3, 4, 3, 4);
+            btn_xuatExcel.Name = "btn_xuatExcel";
+            btn_xuatExcel.Size = new Size(97, 49);
+            btn_xuatExcel.TabIndex = 8;
+            btn_xuatExcel.Text = "Xuất Excel";
+            btn_xuatExcel.UseVisualStyleBackColor = false;
+            btn_xuatExcel.Click += btn_xuatExcel_Click_1;
             // 
             // btn_thoat
             // 
-            this.btn_thoat.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_thoat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_thoat.Location = new System.Drawing.Point(12, 237);
-            this.btn_thoat.Name = "btn_thoat";
-            this.btn_thoat.Size = new System.Drawing.Size(97, 39);
-            this.btn_thoat.TabIndex = 9;
-            this.btn_thoat.Text = "Thoát";
-            this.btn_thoat.UseVisualStyleBackColor = false;
+            btn_thoat.BackColor = Color.DeepSkyBlue;
+            btn_thoat.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_thoat.ForeColor = SystemColors.ButtonFace;
+            btn_thoat.Location = new Point(12, 296);
+            btn_thoat.Margin = new Padding(3, 4, 3, 4);
+            btn_thoat.Name = "btn_thoat";
+            btn_thoat.Size = new Size(97, 49);
+            btn_thoat.TabIndex = 9;
+            btn_thoat.Text = "Thoát";
+            btn_thoat.UseVisualStyleBackColor = false;
             // 
             // txb_timKiem
             // 
-            this.txb_timKiem.Location = new System.Drawing.Point(466, 407);
-            this.txb_timKiem.Name = "txb_timKiem";
-            this.txb_timKiem.Size = new System.Drawing.Size(283, 22);
-            this.txb_timKiem.TabIndex = 11;
+            txb_timKiem.Location = new Point(520, 449);
+            txb_timKiem.Margin = new Padding(3, 4, 3, 4);
+            txb_timKiem.Name = "txb_timKiem";
+            txb_timKiem.Size = new Size(283, 27);
+            txb_timKiem.TabIndex = 11;
             // 
             // btn_timKiem
             // 
-            this.btn_timKiem.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btn_timKiem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_timKiem.Location = new System.Drawing.Point(766, 398);
-            this.btn_timKiem.Name = "btn_timKiem";
-            this.btn_timKiem.Size = new System.Drawing.Size(97, 39);
-            this.btn_timKiem.TabIndex = 12;
-            this.btn_timKiem.Text = "Tìm Kiếm";
-            this.btn_timKiem.UseVisualStyleBackColor = false;
+            btn_timKiem.BackColor = Color.DeepSkyBlue;
+            btn_timKiem.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_timKiem.ForeColor = SystemColors.ButtonFace;
+            btn_timKiem.Location = new Point(809, 440);
+            btn_timKiem.Margin = new Padding(3, 4, 3, 4);
+            btn_timKiem.Name = "btn_timKiem";
+            btn_timKiem.Size = new Size(108, 49);
+            btn_timKiem.TabIndex = 12;
+            btn_timKiem.Text = "Tìm Kiếm";
+            btn_timKiem.UseVisualStyleBackColor = false;
             // 
             // label_timKiem
             // 
-            this.label_timKiem.AutoSize = true;
-            this.label_timKiem.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_timKiem.Location = new System.Drawing.Point(287, 410);
-            this.label_timKiem.Name = "label_timKiem";
-            this.label_timKiem.Size = new System.Drawing.Size(142, 19);
-            this.label_timKiem.TabIndex = 13;
-            this.label_timKiem.Text = "Tìm kiếm theo SDT";
-            this.label_timKiem.Click += new System.EventHandler(this.label1_Click);
+            label_timKiem.AutoSize = true;
+            label_timKiem.Font = new Font("Times New Roman", 10.8F);
+            label_timKiem.Location = new Point(357, 452);
+            label_timKiem.Name = "label_timKiem";
+            label_timKiem.Size = new Size(156, 20);
+            label_timKiem.TabIndex = 13;
+            label_timKiem.Text = "Tìm kiếm theo SDT";
+            label_timKiem.Click += label1_Click;
             // 
             // dgv_customer
             // 
-            this.dgv_customer.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_customer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_customer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_customer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaKH,
-            this.TenKH,
-            this.GioiTinh,
-            this.SDT});
-            this.dgv_customer.Location = new System.Drawing.Point(115, 12);
-            this.dgv_customer.Name = "dgv_customer";
-            this.dgv_customer.RowHeadersWidth = 51;
-            this.dgv_customer.RowTemplate.Height = 24;
-            this.dgv_customer.Size = new System.Drawing.Size(799, 365);
-            this.dgv_customer.TabIndex = 14;
+            dgv_customer.BackgroundColor = Color.White;
+            dgv_customer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_customer.Columns.AddRange(new DataGridViewColumn[] { MaKH, TenKH, GioiTinh, SDT });
+            dgv_customer.Location = new Point(115, 15);
+            dgv_customer.Margin = new Padding(3, 4, 3, 4);
+            dgv_customer.Name = "dgv_customer";
+            dgv_customer.RowHeadersWidth = 51;
+            dgv_customer.RowTemplate.Height = 24;
+            dgv_customer.Size = new Size(800, 410);
+            dgv_customer.TabIndex = 14;
             // 
             // MaKH
             // 
-            this.MaKH.HeaderText = "Mã KH";
-            this.MaKH.MinimumWidth = 6;
-            this.MaKH.Name = "MaKH";
-            this.MaKH.Width = 125;
+            MaKH.HeaderText = "Mã KH";
+            MaKH.MinimumWidth = 6;
+            MaKH.Name = "MaKH";
+            MaKH.Width = 125;
             // 
             // TenKH
             // 
-            this.TenKH.HeaderText = "Tên KH";
-            this.TenKH.MinimumWidth = 6;
-            this.TenKH.Name = "TenKH";
-            this.TenKH.Width = 150;
+            TenKH.HeaderText = "Tên KH";
+            TenKH.MinimumWidth = 6;
+            TenKH.Name = "TenKH";
+            TenKH.Width = 150;
             // 
             // GioiTinh
             // 
-            this.GioiTinh.HeaderText = "Giới Tính";
-            this.GioiTinh.MinimumWidth = 6;
-            this.GioiTinh.Name = "GioiTinh";
-            this.GioiTinh.Width = 110;
+            GioiTinh.HeaderText = "Giới Tính";
+            GioiTinh.MinimumWidth = 6;
+            GioiTinh.Name = "GioiTinh";
+            GioiTinh.Width = 110;
             // 
             // SDT
             // 
-            this.SDT.HeaderText = "Số điện thoại";
-            this.SDT.MinimumWidth = 6;
-            this.SDT.Name = "SDT";
-            this.SDT.Width = 125;
+            SDT.HeaderText = "Số điện thoại";
+            SDT.MinimumWidth = 6;
+            SDT.Name = "SDT";
+            SDT.Width = 125;
             // 
             // CustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ClientSize = new System.Drawing.Size(926, 470);
-            this.Controls.Add(this.dgv_customer);
-            this.Controls.Add(this.label_timKiem);
-            this.Controls.Add(this.btn_timKiem);
-            this.Controls.Add(this.txb_timKiem);
-            this.Controls.Add(this.btn_thoat);
-            this.Controls.Add(this.btn_xuatExcel);
-            this.Controls.Add(this.btn_lamMoi);
-            this.Controls.Add(this.btn_xoa);
-            this.Controls.Add(this.btn_sua);
-            this.Controls.Add(this.btn_them);
-            this.Name = "CustomerForm";
-            this.Text = "Danh mục khách hàng";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_customer)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Wheat;
+            ClientSize = new Size(932, 503);
+            Controls.Add(dgv_customer);
+            Controls.Add(label_timKiem);
+            Controls.Add(btn_timKiem);
+            Controls.Add(txb_timKiem);
+            Controls.Add(btn_thoat);
+            Controls.Add(btn_xuatExcel);
+            Controls.Add(btn_lamMoi);
+            Controls.Add(btn_xoa);
+            Controls.Add(btn_sua);
+            Controls.Add(btn_them);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "CustomerForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Danh mục khách hàng";
+            ((System.ComponentModel.ISupportInitialize)dgv_customer).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

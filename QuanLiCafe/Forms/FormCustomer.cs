@@ -20,7 +20,7 @@ namespace MemberForm
         {
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
-            
+
             // Đăng ký sự kiện
             this.Load += CustomerForm_Load;
             btn_them.Click += Btn_them_Click;
@@ -43,21 +43,21 @@ namespace MemberForm
             try
             {
                 dgv_customer.Rows.Clear();
-                
+
                 var query = _context.Customers.AsQueryable();
-                
+
                 if (!string.IsNullOrWhiteSpace(searchPhone))
                 {
                     query = query.Where(c => c.PhoneNumber.Contains(searchPhone));
                 }
-                
+
                 var customers = query.OrderBy(c => c.Name).ToList();
-                
+
                 foreach (var customer in customers)
                 {
                     int rowIndex = dgv_customer.Rows.Add();
                     var row = dgv_customer.Rows[rowIndex];
-                    
+
                     row.Cells["MaKH"].Value = customer.Id;
                     row.Cells["TenKH"].Value = customer.Name;
                     row.Cells["GioiTinh"].Value = customer.Gender ?? "";
@@ -104,7 +104,7 @@ namespace MemberForm
             {
                 var selectedRow = dgv_customer.SelectedRows[0];
                 var customer = selectedRow.Tag as Customer;
-                
+
                 if (customer != null)
                 {
                     var editForm = new AddCustomer(customer.Id);
@@ -135,7 +135,7 @@ namespace MemberForm
             {
                 var selectedRow = dgv_customer.SelectedRows[0];
                 var customer = selectedRow.Tag as Customer;
-                
+
                 if (customer != null)
                 {
                     var deleteForm = new DeleteCustom(customer.Id);
@@ -186,6 +186,11 @@ namespace MemberForm
         private void label1_Click(object sender, EventArgs e)
         {
             // Event handler đã có sẵn
+        }
+
+        private void btn_xuatExcel_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

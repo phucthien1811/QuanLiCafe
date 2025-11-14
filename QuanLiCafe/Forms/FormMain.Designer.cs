@@ -374,7 +374,7 @@
             dtgvDoUong.Name = "dtgvDoUong";
             dtgvDoUong.ReadOnly = true;
             dtgvDoUong.RowHeadersWidth = 51;
-            dtgvDoUong.Size = new Size(620, 558);
+            dtgvDoUong.Size = new Size(705, 558);
             dtgvDoUong.TabIndex = 595;
             dtgvDoUong.CellContentClick += dtgvDoUong_CellContentClick;
             // 

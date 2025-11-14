@@ -24,7 +24,7 @@ namespace QuanLiCafe.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-B04TJ4O\\SQLEXPRESS;Database=CafeDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=CafeDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
             }
         }
 
