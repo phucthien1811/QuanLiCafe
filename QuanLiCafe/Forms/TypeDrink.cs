@@ -21,7 +21,7 @@ namespace DrinkForm
         {
             InitializeComponent();
             _context = QuanLiCafe.Program.DbContext;
-            
+
             // Đăng ký sự kiện
             this.Load += TypeDrink_Load;
             btnThem.Click += BtnThem_Click;
@@ -49,11 +49,11 @@ namespace DrinkForm
             dtgvtypedrink.MultiSelect = false;
             dtgvtypedrink.AllowUserToAddRows = false;
             dtgvtypedrink.ReadOnly = true;
-            
+
             // Đặt lại header text cho columns có sẵn từ Designer
             Column1.HeaderText = "Mã loại";
             Column1.Width = 100;
-            Column2.HeaderText = "Tên loại"; 
+            Column2.HeaderText = "Tên loại";
             Column2.Width = 300;
         }
 
@@ -63,27 +63,27 @@ namespace DrinkForm
             try
             {
                 var query = _context.Categories.AsQueryable();
-                
+
                 if (!string.IsNullOrWhiteSpace(searchText))
                 {
                     query = query.Where(c => c.Name.Contains(searchText));
                 }
-                
+
                 var categories = query.OrderBy(c => c.Name).ToList();
-                
+
                 dtgvtypedrink.Rows.Clear();
-                
+
                 foreach (var category in categories)
                 {
                     int rowIndex = dtgvtypedrink.Rows.Add();
                     var row = dtgvtypedrink.Rows[rowIndex];
-                    
+
                     // Sử dụng tên columns từ Designer: Column1, Column2
                     row.Cells["Column1"].Value = category.Id;
                     row.Cells["Column2"].Value = category.Name;
                     row.Tag = category; // Lưu object category
                 }
-                
+
                 ClearInputs();
             }
             catch (Exception ex)
@@ -100,12 +100,12 @@ namespace DrinkForm
             {
                 var selectedRow = dtgvtypedrink.SelectedRows[0];
                 var category = selectedRow.Tag as Category;
-                
+
                 if (category != null)
                 {
                     textBox1.Text = category.Id.ToString();
                     textBox2.Text = category.Name;
-                    
+
                     textBox1.Enabled = false; // Không cho sửa mã
                 }
             }
@@ -124,7 +124,7 @@ namespace DrinkForm
         private void BtnThem_Click(object sender, EventArgs e)
         {
             string tenLoai = textBox2.Text.Trim();
-            
+
             if (string.IsNullOrWhiteSpace(tenLoai))
             {
                 MessageBox.Show("Vui lòng nhập tên loại đồ uống!", "Thông báo",
@@ -147,13 +147,13 @@ namespace DrinkForm
                 {
                     Name = tenLoai
                 };
-                
+
                 _context.Categories.Add(newCategory);
                 _context.SaveChanges();
-                
+
                 MessageBox.Show("Thêm loại đồ uống thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 LoadCategories();
             }
             catch (Exception ex)
@@ -174,7 +174,7 @@ namespace DrinkForm
             }
 
             string tenLoaiMoi = textBox2.Text.Trim();
-            
+
             if (string.IsNullOrWhiteSpace(tenLoaiMoi))
             {
                 MessageBox.Show("Vui lòng nhập tên loại đồ uống!", "Thông báo",
@@ -187,7 +187,7 @@ namespace DrinkForm
             {
                 var selectedRow = dtgvtypedrink.SelectedRows[0];
                 var category = selectedRow.Tag as Category;
-                
+
                 if (category == null) return;
 
                 // Kiểm tra trùng tên (ngoại trừ chính nó)
@@ -203,10 +203,10 @@ namespace DrinkForm
                 {
                     categoryToUpdate.Name = tenLoaiMoi;
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Cập nhật loại đồ uống thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     LoadCategories();
                 }
             }
@@ -229,7 +229,7 @@ namespace DrinkForm
 
             var selectedRow = dtgvtypedrink.SelectedRows[0];
             var category = selectedRow.Tag as Category;
-            
+
             if (category == null) return;
 
             var result = MessageBox.Show(
@@ -243,14 +243,14 @@ namespace DrinkForm
                 try
                 {
                     var categoryToDelete = _context.Categories.Find(category.Id);
-                    
+
                     if (categoryToDelete == null)
                     {
                         MessageBox.Show("Không tìm thấy loại đồ uống!", "Lỗi",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    
+
                     // Kiểm tra có đồ uống nào thuộc loại này không
                     if (_context.Products.Any(p => p.CategoryId == category.Id))
                     {
@@ -259,13 +259,13 @@ namespace DrinkForm
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    
+
                     _context.Categories.Remove(categoryToDelete);
                     _context.SaveChanges();
-                    
+
                     MessageBox.Show("Xóa loại đồ uống thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     LoadCategories();
                 }
                 catch (Exception ex)
@@ -300,6 +300,11 @@ namespace DrinkForm
         private void BtnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

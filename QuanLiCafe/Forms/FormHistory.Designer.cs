@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pb_Avatar = new PictureBox();
             lb_tieude = new Label();
             lb_TuNgay = new Label();
             lb_DenNgay = new Label();
@@ -48,26 +47,18 @@
             btn_XuatExcel = new Button();
             lb_Tong = new Label();
             lb_TongTien = new Label();
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).BeginInit();
+            pb_Avatar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Avatar).BeginInit();
             SuspendLayout();
-            // 
-            // pb_Avatar
-            // 
-            pb_Avatar.Location = new Point(12, 15);
-            pb_Avatar.Margin = new Padding(3, 4, 3, 4);
-            pb_Avatar.Name = "pb_Avatar";
-            pb_Avatar.Size = new Size(163, 204);
-            pb_Avatar.TabIndex = 0;
-            pb_Avatar.TabStop = false;
             // 
             // lb_tieude
             // 
             lb_tieude.AutoSize = true;
-            lb_tieude.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lb_tieude.Location = new Point(391, 29);
+            lb_tieude.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_tieude.Location = new Point(374, 35);
             lb_tieude.Name = "lb_tieude";
-            lb_tieude.Size = new Size(418, 38);
+            lb_tieude.Size = new Size(380, 32);
             lb_tieude.TabIndex = 1;
             lb_tieude.Text = "Xem lịch sử hóa đơn bán hàng";
             lb_tieude.TextAlign = ContentAlignment.MiddleCenter;
@@ -77,7 +68,7 @@
             // 
             lb_TuNgay.AutoSize = true;
             lb_TuNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lb_TuNgay.Location = new Point(317, 109);
+            lb_TuNgay.Location = new Point(307, 109);
             lb_TuNgay.Name = "lb_TuNgay";
             lb_TuNgay.Size = new Size(75, 23);
             lb_TuNgay.TabIndex = 2;
@@ -87,7 +78,7 @@
             // 
             lb_DenNgay.AutoSize = true;
             lb_DenNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lb_DenNgay.Location = new Point(581, 109);
+            lb_DenNgay.Location = new Point(571, 109);
             lb_DenNgay.Name = "lb_DenNgay";
             lb_DenNgay.Size = new Size(86, 23);
             lb_DenNgay.TabIndex = 3;
@@ -115,12 +106,12 @@
             // btn_LocDuLieu
             // 
             btn_LocDuLieu.BackColor = Color.Blue;
-            btn_LocDuLieu.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_LocDuLieu.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_LocDuLieu.ForeColor = SystemColors.ButtonFace;
-            btn_LocDuLieu.Location = new Point(503, 167);
+            btn_LocDuLieu.Location = new Point(503, 160);
             btn_LocDuLieu.Margin = new Padding(3, 4, 3, 4);
             btn_LocDuLieu.Name = "btn_LocDuLieu";
-            btn_LocDuLieu.Size = new Size(114, 39);
+            btn_LocDuLieu.Size = new Size(131, 46);
             btn_LocDuLieu.TabIndex = 6;
             btn_LocDuLieu.Text = "Lọc dữ liệu";
             btn_LocDuLieu.UseVisualStyleBackColor = false;
@@ -207,7 +198,7 @@
             // btn_InBaoCao
             // 
             btn_InBaoCao.BackColor = Color.Blue;
-            btn_InBaoCao.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_InBaoCao.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_InBaoCao.ForeColor = SystemColors.ButtonFace;
             btn_InBaoCao.Location = new Point(439, 660);
             btn_InBaoCao.Margin = new Padding(3, 4, 3, 4);
@@ -221,7 +212,8 @@
             // btn_XuatExcel
             // 
             btn_XuatExcel.BackColor = Color.Lime;
-            btn_XuatExcel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_XuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_XuatExcel.ForeColor = SystemColors.ButtonFace;
             btn_XuatExcel.Location = new Point(588, 660);
             btn_XuatExcel.Margin = new Padding(3, 4, 3, 4);
             btn_XuatExcel.Name = "btn_XuatExcel";
@@ -250,12 +242,22 @@
             lb_TongTien.TabIndex = 11;
             lb_TongTien.Text = "...";
             // 
+            // pb_Avatar
+            // 
+            pb_Avatar.Location = new Point(1000, 500);
+            pb_Avatar.Name = "pb_Avatar";
+            pb_Avatar.Size = new Size(10, 10);
+            pb_Avatar.TabIndex = 12;
+            pb_Avatar.TabStop = false;
+            pb_Avatar.Visible = false;
+            // 
             // ReportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
             ClientSize = new Size(1083, 730);
+            Controls.Add(pb_Avatar);
             Controls.Add(lb_TongTien);
             Controls.Add(lb_Tong);
             Controls.Add(btn_XuatExcel);
@@ -267,21 +269,18 @@
             Controls.Add(lb_DenNgay);
             Controls.Add(lb_TuNgay);
             Controls.Add(lb_tieude);
-            Controls.Add(pb_Avatar);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ReportForm";
             Text = "Lịch sử hóa đơn bán hàng";
             Load += ReportForm_Load_1;
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Avatar).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pb_Avatar;
         private System.Windows.Forms.Label lb_tieude;
         private System.Windows.Forms.Label lb_TuNgay;
         private System.Windows.Forms.Label lb_DenNgay;
@@ -301,6 +300,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaDoUong;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenDoUong;
+        private System.Windows.Forms.PictureBox pb_Avatar;
     }
 }
 

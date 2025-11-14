@@ -257,6 +257,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Wheat;
             ClientSize = new Size(849, 692);
             Controls.Add(menuTimKiem);
             Controls.Add(txtSearch);
@@ -275,6 +276,7 @@
             Controls.Add(label1);
             Name = "FormEmployee";
             Text = "Quản Lý Nhân Viên";
+            Load += FormEmployee_Load_1;
             ((System.ComponentModel.ISupportInitialize)dtgvData).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

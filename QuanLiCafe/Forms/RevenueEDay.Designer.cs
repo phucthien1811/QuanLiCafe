@@ -28,202 +28,210 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lb_TongTien = new System.Windows.Forms.Label();
-            this.lb_Tong = new System.Windows.Forms.Label();
-            this.btn_XuatExcel = new System.Windows.Forms.Button();
-            this.btn_InBaoCao = new System.Windows.Forms.Button();
-            this.btn_LocDuLieu = new System.Windows.Forms.Button();
-            this.dtp_DenNgay = new System.Windows.Forms.DateTimePicker();
-            this.dtp_TuNgay = new System.Windows.Forms.DateTimePicker();
-            this.lb_DenNgay = new System.Windows.Forms.Label();
-            this.lb_TuNgay = new System.Windows.Forms.Label();
-            this.lb_tieude = new System.Windows.Forms.Label();
-            this.pb_Avatar = new System.Windows.Forms.PictureBox();
-            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgayThanhToan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_HoaDon = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Avatar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_HoaDon)).BeginInit();
-            this.SuspendLayout();
+            lb_TongTien = new Label();
+            lb_Tong = new Label();
+            btn_XuatExcel = new Button();
+            btn_InBaoCao = new Button();
+            btn_LocDuLieu = new Button();
+            dtp_DenNgay = new DateTimePicker();
+            dtp_TuNgay = new DateTimePicker();
+            lb_DenNgay = new Label();
+            lb_TuNgay = new Label();
+            lb_tieude = new Label();
+            TongTien = new DataGridViewTextBoxColumn();
+            SoLuong = new DataGridViewTextBoxColumn();
+            NgayThanhToan = new DataGridViewTextBoxColumn();
+            STT = new DataGridViewTextBoxColumn();
+            dgv_HoaDon = new DataGridView();
+            pb_Avatar = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Avatar).BeginInit();
+            SuspendLayout();
             // 
             // lb_TongTien
             // 
-            this.lb_TongTien.AutoSize = true;
-            this.lb_TongTien.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_TongTien.Location = new System.Drawing.Point(951, 534);
-            this.lb_TongTien.Name = "lb_TongTien";
-            this.lb_TongTien.Size = new System.Drawing.Size(27, 28);
-            this.lb_TongTien.TabIndex = 23;
-            this.lb_TongTien.Text = "...";
+            lb_TongTien.AutoSize = true;
+            lb_TongTien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_TongTien.Location = new Point(951, 668);
+            lb_TongTien.Name = "lb_TongTien";
+            lb_TongTien.Size = new Size(27, 28);
+            lb_TongTien.TabIndex = 23;
+            lb_TongTien.Text = "...";
             // 
             // lb_Tong
             // 
-            this.lb_Tong.AutoSize = true;
-            this.lb_Tong.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Tong.Location = new System.Drawing.Point(847, 534);
-            this.lb_Tong.Name = "lb_Tong";
-            this.lb_Tong.Size = new System.Drawing.Size(60, 28);
-            this.lb_Tong.TabIndex = 22;
-            this.lb_Tong.Text = "Tổng";
+            lb_Tong.AutoSize = true;
+            lb_Tong.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_Tong.Location = new Point(847, 668);
+            lb_Tong.Name = "lb_Tong";
+            lb_Tong.Size = new Size(60, 28);
+            lb_Tong.TabIndex = 22;
+            lb_Tong.Text = "Tổng";
             // 
             // btn_XuatExcel
             // 
-            this.btn_XuatExcel.BackColor = System.Drawing.Color.Lime;
-            this.btn_XuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_XuatExcel.Location = new System.Drawing.Point(588, 528);
-            this.btn_XuatExcel.Name = "btn_XuatExcel";
-            this.btn_XuatExcel.Size = new System.Drawing.Size(143, 42);
-            this.btn_XuatExcel.TabIndex = 21;
-            this.btn_XuatExcel.Text = "Xuất Excel";
-            this.btn_XuatExcel.UseVisualStyleBackColor = false;
+            btn_XuatExcel.BackColor = Color.Lime;
+            btn_XuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_XuatExcel.ForeColor = SystemColors.ButtonFace;
+            btn_XuatExcel.Location = new Point(588, 660);
+            btn_XuatExcel.Margin = new Padding(3, 4, 3, 4);
+            btn_XuatExcel.Name = "btn_XuatExcel";
+            btn_XuatExcel.Size = new Size(143, 52);
+            btn_XuatExcel.TabIndex = 21;
+            btn_XuatExcel.Text = "Xuất Excel";
+            btn_XuatExcel.UseVisualStyleBackColor = false;
             // 
             // btn_InBaoCao
             // 
-            this.btn_InBaoCao.BackColor = System.Drawing.Color.Blue;
-            this.btn_InBaoCao.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_InBaoCao.Location = new System.Drawing.Point(439, 528);
-            this.btn_InBaoCao.Name = "btn_InBaoCao";
-            this.btn_InBaoCao.Size = new System.Drawing.Size(143, 42);
-            this.btn_InBaoCao.TabIndex = 20;
-            this.btn_InBaoCao.Text = "In báo cáo";
-            this.btn_InBaoCao.UseVisualStyleBackColor = false;
+            btn_InBaoCao.BackColor = Color.Blue;
+            btn_InBaoCao.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_InBaoCao.ForeColor = SystemColors.ButtonFace;
+            btn_InBaoCao.Location = new Point(439, 660);
+            btn_InBaoCao.Margin = new Padding(3, 4, 3, 4);
+            btn_InBaoCao.Name = "btn_InBaoCao";
+            btn_InBaoCao.Size = new Size(143, 52);
+            btn_InBaoCao.TabIndex = 20;
+            btn_InBaoCao.Text = "In báo cáo";
+            btn_InBaoCao.UseVisualStyleBackColor = false;
             // 
             // btn_LocDuLieu
             // 
-            this.btn_LocDuLieu.BackColor = System.Drawing.Color.Blue;
-            this.btn_LocDuLieu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_LocDuLieu.Location = new System.Drawing.Point(468, 131);
-            this.btn_LocDuLieu.Name = "btn_LocDuLieu";
-            this.btn_LocDuLieu.Size = new System.Drawing.Size(114, 44);
-            this.btn_LocDuLieu.TabIndex = 18;
-            this.btn_LocDuLieu.Text = "Lọc dữ liệu";
-            this.btn_LocDuLieu.UseVisualStyleBackColor = false;
+            btn_LocDuLieu.BackColor = Color.Blue;
+            btn_LocDuLieu.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            btn_LocDuLieu.ForeColor = SystemColors.ButtonFace;
+            btn_LocDuLieu.Location = new Point(468, 164);
+            btn_LocDuLieu.Margin = new Padding(3, 4, 3, 4);
+            btn_LocDuLieu.Name = "btn_LocDuLieu";
+            btn_LocDuLieu.Size = new Size(114, 55);
+            btn_LocDuLieu.TabIndex = 18;
+            btn_LocDuLieu.Text = "Lọc dữ liệu";
+            btn_LocDuLieu.UseVisualStyleBackColor = false;
             // 
             // dtp_DenNgay
             // 
-            this.dtp_DenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp_DenNgay.Location = new System.Drawing.Point(673, 88);
-            this.dtp_DenNgay.Name = "dtp_DenNgay";
-            this.dtp_DenNgay.Size = new System.Drawing.Size(125, 22);
-            this.dtp_DenNgay.TabIndex = 17;
+            dtp_DenNgay.Format = DateTimePickerFormat.Short;
+            dtp_DenNgay.Location = new Point(673, 109);
+            dtp_DenNgay.Margin = new Padding(3, 4, 3, 4);
+            dtp_DenNgay.Name = "dtp_DenNgay";
+            dtp_DenNgay.Size = new Size(125, 27);
+            dtp_DenNgay.TabIndex = 17;
             // 
             // dtp_TuNgay
             // 
-            this.dtp_TuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp_TuNgay.Location = new System.Drawing.Point(398, 88);
-            this.dtp_TuNgay.Name = "dtp_TuNgay";
-            this.dtp_TuNgay.Size = new System.Drawing.Size(125, 22);
-            this.dtp_TuNgay.TabIndex = 16;
+            dtp_TuNgay.Format = DateTimePickerFormat.Short;
+            dtp_TuNgay.Location = new Point(370, 110);
+            dtp_TuNgay.Margin = new Padding(3, 4, 3, 4);
+            dtp_TuNgay.Name = "dtp_TuNgay";
+            dtp_TuNgay.Size = new Size(125, 27);
+            dtp_TuNgay.TabIndex = 16;
             // 
             // lb_DenNgay
             // 
-            this.lb_DenNgay.AutoSize = true;
-            this.lb_DenNgay.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_DenNgay.Location = new System.Drawing.Point(581, 87);
-            this.lb_DenNgay.Name = "lb_DenNgay";
-            this.lb_DenNgay.Size = new System.Drawing.Size(86, 23);
-            this.lb_DenNgay.TabIndex = 15;
-            this.lb_DenNgay.Text = "Đến ngày";
+            lb_DenNgay.AutoSize = true;
+            lb_DenNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_DenNgay.Location = new Point(581, 110);
+            lb_DenNgay.Name = "lb_DenNgay";
+            lb_DenNgay.Size = new Size(86, 23);
+            lb_DenNgay.TabIndex = 15;
+            lb_DenNgay.Text = "Đến ngày";
             // 
             // lb_TuNgay
             // 
-            this.lb_TuNgay.AutoSize = true;
-            this.lb_TuNgay.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_TuNgay.Location = new System.Drawing.Point(317, 87);
-            this.lb_TuNgay.Name = "lb_TuNgay";
-            this.lb_TuNgay.Size = new System.Drawing.Size(75, 23);
-            this.lb_TuNgay.TabIndex = 14;
-            this.lb_TuNgay.Text = "Từ ngày";
+            lb_TuNgay.AutoSize = true;
+            lb_TuNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_TuNgay.Location = new Point(289, 112);
+            lb_TuNgay.Name = "lb_TuNgay";
+            lb_TuNgay.Size = new Size(75, 23);
+            lb_TuNgay.TabIndex = 14;
+            lb_TuNgay.Text = "Từ ngày";
             // 
             // lb_tieude
             // 
-            this.lb_tieude.AutoSize = true;
-            this.lb_tieude.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_tieude.Location = new System.Drawing.Point(391, 23);
-            this.lb_tieude.Name = "lb_tieude";
-            this.lb_tieude.Size = new System.Drawing.Size(418, 38);
-            this.lb_tieude.TabIndex = 13;
-            this.lb_tieude.Text = "Xem lịch sử hóa đơn bán hàng";
-            this.lb_tieude.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pb_Avatar
-            // 
-            this.pb_Avatar.Location = new System.Drawing.Point(12, 12);
-            this.pb_Avatar.Name = "pb_Avatar";
-            this.pb_Avatar.Size = new System.Drawing.Size(163, 163);
-            this.pb_Avatar.TabIndex = 12;
-            this.pb_Avatar.TabStop = false;
+            lb_tieude.AutoSize = true;
+            lb_tieude.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_tieude.Location = new Point(353, 29);
+            lb_tieude.Name = "lb_tieude";
+            lb_tieude.Size = new Size(380, 32);
+            lb_tieude.TabIndex = 13;
+            lb_tieude.Text = "Xem lịch sử hóa đơn bán hàng";
+            lb_tieude.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // TongTien
             // 
-            this.TongTien.HeaderText = "Tổng tiền";
-            this.TongTien.MinimumWidth = 6;
-            this.TongTien.Name = "TongTien";
-            this.TongTien.Width = 125;
+            TongTien.HeaderText = "Tổng tiền";
+            TongTien.MinimumWidth = 6;
+            TongTien.Name = "TongTien";
+            TongTien.Width = 125;
             // 
             // SoLuong
             // 
-            this.SoLuong.HeaderText = "Số Lượng";
-            this.SoLuong.MinimumWidth = 6;
-            this.SoLuong.Name = "SoLuong";
-            this.SoLuong.Width = 125;
+            SoLuong.HeaderText = "Số Lượng";
+            SoLuong.MinimumWidth = 6;
+            SoLuong.Name = "SoLuong";
+            SoLuong.Width = 125;
             // 
             // NgayThanhToan
             // 
-            this.NgayThanhToan.HeaderText = "Ngày thanh toán";
-            this.NgayThanhToan.MinimumWidth = 6;
-            this.NgayThanhToan.Name = "NgayThanhToan";
-            this.NgayThanhToan.Width = 150;
+            NgayThanhToan.HeaderText = "Ngày thanh toán";
+            NgayThanhToan.MinimumWidth = 6;
+            NgayThanhToan.Name = "NgayThanhToan";
+            NgayThanhToan.Width = 150;
             // 
             // STT
             // 
-            this.STT.HeaderText = "STT";
-            this.STT.MinimumWidth = 6;
-            this.STT.Name = "STT";
-            this.STT.Width = 75;
+            STT.HeaderText = "STT";
+            STT.MinimumWidth = 6;
+            STT.Name = "STT";
+            STT.Width = 75;
             // 
             // dgv_HoaDon
             // 
-            this.dgv_HoaDon.BackgroundColor = System.Drawing.Color.White;
-            this.dgv_HoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_HoaDon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.STT,
-            this.NgayThanhToan,
-            this.SoLuong,
-            this.TongTien});
-            this.dgv_HoaDon.Location = new System.Drawing.Point(12, 193);
-            this.dgv_HoaDon.Name = "dgv_HoaDon";
-            this.dgv_HoaDon.RowHeadersWidth = 51;
-            this.dgv_HoaDon.RowTemplate.Height = 24;
-            this.dgv_HoaDon.Size = new System.Drawing.Size(1059, 317);
-            this.dgv_HoaDon.TabIndex = 24;
+            dgv_HoaDon.BackgroundColor = Color.White;
+            dgv_HoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_HoaDon.Columns.AddRange(new DataGridViewColumn[] { STT, NgayThanhToan, SoLuong, TongTien });
+            dgv_HoaDon.Location = new Point(12, 241);
+            dgv_HoaDon.Margin = new Padding(3, 4, 3, 4);
+            dgv_HoaDon.Name = "dgv_HoaDon";
+            dgv_HoaDon.RowHeadersWidth = 51;
+            dgv_HoaDon.RowTemplate.Height = 24;
+            dgv_HoaDon.Size = new Size(1059, 396);
+            dgv_HoaDon.TabIndex = 24;
             // 
-            // DoanhThuTheoNgay
+            // pb_Avatar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ClientSize = new System.Drawing.Size(1083, 584);
-            this.Controls.Add(this.dgv_HoaDon);
-            this.Controls.Add(this.lb_TongTien);
-            this.Controls.Add(this.lb_Tong);
-            this.Controls.Add(this.btn_XuatExcel);
-            this.Controls.Add(this.btn_InBaoCao);
-            this.Controls.Add(this.btn_LocDuLieu);
-            this.Controls.Add(this.dtp_DenNgay);
-            this.Controls.Add(this.dtp_TuNgay);
-            this.Controls.Add(this.lb_DenNgay);
-            this.Controls.Add(this.lb_TuNgay);
-            this.Controls.Add(this.lb_tieude);
-            this.Controls.Add(this.pb_Avatar);
-            this.Name = "DoanhThuTheoNgay";
-            this.Text = "Thống kê doanh thu theo ngày";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Avatar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_HoaDon)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            pb_Avatar.Location = new Point(1000, 500);
+            pb_Avatar.Name = "pb_Avatar";
+            pb_Avatar.Size = new Size(10, 10);
+            pb_Avatar.TabIndex = 25;
+            pb_Avatar.TabStop = false;
+            pb_Avatar.Visible = false;
+            // 
+            // RevenueEDay
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Wheat;
+            ClientSize = new Size(1083, 730);
+            Controls.Add(pb_Avatar);
+            Controls.Add(dgv_HoaDon);
+            Controls.Add(lb_TongTien);
+            Controls.Add(lb_Tong);
+            Controls.Add(btn_XuatExcel);
+            Controls.Add(btn_InBaoCao);
+            Controls.Add(btn_LocDuLieu);
+            Controls.Add(dtp_DenNgay);
+            Controls.Add(dtp_TuNgay);
+            Controls.Add(lb_DenNgay);
+            Controls.Add(lb_TuNgay);
+            Controls.Add(lb_tieude);
+            ForeColor = SystemColors.ControlText;
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "RevenueEDay";
+            Text = "Thống kê doanh thu theo ngày";
+            ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Avatar).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -239,11 +247,11 @@
         private System.Windows.Forms.Label lb_DenNgay;
         private System.Windows.Forms.Label lb_TuNgay;
         private System.Windows.Forms.Label lb_tieude;
-        private System.Windows.Forms.PictureBox pb_Avatar;
         private System.Windows.Forms.DataGridViewTextBoxColumn TongTien;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayThanhToan;
         private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridView dgv_HoaDon;
+        private System.Windows.Forms.PictureBox pb_Avatar;
     }
 }

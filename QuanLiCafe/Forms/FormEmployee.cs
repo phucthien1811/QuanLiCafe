@@ -306,5 +306,10 @@ namespace QuanLiCafe.Forms
         {
 
         }
+
+        private void FormEmployee_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
