@@ -100,7 +100,6 @@ namespace QuanLiCafe.Helpers
                     StaffId = staffId,
                     CreatedAt = orderDate,
                     Discount = random.Next(0, 3) * 5, // 0%, 5%, 10%, 15%
-                    VAT = 10,
                     TotalAmount = 0 // S? tính sau
                 };
 
@@ -131,9 +130,7 @@ namespace QuanLiCafe.Helpers
 
                 // Tính t?ng ti?n
                 var discountAmount = subTotal * (order.Discount / 100);
-                var afterDiscount = subTotal - discountAmount;
-                var vatAmount = afterDiscount * (order.VAT / 100);
-                order.TotalAmount = afterDiscount + vatAmount;
+                order.TotalAmount = subTotal - discountAmount;
 
                 context.SaveChanges();
             }

@@ -74,7 +74,7 @@ namespace QuanLiCafe.Demo
 
             var updatedOrder = Program.DbContext.Orders.Find(order.Id);
             Console.WriteLine($"\n?? T?ng ti?n: {updatedOrder!.TotalAmount:N0} ?");
-            Console.WriteLine($"   (Gi?m giá: {updatedOrder.Discount}%, VAT: {updatedOrder.VAT}%)");
+            Console.WriteLine($"   (Gi?m giá: {updatedOrder.Discount}%)");
         }
 
         static void Demo2_MergeTables(OrderService service)

@@ -109,8 +109,8 @@ namespace QuanLiCafe.Services
         }
 
         /// <summary>
-        /// Tính l?i t?ng ti?n c?a order
-        /// Công th?c: TotalAmount = (sum SubTotal - discount) * (1 + VAT)
+        /// T?nh l?i t?ng ti?n c?a order
+        /// C?ng th?c: TotalAmount = sum SubTotal - discount
         /// </summary>
         public void RecalcOrderTotals(int orderId, decimal discountPercent, decimal vatPercent)
         {
@@ -119,23 +119,18 @@ namespace QuanLiCafe.Services
                 .FirstOrDefault(o => o.Id == orderId);
 
             if (order == null)
-                throw new InvalidOperationException($"Order ID {orderId} không t?n t?i");
+                throw new InvalidOperationException($"Order ID {orderId} kh?ng t?n t?i");
 
-            // LINQ: Tính t?ng SubTotal
+            // LINQ: T?nh t?ng SubTotal
             decimal subTotal = order.OrderDetails
                 .Sum(od => od.Quantity * od.UnitPrice);
 
-            // Tính gi?m giá
+            // T?nh gi?m gi?
             decimal discountAmount = subTotal * (discountPercent / 100);
-            decimal afterDiscount = subTotal - discountAmount;
-
-            // Tính VAT
-            decimal vatAmount = afterDiscount * (vatPercent / 100);
-            decimal total = afterDiscount + vatAmount;
+            decimal total = subTotal - discountAmount;
 
             // C?p nh?t order
             order.Discount = discountPercent;
-            order.VAT = vatPercent;
             order.TotalAmount = total;
 
             _context.SaveChanges();
@@ -188,15 +183,15 @@ namespace QuanLiCafe.Services
                 .FirstOrDefault(o => o.Id == toOrderId);
 
             if (fromOrder == null)
-                throw new InvalidOperationException($"Order ID {fromOrderId} không t?n t?i");
+                throw new InvalidOperationException($"Order ID {fromOrderId} kh?ng t?n t?i");
 
             if (toOrder == null)
-                throw new InvalidOperationException($"Order ID {toOrderId} không t?n t?i");
+                throw new InvalidOperationException($"Order ID {toOrderId} kh?ng t?n t?i");
 
             // G?p OrderDetails
             foreach (var fromDetail in fromOrder.OrderDetails.ToList())
             {
-                // Ki?m tra xem món ?ã có trong toOrder ch?a
+                // Ki?m tra xem m?n ?? c? trong toOrder ch?a
                 var existingDetail = toOrder.OrderDetails
                     .FirstOrDefault(od => od.ProductId == fromDetail.ProductId);
 
@@ -207,7 +202,7 @@ namespace QuanLiCafe.Services
                 }
                 else
                 {
-                    // Thêm món m?i vào toOrder
+                    // Th?m m?n m?i v?o toOrder
                     var newDetail = new OrderDetail
                     {
                         OrderId = toOrderId,
@@ -220,18 +215,18 @@ namespace QuanLiCafe.Services
                 }
             }
 
-            // C?p nh?t tr?ng thái bàn c?
+            // C?p nh?t tr?ng th?i b?n c?
             var fromTable = _context.Tables.Find(fromOrder.TableId);
             if (fromTable != null)
                 fromTable.Status = "Free";
 
-            // Xóa fromOrder
+            // X?a fromOrder
             _context.Orders.Remove(fromOrder);
 
             _context.SaveChanges();
 
-            // Tính l?i t?ng ti?n c?a toOrder
-            RecalcOrderTotals(toOrderId, toOrder.Discount, toOrder.VAT);
+            // T?nh l?i t?ng ti?n c?a toOrder
+            RecalcOrderTotals(toOrderId, toOrder.Discount, 0);
         }
 
         /// <summary>
@@ -248,17 +243,17 @@ namespace QuanLiCafe.Services
         }
 
         /// <summary>
-        /// T?o order m?i cho bàn
+        /// T?o order m?i cho b?n
         /// </summary>
         public Order CreateOrder(int tableId, int staffId)
         {
             var table = _context.Tables.Find(tableId);
             if (table == null)
-                throw new InvalidOperationException($"Table ID {tableId} không t?n t?i");
+                throw new InvalidOperationException($"Table ID {tableId} kh?ng t?n t?i");
 
-            // Ki?m tra bàn ?ang tr?ng
+            // Ki?m tra b?n ?ang tr?ng
             if (table.Status != "Free")
-                throw new InvalidOperationException($"Bàn {table.Name} ?ang ???c s? d?ng!");
+                throw new InvalidOperationException($"B?n {table.Name} ?ang ???c s? d?ng!");
 
             var order = new Order
             {
@@ -266,13 +261,12 @@ namespace QuanLiCafe.Services
                 StaffId = staffId,
                 CreatedAt = DateTime.Now,
                 Discount = 0,
-                VAT = 10,
                 TotalAmount = 0
             };
 
             _context.Orders.Add(order);
 
-            // C?p nh?t tr?ng thái bàn
+            // C?p nh?t tr?ng th?i b?n
             table.Status = "Serving";
 
             _context.SaveChanges();

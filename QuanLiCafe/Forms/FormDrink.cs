@@ -156,18 +156,47 @@ namespace DrinkForm
             }
         }
 
-        // Nút Xóa - Mở form TypeDrink (quản lý loại đồ uống)
+        // Nút Xóa - Xóa đồ uống đã chọn
         private void BtnXoa_Click(object sender, EventArgs e)
         {
+            if (DanhMucDoUong.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn đồ uống cần xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                var typeDrinkForm = new TypeDrink();
-                typeDrinkForm.ShowDialog();
-                LoadProducts(); // Refresh sau khi quản lý category
+                var selectedRow = DanhMucDoUong.SelectedRows[0];
+                var product = selectedRow.Tag as Product;
+                
+                if (product != null)
+                {
+                    // Hiển thị hộp thoại xác nhận
+                    var result = MessageBox.Show(
+                        $"Bạn có chắc chắn muốn xóa đồ uống '{product.Name}' không?",
+                        "Xác nhận xóa",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    
+                    if (result == DialogResult.Yes)
+                    {
+                        // Xóa đồ uống khỏi database
+                        _context.Products.Remove(product);
+                        _context.SaveChanges();
+                        
+                        MessageBox.Show("Xóa đồ uống thành công!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        // Refresh danh sách
+                        LoadProducts();
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi mở form loại đồ uống:\n{ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi xóa đồ uống:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

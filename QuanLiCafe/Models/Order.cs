@@ -20,9 +20,6 @@ namespace QuanLiCafe.Models
         [Column(TypeName = "decimal(5,2)")]
         public decimal Discount { get; set; } = 0;
 
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal VAT { get; set; } = 10; // 10%
-
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
 

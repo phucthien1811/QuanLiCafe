@@ -77,7 +77,6 @@ namespace QuanLiCafe.Data
                 entity.ToTable("Orders");
                 entity.Property(e => e.CreatedAt).IsRequired();
                 entity.Property(e => e.Discount).HasColumnType("decimal(5,2)").HasDefaultValue(0);
-                entity.Property(e => e.VAT).HasColumnType("decimal(5,2)").HasDefaultValue(10);
                 entity.Property(e => e.TotalAmount).HasColumnType("decimal(18,2)");
 
                 entity.HasOne(e => e.Table)

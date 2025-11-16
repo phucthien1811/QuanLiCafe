@@ -133,12 +133,9 @@ namespace QuanLiCafe.Services
 
                 // ===== T?NG TI?N =====
                 var discountAmount = subTotal * order.Discount / 100;
-                var afterDiscount = subTotal - discountAmount;
-                var vatAmount = afterDiscount * order.VAT / 100;
 
-                document.Add(new Paragraph($"T?m tính: {subTotal:N0} ?", normalFont) { Alignment = Element.ALIGN_RIGHT });
-                document.Add(new Paragraph($"Gi?m giá ({order.Discount}%): -{discountAmount:N0} ?", normalFont) { Alignment = Element.ALIGN_RIGHT });
-                document.Add(new Paragraph($"VAT ({order.VAT}%): +{vatAmount:N0} ?", normalFont) { Alignment = Element.ALIGN_RIGHT });
+                document.Add(new Paragraph($"T?m t?nh: {subTotal:N0} ?", normalFont) { Alignment = Element.ALIGN_RIGHT });
+                document.Add(new Paragraph($"Gi?m gi? ({order.Discount}%): -{discountAmount:N0} ?", normalFont) { Alignment = Element.ALIGN_RIGHT });
                 
                 var totalPara = new Paragraph($"T?NG C?NG: {order.TotalAmount:N0} ?", headerFont);
                 totalPara.Alignment = Element.ALIGN_RIGHT;
@@ -264,7 +261,6 @@ namespace QuanLiCafe.Services
                 row += 2;
                 var discountAmount = subTotal * order.Discount / 100;
                 var afterDiscount = subTotal - discountAmount;
-                var vatAmount = afterDiscount * order.VAT / 100;
 
                 worksheet.Cells[$"D{row}"].Value = "T?m tính:";
                 worksheet.Cells[$"E{row}"].Value = subTotal;
@@ -275,11 +271,6 @@ namespace QuanLiCafe.Services
                 worksheet.Cells[$"E{row}"].Value = -discountAmount;
                 worksheet.Cells[$"E{row}"].Style.Numberformat.Format = "#,##0 ?";
                 worksheet.Cells[$"E{row}"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
-
-                row++;
-                worksheet.Cells[$"D{row}"].Value = $"VAT ({order.VAT}%):";
-                worksheet.Cells[$"E{row}"].Value = vatAmount;
-                worksheet.Cells[$"E{row}"].Style.Numberformat.Format = "#,##0 ?";
 
                 row++;
                 worksheet.Cells[$"D{row}"].Value = "T?NG C?NG:";
