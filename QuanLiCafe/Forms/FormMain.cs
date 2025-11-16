@@ -739,6 +739,27 @@ namespace QuanLiCafe.Forms
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void menuToping_Click(object sender, EventArgs e)
+        {
+            if (_currentUser.Role != "Admin")
+            {
+                MessageBox.Show("Chỉ Admin mới được quản lý topping!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var formToping = new FormToping();
+                formToping.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở quản lý topping:\n{ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void menuThongTinCaNhan_Click(object sender, EventArgs e)
         {
             try

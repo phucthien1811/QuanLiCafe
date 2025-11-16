@@ -573,6 +573,7 @@
             menuToping.Name = "menuToping";
             menuToping.Size = new Size(224, 28);
             menuToping.Text = "Toping";
+            menuToping.Click += menuToping_Click;
             // 
             // FormMain
             // 
