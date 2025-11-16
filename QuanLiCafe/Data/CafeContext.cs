@@ -16,6 +16,7 @@ namespace QuanLiCafe.Data
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ImportHistory> ImportHistories { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<EmployeeInformation> EmployeeInformations { get; set; } // ✅ THÊM MỚI
 
         public CafeContext(DbContextOptions<CafeContext> options) : base(options) { }
 
@@ -40,6 +41,23 @@ namespace QuanLiCafe.Data
                 entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.PasswordHash).IsRequired().HasMaxLength(256);
                 entity.Property(e => e.Role).IsRequired().HasMaxLength(20);
+            });
+
+            // ✅ EmployeeInformation Configuration
+            modelBuilder.Entity<EmployeeInformation>(entity =>
+            {
+                entity.ToTable("EmployeeInformations");
+                entity.Property(e => e.FullName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.PhoneNumber).HasMaxLength(15);
+                entity.Property(e => e.Address).HasMaxLength(255);
+                entity.Property(e => e.Gender).HasMaxLength(10);
+                entity.Property(e => e.IdentityCard).HasMaxLength(50);
+                entity.Property(e => e.Notes).HasMaxLength(500);
+
+                entity.HasOne(e => e.User)
+                    .WithOne()
+                    .HasForeignKey<EmployeeInformation>(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             // Table Configuration
@@ -84,10 +102,12 @@ namespace QuanLiCafe.Data
                     .HasForeignKey(e => e.TableId)
                     .OnDelete(DeleteBehavior.Restrict);
 
+                // ✅ ĐỔI SANG SetNull - Khi xóa User, StaffId sẽ = NULL
                 entity.HasOne(e => e.Staff)
                     .WithMany(u => u.Orders)
                     .HasForeignKey(e => e.StaffId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .IsRequired(false); // Cho phép NULL
             });
 
             // OrderDetail Configuration

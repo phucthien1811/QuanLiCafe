@@ -81,6 +81,56 @@ namespace QuanLiCafe.Migrations
                     b.ToTable("Customers", (string)null);
                 });
 
+            modelBuilder.Entity("QuanLiCafe.Models.EmployeeInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Gender")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("IdentityCard")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("EmployeeInformations", (string)null);
+                });
+
             modelBuilder.Entity("QuanLiCafe.Models.ImportHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -195,7 +245,7 @@ namespace QuanLiCafe.Migrations
                         .HasColumnType("decimal(5,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("StaffId")
+                    b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<int>("TableId")
@@ -203,11 +253,6 @@ namespace QuanLiCafe.Migrations
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("VAT")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(5,2)")
-                        .HasDefaultValue(10m);
 
                     b.HasKey("Id");
 
@@ -427,6 +472,17 @@ namespace QuanLiCafe.Migrations
                         });
                 });
 
+            modelBuilder.Entity("QuanLiCafe.Models.EmployeeInformation", b =>
+                {
+                    b.HasOne("QuanLiCafe.Models.User", "User")
+                        .WithOne()
+                        .HasForeignKey("QuanLiCafe.Models.EmployeeInformation", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("QuanLiCafe.Models.ImportHistory", b =>
                 {
                     b.HasOne("QuanLiCafe.Models.Inventory", "Material")
@@ -443,8 +499,7 @@ namespace QuanLiCafe.Migrations
                     b.HasOne("QuanLiCafe.Models.User", "Staff")
                         .WithMany("Orders")
                         .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("QuanLiCafe.Models.Table", "Table")
                         .WithMany("Orders")

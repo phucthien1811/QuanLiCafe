@@ -235,21 +235,21 @@
             btndmk.BackColor = Color.Red;
             btndmk.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btndmk.ForeColor = SystemColors.ButtonFace;
-            btndmk.Location = new Point(324, 460);
+            btndmk.Location = new Point(235, 460);
             btndmk.Name = "btndmk";
-            btndmk.Size = new Size(137, 44);
+            btndmk.Size = new Size(165, 44);
             btndmk.TabIndex = 21;
             btndmk.Text = "Đổi mật khẩu";
             btndmk.UseVisualStyleBackColor = false;
             // 
             // btnExit
             // 
-            btnExit.BackColor = Color.Blue;
+            btnExit.BackColor = Color.Gray;
             btnExit.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnExit.ForeColor = SystemColors.ButtonFace;
-            btnExit.Location = new Point(469, 460);
+            btnExit.Location = new Point(410, 460);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(132, 44);
+            btnExit.Size = new Size(135, 44);
             btnExit.TabIndex = 22;
             btnExit.Text = "Thoát";
             btnExit.UseVisualStyleBackColor = false;

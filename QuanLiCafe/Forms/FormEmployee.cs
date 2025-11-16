@@ -98,37 +98,18 @@ namespace QuanLiCafe.Forms
         // ===== THÊM USER MỚI =====
         private void MenuThem_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput()) return;
-
-            // Kiểm tra username đã tồn tại
-            if (_context.Users.Any(u => u.Username == txtTenNV.Text.Trim()))
-            {
-                MessageBox.Show("Username đã tồn tại!", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             try
             {
-                var newUser = new User
+                var addForm = new FormAddEmployee();
+                if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    Username = txtTenNV.Text.Trim(),
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(txtMatKhau.Text),
-                    Role = txtSDT.Text.Trim() // Lấy từ field SDT tạm thời
-                };
-
-                _context.Users.Add(newUser);
-                _context.SaveChanges();
-
-                MessageBox.Show("Thêm nhân viên thành công!", "Thành công",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LoadUsers();
-                ClearForm();
+                    LoadUsers();
+                    ClearForm();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi mở form thêm nhân viên:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -143,46 +124,18 @@ namespace QuanLiCafe.Forms
                 return;
             }
 
-            if (!ValidateInput()) return;
-
             try
             {
-                var user = _context.Users.Find(_editingUserId);
-                if (user == null)
+                var editForm = new FormAddEmployee(_editingUserId);
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("Không tìm thấy nhân viên!", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    LoadUsers();
+                    ClearForm();
                 }
-
-                // Kiểm tra username trùng (trừ chính nó)
-                if (_context.Users.Any(u => u.Username == txtTenNV.Text.Trim() && u.Id != _editingUserId))
-                {
-                    MessageBox.Show("Username đã tồn tại!", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                user.Username = txtTenNV.Text.Trim();
-                user.Role = txtSDT.Text.Trim();
-
-                // Chỉ update password nếu có nhập
-                if (!string.IsNullOrWhiteSpace(txtMatKhau.Text))
-                {
-                    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(txtMatKhau.Text);
-                }
-
-                _context.SaveChanges();
-
-                MessageBox.Show("Cập nhật thành công!", "Thành công",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LoadUsers();
-                ClearForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi mở form sửa nhân viên:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -197,38 +150,57 @@ namespace QuanLiCafe.Forms
                 return;
             }
 
-            var result = MessageBox.Show("Xác nhận xóa nhân viên này?", "Xác nhận",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            try
             {
-                try
+                var user = _context.Users.Find(_editingUserId);
+                if (user == null)
                 {
-                    var user = _context.Users.Find(_editingUserId);
-                    if (user == null) return;
+                    MessageBox.Show("Không tìm thấy nhân viên!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                    // Kiểm tra có đơn hàng không
-                    if (_context.Orders.Any(o => o.StaffId == _editingUserId))
-                    {
-                        MessageBox.Show("Không thể xóa nhân viên đã có đơn hàng!", "Lỗi",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                // ✅ CHỈ CẤM XÓA CHÍNH MÌNH (Admin đang đăng nhập)
+                var currentUser = Program.CurrentUser;
+                if (currentUser != null && _editingUserId == currentUser.Id)
+                {
+                    MessageBox.Show("Bạn không thể xóa tài khoản của chính mình!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
+                // Đếm số đơn hàng của nhân viên này
+                int orderCount = _context.Orders.Count(o => o.StaffId == _editingUserId);
+
+                // Tạo thông báo xác nhận
+                string confirmMessage = $"Xác nhận xóa nhân viên '{user.Username}'?";
+                if (orderCount > 0)
+                {
+                    confirmMessage = $"Nhân viên '{user.Username}' có {orderCount} đơn hàng.\n\n" +
+                                   "Bạn có chắc chắn muốn xóa nhân viên này?\n" +
+                                   "(Các đơn hàng sẽ vẫn được giữ lại trong hệ thống)";
+                }
+
+                var result = MessageBox.Show(confirmMessage, "Xác nhận xóa",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // ✅ XÓA NHÂN VIÊN (kể cả khi có đơn hàng)
                     _context.Users.Remove(user);
                     _context.SaveChanges();
 
-                    MessageBox.Show("Xóa thành công!", "Thành công",
+                    MessageBox.Show("Xóa nhân viên thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     LoadUsers();
                     ClearForm();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi xóa nhân viên:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

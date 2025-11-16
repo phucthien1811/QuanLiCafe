@@ -122,11 +122,11 @@
             // dtgvData
             // 
             dtgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvData.Location = new Point(1, 200);
+            dtgvData.Location = new Point(25, 200);
             dtgvData.Margin = new Padding(4, 5, 4, 5);
             dtgvData.Name = "dtgvData";
             dtgvData.RowHeadersWidth = 51;
-            dtgvData.Size = new Size(848, 425);
+            dtgvData.Size = new Size(824, 425);
             dtgvData.TabIndex = 25;
             // 
             // txtDiaChi

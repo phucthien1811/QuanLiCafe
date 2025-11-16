@@ -40,8 +40,6 @@
             btnXoa = new Button();
             btnSua = new Button();
             btnThem = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dtgvtypedrink).BeginInit();
             SuspendLayout();
             // 
@@ -82,11 +80,11 @@
             dtgvtypedrink.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvtypedrink.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2 });
             dtgvtypedrink.GridColor = SystemColors.Window;
-            dtgvtypedrink.Location = new Point(169, 22);
+            dtgvtypedrink.Location = new Point(142, 22);
             dtgvtypedrink.Margin = new Padding(2);
             dtgvtypedrink.Name = "dtgvtypedrink";
             dtgvtypedrink.RowHeadersWidth = 62;
-            dtgvtypedrink.Size = new Size(724, 411);
+            dtgvtypedrink.Size = new Size(751, 411);
             dtgvtypedrink.TabIndex = 13;
             // 
             // Column1
@@ -182,32 +180,12 @@
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = false;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(900, 87);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(25, 27);
-            textBox1.TabIndex = 14;
-            textBox1.Visible = false;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(900, 120);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(25, 27);
-            textBox2.TabIndex = 15;
-            textBox2.Visible = false;
-            // 
             // TypeDrink
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
             ClientSize = new Size(947, 542);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
             Controls.Add(btnThoat);
             Controls.Add(btnXuatExcel);
             Controls.Add(btnLamMoi);
@@ -240,7 +218,5 @@
         private Button btnXoa;
         private Button btnSua;
         private Button btnThem;
-        private TextBox textBox1;
-        private TextBox textBox2;
     }
 }

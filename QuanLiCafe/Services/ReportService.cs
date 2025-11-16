@@ -81,11 +81,13 @@ namespace QuanLiCafe.Services
         /// <summary>
         /// Doanh thu theo nhân viên
         /// LINQ: Include, Where, GroupBy, Select
+        /// ? X? lý StaffId nullable
         /// </summary>
         public List<StaffRevenueReport> GetRevenueByStaff(DateTime? fromDate = null, DateTime? toDate = null)
         {
             var query = _context.Orders
                 .Include(o => o.Staff)
+                .Where(o => o.StaffId.HasValue) // ? CH? L?Y ??N CÓ NHÂN VIÊN
                 .AsQueryable();
 
             if (fromDate.HasValue)
@@ -98,11 +100,11 @@ namespace QuanLiCafe.Services
                 .GroupBy(o => new
                 {
                     o.StaffId,
-                    o.Staff.Username
+                    o.Staff!.Username
                 })
                 .Select(g => new StaffRevenueReport
                 {
-                    StaffId = g.Key.StaffId,
+                    StaffId = g.Key.StaffId!.Value, // ? CAST SANG INT
                     StaffName = g.Key.Username,
                     TotalOrders = g.Count(),
                     TotalRevenue = g.Sum(o => o.TotalAmount),

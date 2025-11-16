@@ -11,8 +11,8 @@ namespace QuanLiCafe.Models
         [Required]
         public int TableId { get; set; }
 
-        [Required]
-        public int StaffId { get; set; }
+        // ? Cho phép NULL khi xóa nhân viên
+        public int? StaffId { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -28,7 +28,7 @@ namespace QuanLiCafe.Models
         public virtual Table Table { get; set; } = null!;
 
         [ForeignKey("StaffId")]
-        public virtual User Staff { get; set; } = null!;
+        public virtual User? Staff { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
