@@ -10,6 +10,11 @@ using System.Windows.Forms;
 using QuanLiCafe.Data;
 using QuanLiCafe.Models;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace ReportForm
 {
@@ -27,6 +32,9 @@ namespace ReportForm
             btn_LocDuLieu.Click += Btn_LocDuLieu_Click;
             btn_InBaoCao.Click += Btn_InBaoCao_Click;
             btn_XuatExcel.Click += Btn_XuatExcel_Click;
+            
+            // Set license context cho EPPlus
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
         }
 
         private void RevenueEDay_Load(object sender, EventArgs e)
@@ -46,9 +54,8 @@ namespace ReportForm
         {
             try
             {
-                // Có thể load logo từ file nếu có
-                // pb_Avatar.Image = Image.FromFile("path/to/logo.png");
-                pb_Avatar.SizeMode = PictureBoxSizeMode.Zoom;
+                // Logo có thể được thêm vào form nếu cần
+                // pb_Avatar.SizeMode = PictureBoxSizeMode.Zoom;
             }
             catch
             {
@@ -139,18 +146,33 @@ namespace ReportForm
         {
             try
             {
-                // Tạo báo cáo in
-                string reportContent = GenerateReport();
-                
-                // Hiển thị dialog in (có thể sử dụng PrintDialog)
-                MessageBox.Show("Chức năng in báo cáo đang được phát triển!\n\n" + 
-                    "Báo cáo sẽ được xuất ra file hoặc máy in.", 
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                // TODO: Implement print functionality
-                // PrintDocument printDoc = new PrintDocument();
-                // printDoc.PrintPage += PrintDoc_PrintPage;
-                // printDoc.Print();
+                if (dgv_HoaDon.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không có dữ liệu để in!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.Title = "In báo cáo doanh thu theo ngày";
+                    saveFileDialog.FileName = $"BaoCaoDoanhThu_{DateTime.Now:ddMMyyyy_HHmmss}.pdf";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        ExportToPDF(saveFileDialog.FileName);
+                        MessageBox.Show($"In báo cáo thành công!\n\nĐường dẫn: {saveFileDialog.FileName}",
+                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        // Mở file PDF
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = saveFileDialog.FileName,
+                            UseShellExecute = true
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -164,26 +186,31 @@ namespace ReportForm
         {
             try
             {
-                // Kiểm tra có dữ liệu không
                 if (dgv_HoaDon.Rows.Count == 0)
                 {
                     MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                
-                // Tạo SaveFileDialog
+
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
                     saveFileDialog.Filter = "Excel Files|*.xlsx";
                     saveFileDialog.Title = "Xuất báo cáo doanh thu";
                     saveFileDialog.FileName = $"DoanhThu_{DateTime.Now:ddMMyyyy_HHmmss}.xlsx";
-                    
+
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         ExportToExcel(saveFileDialog.FileName);
-                        MessageBox.Show($"Xuất file Excel thành công!\n\nĐường dẫn: {saveFileDialog.FileName}", 
+                        MessageBox.Show($"Xuất file Excel thành công!\n\nĐường dẫn: {saveFileDialog.FileName}",
                             "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        // Mở file Excel
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = saveFileDialog.FileName,
+                            UseShellExecute = true
+                        });
                     }
                 }
             }
@@ -216,39 +243,138 @@ namespace ReportForm
             return report.ToString();
         }
 
-        // Xuất dữ liệu ra Excel
+        // Xuất dữ liệu ra Excel sử dụng EPPlus
         private void ExportToExcel(string filePath)
         {
-            // Sử dụng EPPlus hoặc thư viện khác để xuất Excel
-            // Đơn giản hóa: Xuất dưới dạng CSV
-            StringBuilder csv = new StringBuilder();
-            
-            // Header
-            csv.AppendLine("STT,Ngày thanh toán,Số lượng,Tổng tiền");
-            
-            // Data
-            foreach (DataGridViewRow row in dgv_HoaDon.Rows)
+            using (var package = new ExcelPackage())
             {
-                csv.AppendLine($"{row.Cells["STT"].Value}," +
-                    $"{row.Cells["NgayThanhToan"].Value}," +
-                    $"{row.Cells["SoLuong"].Value}," +
-                    $"{row.Cells["TongTien"].Value}");
+                var worksheet = package.Workbook.Worksheets.Add("Doanh thu theo ngày");
+
+                // Tiêu đề
+                worksheet.Cells["A1:D1"].Merge = true;
+                worksheet.Cells["A1"].Value = "BÁO CÁO DOANH THU THEO NGÀY";
+                worksheet.Cells["A1"].Style.Font.Size = 16;
+                worksheet.Cells["A1"].Style.Font.Bold = true;
+                worksheet.Cells["A1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                // Thông tin khoảng thời gian
+                worksheet.Cells["A2"].Value = $"Từ ngày: {dtp_TuNgay.Value:dd/MM/yyyy} - Đến ngày: {dtp_DenNgay.Value:dd/MM/yyyy}";
+                worksheet.Cells["A2"].Style.Font.Italic = true;
+
+                // Header
+                int headerRow = 4;
+                worksheet.Cells[headerRow, 1].Value = "STT";
+                worksheet.Cells[headerRow, 2].Value = "Ngày thanh toán";
+                worksheet.Cells[headerRow, 3].Value = "Số lượng";
+                worksheet.Cells[headerRow, 4].Value = "Tổng tiền";
+
+                // Format header
+                using (var range = worksheet.Cells[headerRow, 1, headerRow, 4])
+                {
+                    range.Style.Font.Bold = true;
+                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    range.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                    range.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+                // Data
+                int row = headerRow + 1;
+                foreach (DataGridViewRow dgvRow in dgv_HoaDon.Rows)
+                {
+                    worksheet.Cells[row, 1].Value = dgvRow.Cells["STT"].Value;
+                    worksheet.Cells[row, 2].Value = dgvRow.Cells["NgayThanhToan"].Value;
+                    worksheet.Cells[row, 3].Value = dgvRow.Cells["SoLuong"].Value;
+                    worksheet.Cells[row, 4].Value = dgvRow.Cells["TongTien"].Value;
+                    row++;
+                }
+
+                // Tổng cộng
+                worksheet.Cells[row + 1, 3].Value = "Tổng doanh thu:";
+                worksheet.Cells[row + 1, 3].Style.Font.Bold = true;
+                worksheet.Cells[row + 1, 4].Value = lb_TongTien.Text;
+                worksheet.Cells[row + 1, 4].Style.Font.Bold = true;
+
+                worksheet.Cells[row + 2, 3].Value = "Số hóa đơn:";
+                worksheet.Cells[row + 2, 3].Style.Font.Bold = true;
+                worksheet.Cells[row + 2, 4].Value = dgv_HoaDon.Rows.Count;
+
+                // Auto-fit columns
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                // Lưu file
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
             }
+        }
+
+        // Xuất PDF để in báo cáo
+        private void ExportToPDF(string filePath)
+        {
+            Document document = new Document(PageSize.A4, 25, 25, 30, 30);
             
-            // Footer
-            csv.AppendLine();
-            csv.AppendLine($",,Tổng doanh thu,{lb_TongTien.Text}");
-            
-            // Ghi file
-            System.IO.File.WriteAllText(filePath.Replace(".xlsx", ".csv"), csv.ToString(), Encoding.UTF8);
-            
-            // Nếu cần xuất đúng định dạng Excel, sử dụng EPPlus:
-            // using (var package = new ExcelPackage(new FileInfo(filePath)))
-            // {
-            //     var worksheet = package.Workbook.Worksheets.Add("Doanh Thu");
-            //     // ... thêm dữ liệu vào worksheet
-            //     package.Save();
-            // }
+            try
+            {
+                PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+                document.Open();
+
+                // Font cho tiếng Việt
+                string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                iTextSharp.text.Font titleFont = new iTextSharp.text.Font(bf, 16, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(bf, 11, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font normalFont = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.NORMAL);
+
+                // Tiêu đề
+                Paragraph title = new Paragraph("BÁO CÁO DOANH THU THEO NGÀY", titleFont);
+                title.Alignment = Element.ALIGN_CENTER;
+                document.Add(title);
+
+                // Thông tin khoảng thời gian
+                Paragraph dateRange = new Paragraph(
+                    $"Từ ngày: {dtp_TuNgay.Value:dd/MM/yyyy} - Đến ngày: {dtp_DenNgay.Value:dd/MM/yyyy}", 
+                    normalFont);
+                dateRange.Alignment = Element.ALIGN_CENTER;
+                dateRange.SpacingAfter = 10;
+                document.Add(dateRange);
+
+                // Tạo bảng
+                PdfPTable table = new PdfPTable(4);
+                table.WidthPercentage = 100;
+                table.SetWidths(new float[] { 10, 40, 20, 30 });
+
+                // Header
+                string[] headers = { "STT", "Ngày thanh toán", "Số lượng", "Tổng tiền" };
+                foreach (string header in headers)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
+                    cell.BackgroundColor = new BaseColor(211, 211, 211); // Light gray
+                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell.Padding = 5;
+                    table.AddCell(cell);
+                }
+
+                // Data
+                foreach (DataGridViewRow dgvRow in dgv_HoaDon.Rows)
+                {
+                    table.AddCell(new Phrase(dgvRow.Cells["STT"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["NgayThanhToan"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["SoLuong"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["TongTien"].Value?.ToString() ?? "", normalFont));
+                }
+
+                document.Add(table);
+
+                // Tổng cộng
+                Paragraph summary = new Paragraph(
+                    $"\nTổng doanh thu: {lb_TongTien.Text}\nSố hóa đơn: {dgv_HoaDon.Rows.Count}", 
+                    headerFont);
+                summary.SpacingBefore = 10;
+                document.Add(summary);
+            }
+            finally
+            {
+                document.Close();
+            }
         }
     }
 }

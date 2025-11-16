@@ -35,7 +35,6 @@
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             btnThoat = new Button();
-            btnXuatExcel = new Button();
             btnLamMoi = new Button();
             btnXoa = new Button();
             btnSua = new Button();
@@ -106,7 +105,7 @@
             btnThoat.BackColor = Color.DeepSkyBlue;
             btnThoat.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
             btnThoat.ForeColor = SystemColors.ButtonFace;
-            btnThoat.Location = new Point(22, 347);
+            btnThoat.Location = new Point(22, 282);
             btnThoat.Margin = new Padding(3, 4, 3, 4);
             btnThoat.Name = "btnThoat";
             btnThoat.Size = new Size(97, 49);
@@ -114,19 +113,6 @@
             btnThoat.Text = "Thoát";
             btnThoat.UseVisualStyleBackColor = false;
             btnThoat.Click += button1_Click;
-            // 
-            // btnXuatExcel
-            // 
-            btnXuatExcel.BackColor = Color.DeepSkyBlue;
-            btnXuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            btnXuatExcel.ForeColor = SystemColors.ButtonFace;
-            btnXuatExcel.Location = new Point(22, 282);
-            btnXuatExcel.Margin = new Padding(3, 4, 3, 4);
-            btnXuatExcel.Name = "btnXuatExcel";
-            btnXuatExcel.Size = new Size(97, 49);
-            btnXuatExcel.TabIndex = 2;
-            btnXuatExcel.Text = "Xuất Excel";
-            btnXuatExcel.UseVisualStyleBackColor = false;
             // 
             // btnLamMoi
             // 
@@ -187,7 +173,6 @@
             BackColor = Color.Wheat;
             ClientSize = new Size(947, 542);
             Controls.Add(btnThoat);
-            Controls.Add(btnXuatExcel);
             Controls.Add(btnLamMoi);
             Controls.Add(btnXoa);
             Controls.Add(btnSua);
@@ -213,7 +198,6 @@
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private Button btnThoat;
-        private Button btnXuatExcel;
         private Button btnLamMoi;
         private Button btnXoa;
         private Button btnSua;

@@ -44,9 +44,7 @@
             TenNV = new DataGridViewTextBoxColumn();
             SoLuong = new DataGridViewTextBoxColumn();
             ThanhTien = new DataGridViewTextBoxColumn();
-            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lb_TongTien
@@ -205,22 +203,12 @@
             ThanhTien.Name = "ThanhTien";
             ThanhTien.Width = 125;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(1000, 500);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(10, 10);
-            pictureBox1.TabIndex = 37;
-            pictureBox1.TabStop = false;
-            pictureBox1.Visible = false;
-            // 
             // RevenueEmployee
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
             ClientSize = new Size(1083, 730);
-            Controls.Add(pictureBox1);
             Controls.Add(dgv_HoaDon);
             Controls.Add(lb_TongTien);
             Controls.Add(lb_Tong);
@@ -236,7 +224,6 @@
             Name = "RevenueEmployee";
             Text = "Thống kê doanh thu theo nhân viên";
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -259,6 +246,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TenNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThanhTien;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

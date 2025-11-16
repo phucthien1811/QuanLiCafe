@@ -47,9 +47,7 @@
             btn_XuatExcel = new Button();
             lb_Tong = new Label();
             lb_TongTien = new Label();
-            pb_Avatar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).BeginInit();
             SuspendLayout();
             // 
             // lb_tieude
@@ -242,22 +240,12 @@
             lb_TongTien.TabIndex = 11;
             lb_TongTien.Text = "...";
             // 
-            // pb_Avatar
-            // 
-            pb_Avatar.Location = new Point(1000, 500);
-            pb_Avatar.Name = "pb_Avatar";
-            pb_Avatar.Size = new Size(10, 10);
-            pb_Avatar.TabIndex = 12;
-            pb_Avatar.TabStop = false;
-            pb_Avatar.Visible = false;
-            // 
             // ReportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
             ClientSize = new Size(1083, 730);
-            Controls.Add(pb_Avatar);
             Controls.Add(lb_TongTien);
             Controls.Add(lb_Tong);
             Controls.Add(btn_XuatExcel);
@@ -274,7 +262,6 @@
             Text = "Lịch sử hóa đơn bán hàng";
             Load += ReportForm_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -300,7 +287,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaDoUong;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenDoUong;
-        private System.Windows.Forms.PictureBox pb_Avatar;
     }
 }
 

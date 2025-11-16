@@ -29,32 +29,34 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
-            label2 = new Label();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            label3 = new Label();
-            label4 = new Label();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
-            button1 = new Button();
-            label5 = new Label();
-            textBox1 = new TextBox();
-            button2 = new Button();
-            label6 = new Label();
-            textBox2 = new TextBox();
-            label7 = new Label();
-            label8 = new Label();
             nmSoLuong = new NumericUpDown();
+            label7 = new Label();
+            textBox2 = new TextBox();
+            label6 = new Label();
+            textBox1 = new TextBox();
+            label5 = new Label();
+            button1 = new Button();
+            radioButton3 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            button2 = new Button();
+            label8 = new Label();
+            tbxToping = new TextBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nmSoLuong).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(tbxToping);
             panel1.Controls.Add(nmSoLuong);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(textBox2);
@@ -75,81 +77,70 @@
             panel1.Size = new Size(501, 580);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // nmSoLuong
             // 
-            pictureBox1.Location = new Point(35, 16);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(157, 158);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            nmSoLuong.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nmSoLuong.Location = new Point(323, 75);
+            nmSoLuong.Margin = new Padding(4, 5, 4, 5);
+            nmSoLuong.Name = "nmSoLuong";
+            nmSoLuong.Size = new Size(81, 27);
+            nmSoLuong.TabIndex = 590;
+            nmSoLuong.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // label1
+            // label7
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label1.Location = new Point(232, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(43, 20);
-            label1.TabIndex = 1;
-            label1.Text = "Tên:";
+            label7.AutoSize = true;
+            label7.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label7.Location = new Point(31, 367);
+            label7.Name = "label7";
+            label7.Size = new Size(55, 20);
+            label7.TabIndex = 13;
+            label7.Text = "Mô tả";
             // 
-            // sqlCommand1
+            // textBox2
             // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
+            textBox2.Location = new Point(31, 401);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(433, 66);
+            textBox2.TabIndex = 12;
             // 
-            // label2
+            // label6
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label2.Location = new Point(232, 75);
-            label2.Name = "label2";
-            label2.Size = new Size(79, 20);
-            label2.TabIndex = 2;
-            label2.Text = "Số lượng";
+            label6.AutoSize = true;
+            label6.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label6.Location = new Point(31, 297);
+            label6.Name = "label6";
+            label6.Size = new Size(62, 20);
+            label6.TabIndex = 11;
+            label6.Text = "Toping";
             // 
-            // label3
+            // textBox1
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label3.Location = new Point(232, 132);
-            label3.Name = "label3";
-            label3.Size = new Size(42, 20);
-            label3.TabIndex = 3;
-            label3.Text = "Giá:";
+            textBox1.Location = new Point(31, 503);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(433, 56);
+            textBox1.TabIndex = 10;
             // 
-            // label4
+            // label5
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(31, 218);
-            label4.Name = "label4";
-            label4.Size = new Size(93, 20);
-            label4.TabIndex = 4;
-            label4.Text = "Chọn Size:";
-            label4.Click += label4_Click;
+            label5.AutoSize = true;
+            label5.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label5.Location = new Point(31, 480);
+            label5.Name = "label5";
+            label5.Size = new Size(76, 20);
+            label5.TabIndex = 9;
+            label5.Text = "Ghi chú:";
             // 
-            // radioButton1
+            // button1
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(39, 251);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(58, 24);
-            radioButton1.TabIndex = 5;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Nhỏ";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(202, 251);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(56, 24);
-            radioButton2.TabIndex = 6;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Vừa";
-            radioButton2.UseVisualStyleBackColor = true;
+            button1.Location = new Point(95, 293);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 8;
+            button1.Text = "Chọn";
+            button1.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
@@ -162,32 +153,81 @@
             radioButton3.Text = "Lớn";
             radioButton3.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // radioButton2
             // 
-            button1.Location = new Point(95, 293);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 8;
-            button1.Text = "Chọn";
-            button1.UseVisualStyleBackColor = true;
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(202, 251);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(56, 24);
+            radioButton2.TabIndex = 6;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Vừa";
+            radioButton2.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // radioButton1
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label5.Location = new Point(31, 480);
-            label5.Name = "label5";
-            label5.Size = new Size(76, 20);
-            label5.TabIndex = 9;
-            label5.Text = "Ghi chú:";
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(39, 251);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(58, 24);
+            radioButton1.TabIndex = 5;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Nhỏ";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // label4
             // 
-            textBox1.Location = new Point(31, 503);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(433, 56);
-            textBox1.TabIndex = 10;
+            label4.AutoSize = true;
+            label4.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(31, 218);
+            label4.Name = "label4";
+            label4.Size = new Size(93, 20);
+            label4.TabIndex = 4;
+            label4.Text = "Chọn Size:";
+            label4.Click += label4_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label3.Location = new Point(232, 132);
+            label3.Name = "label3";
+            label3.Size = new Size(42, 20);
+            label3.TabIndex = 3;
+            label3.Text = "Giá:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label2.Location = new Point(232, 75);
+            label2.Name = "label2";
+            label2.Size = new Size(79, 20);
+            label2.TabIndex = 2;
+            label2.Text = "Số lượng";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
+            label1.Location = new Point(232, 20);
+            label1.Name = "label1";
+            label1.Size = new Size(43, 20);
+            label1.TabIndex = 1;
+            label1.Text = "Tên:";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(35, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(157, 158);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
             // 
             // button2
             // 
@@ -199,34 +239,6 @@
             button2.Text = "Thêm";
             button2.UseVisualStyleBackColor = true;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label6.Location = new Point(31, 297);
-            label6.Name = "label6";
-            label6.Size = new Size(62, 20);
-            label6.TabIndex = 11;
-            label6.Text = "Toping";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(31, 387);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(433, 80);
-            textBox2.TabIndex = 12;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            label7.Location = new Point(31, 344);
-            label7.Name = "label7";
-            label7.Size = new Size(55, 20);
-            label7.TabIndex = 13;
-            label7.Text = "Mô tả";
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -237,15 +249,12 @@
             label8.TabIndex = 2;
             label8.Text = "Tổng: ";
             // 
-            // nmSoLuong
+            // tbxToping
             // 
-            nmSoLuong.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nmSoLuong.Location = new Point(323, 75);
-            nmSoLuong.Margin = new Padding(4, 5, 4, 5);
-            nmSoLuong.Name = "nmSoLuong";
-            nmSoLuong.Size = new Size(81, 27);
-            nmSoLuong.TabIndex = 590;
-            nmSoLuong.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            tbxToping.Location = new Point(35, 327);
+            tbxToping.Name = "tbxToping";
+            tbxToping.Size = new Size(429, 27);
+            tbxToping.TabIndex = 591;
             // 
             // Details
             // 
@@ -262,8 +271,8 @@
             Text = "Chi tiết sản phẩm";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)nmSoLuong).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -290,5 +299,6 @@
         private Label label7;
         private Label label8;
         private NumericUpDown nmSoLuong;
+        private TextBox tbxToping;
     }
 }

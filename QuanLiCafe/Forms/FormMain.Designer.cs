@@ -76,6 +76,7 @@
             MaDoUong = new DataGridViewTextBoxColumn();
             HinhAnh = new DataGridViewImageColumn();
             dtgvDoUong = new DataGridView();
+            menuToping = new ToolStripMenuItem();
             imageList1 = new ImageList(components);
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmSoLuong).BeginInit();
@@ -102,10 +103,10 @@
             // 
             // btnDanhMuc
             // 
-            btnDanhMuc.DropDownItems.AddRange(new ToolStripItem[] { menuLDU, menuDoUong, menuBan, menuKho });
+            btnDanhMuc.DropDownItems.AddRange(new ToolStripItem[] { menuLDU, menuDoUong, menuBan, menuKho, menuToping });
             btnDanhMuc.Image = (Image)resources.GetObject("btnDanhMuc.Image");
             btnDanhMuc.Name = "btnDanhMuc";
-            btnDanhMuc.Size = new Size(123, 27);
+            btnDanhMuc.Size = new Size(152, 27);
             btnDanhMuc.Text = "Danh mục";
             // 
             // menuLDU
@@ -567,6 +568,12 @@
             dtgvDoUong.Size = new Size(705, 778);
             dtgvDoUong.TabIndex = 595;
             // 
+            // menuToping
+            // 
+            menuToping.Name = "menuToping";
+            menuToping.Size = new Size(224, 28);
+            menuToping.Text = "Toping";
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -658,5 +665,6 @@
         private DataGridViewTextBoxColumn MaDoUong;
         private DataGridViewImageColumn HinhAnh;
         private DataGridView dtgvDoUong;
+        private ToolStripMenuItem menuToping;
     }
 }

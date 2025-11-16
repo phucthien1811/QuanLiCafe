@@ -32,7 +32,6 @@
             btn_timKiem = new Button();
             txb_timKiem = new TextBox();
             btn_thoat = new Button();
-            btn_xuatExcel = new Button();
             btn_lamMoi = new Button();
             btn_xoa = new Button();
             btn_sua = new Button();
@@ -81,26 +80,13 @@
             btn_thoat.BackColor = Color.DeepSkyBlue;
             btn_thoat.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
             btn_thoat.ForeColor = SystemColors.ButtonFace;
-            btn_thoat.Location = new Point(12, 296);
+            btn_thoat.Location = new Point(12, 241);
             btn_thoat.Margin = new Padding(3, 4, 3, 4);
             btn_thoat.Name = "btn_thoat";
             btn_thoat.Size = new Size(97, 49);
             btn_thoat.TabIndex = 20;
             btn_thoat.Text = "Thoát";
             btn_thoat.UseVisualStyleBackColor = false;
-            // 
-            // btn_xuatExcel
-            // 
-            btn_xuatExcel.BackColor = Color.DeepSkyBlue;
-            btn_xuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            btn_xuatExcel.ForeColor = SystemColors.ButtonFace;
-            btn_xuatExcel.Location = new Point(12, 240);
-            btn_xuatExcel.Margin = new Padding(3, 4, 3, 4);
-            btn_xuatExcel.Name = "btn_xuatExcel";
-            btn_xuatExcel.Size = new Size(97, 49);
-            btn_xuatExcel.TabIndex = 19;
-            btn_xuatExcel.Text = "Xuất Excel";
-            btn_xuatExcel.UseVisualStyleBackColor = false;
             // 
             // btn_lamMoi
             // 
@@ -209,7 +195,6 @@
             Controls.Add(btn_timKiem);
             Controls.Add(txb_timKiem);
             Controls.Add(btn_thoat);
-            Controls.Add(btn_xuatExcel);
             Controls.Add(btn_lamMoi);
             Controls.Add(btn_xoa);
             Controls.Add(btn_sua);
@@ -228,7 +213,6 @@
         private System.Windows.Forms.Button btn_timKiem;
         private System.Windows.Forms.TextBox txb_timKiem;
         private System.Windows.Forms.Button btn_thoat;
-        private System.Windows.Forms.Button btn_xuatExcel;
         private System.Windows.Forms.Button btn_lamMoi;
         private System.Windows.Forms.Button btn_xoa;
         private System.Windows.Forms.Button btn_sua;

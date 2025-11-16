@@ -41,7 +41,6 @@
             btnTimKiem = new Button();
             btnThem = new Button();
             btnThoat = new Button();
-            btnXuatExcel = new Button();
             btnLamMoi = new Button();
             btnXoa = new Button();
             btnSua = new Button();
@@ -170,26 +169,13 @@
             btnThoat.BackColor = Color.DeepSkyBlue;
             btnThoat.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
             btnThoat.ForeColor = SystemColors.ButtonFace;
-            btnThoat.Location = new Point(14, 314);
+            btnThoat.Location = new Point(14, 246);
             btnThoat.Margin = new Padding(3, 4, 3, 4);
             btnThoat.Name = "btnThoat";
             btnThoat.Size = new Size(97, 49);
             btnThoat.TabIndex = 6;
             btnThoat.Text = "Thoát";
             btnThoat.UseVisualStyleBackColor = false;
-            // 
-            // btnXuatExcel
-            // 
-            btnXuatExcel.BackColor = Color.DeepSkyBlue;
-            btnXuatExcel.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold);
-            btnXuatExcel.ForeColor = SystemColors.ButtonFace;
-            btnXuatExcel.Location = new Point(14, 250);
-            btnXuatExcel.Margin = new Padding(3, 4, 3, 4);
-            btnXuatExcel.Name = "btnXuatExcel";
-            btnXuatExcel.Size = new Size(97, 49);
-            btnXuatExcel.TabIndex = 7;
-            btnXuatExcel.Text = "Xuất Excel";
-            btnXuatExcel.UseVisualStyleBackColor = false;
             // 
             // btnLamMoi
             // 
@@ -238,7 +224,6 @@
             ClientSize = new Size(962, 569);
             Controls.Add(btnThem);
             Controls.Add(btnThoat);
-            Controls.Add(btnXuatExcel);
             Controls.Add(btnLamMoi);
             Controls.Add(btnXoa);
             Controls.Add(btnSua);
@@ -271,7 +256,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenDanhMuc;
         private Button btnThem;
         private Button btnThoat;
-        private Button btnXuatExcel;
         private Button btnLamMoi;
         private Button btnXoa;
         private Button btnSua;

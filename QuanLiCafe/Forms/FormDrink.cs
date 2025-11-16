@@ -29,7 +29,6 @@ namespace DrinkForm
             btnXoa.Click += BtnXoa_Click;
             btnLamMoi.Click += BtnLamMoi_Click;
             btnTimKiem.Click += BtnTimKiem_Click;
-            btnXuatExcel.Click += BtnXuatExcel_Click;
             btnThoat.Click += BtnThoat_Click;
         }
 
@@ -212,13 +211,6 @@ namespace DrinkForm
         private void BtnTimKiem_Click(object sender, EventArgs e)
         {
             LoadProducts(txtTimKiem.Text);
-        }
-
-        // Nút Xuất Excel
-        private void BtnXuatExcel_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Chức năng xuất Excel đang phát triển!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Nút Thoát

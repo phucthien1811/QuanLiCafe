@@ -28,7 +28,6 @@ namespace TableForm
             btn_sua.Click += Btn_sua_Click;
             btn_lamMoi.Click += Btn_lamMoi_Click;
             btn_timKiem.Click += Btn_timKiem_Click;
-            btn_xuatExcel.Click += Btn_xuatExcel_Click;
             btn_thoat.Click += Btn_thoat_Click;
             dgv_table.SelectionChanged += Dgv_table_SelectionChanged;
         }
@@ -164,13 +163,6 @@ namespace TableForm
         private void Btn_timKiem_Click(object sender, EventArgs e)
         {
             LoadTables(txb_timKiem.Text);
-        }
-
-        // Nút Xuất Excel
-        private void Btn_xuatExcel_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Chức năng xuất Excel đang phát triển!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Nút Thoát

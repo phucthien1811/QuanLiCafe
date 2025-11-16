@@ -43,9 +43,7 @@
             NgayThanhToan = new DataGridViewTextBoxColumn();
             STT = new DataGridViewTextBoxColumn();
             dgv_HoaDon = new DataGridView();
-            pb_Avatar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).BeginInit();
             SuspendLayout();
             // 
             // lb_TongTien
@@ -197,22 +195,12 @@
             dgv_HoaDon.Size = new Size(1059, 396);
             dgv_HoaDon.TabIndex = 24;
             // 
-            // pb_Avatar
-            // 
-            pb_Avatar.Location = new Point(1000, 500);
-            pb_Avatar.Name = "pb_Avatar";
-            pb_Avatar.Size = new Size(10, 10);
-            pb_Avatar.TabIndex = 25;
-            pb_Avatar.TabStop = false;
-            pb_Avatar.Visible = false;
-            // 
             // RevenueEDay
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Wheat;
             ClientSize = new Size(1083, 730);
-            Controls.Add(pb_Avatar);
             Controls.Add(dgv_HoaDon);
             Controls.Add(lb_TongTien);
             Controls.Add(lb_Tong);
@@ -229,7 +217,6 @@
             Name = "RevenueEDay";
             Text = "Thống kê doanh thu theo ngày";
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pb_Avatar).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -252,6 +239,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayThanhToan;
         private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridView dgv_HoaDon;
-        private System.Windows.Forms.PictureBox pb_Avatar;
     }
 }

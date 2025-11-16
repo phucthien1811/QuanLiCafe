@@ -16,7 +16,8 @@ namespace QuanLiCafe.Data
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ImportHistory> ImportHistories { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<EmployeeInformation> EmployeeInformations { get; set; } // ✅ THÊM MỚI
+        public DbSet<EmployeeInformation> EmployeeInformations { get; set; }
+        public DbSet<Topping> Toppings { get; set; } // ✅ THÊM MỚI
 
         public CafeContext(DbContextOptions<CafeContext> options) : base(options) { }
 
@@ -73,6 +74,14 @@ namespace QuanLiCafe.Data
             {
                 entity.ToTable("Categories");
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            });
+
+            // ✅ Topping Configuration
+            modelBuilder.Entity<Topping>(entity =>
+            {
+                entity.ToTable("Toppings");
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Price).IsRequired().HasColumnType("decimal(18,2)");
             });
 
             // Product Configuration
@@ -196,6 +205,16 @@ namespace QuanLiCafe.Data
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Cà phê" },
                 new Category { Id = 2, Name = "Trà sữa" }
+            );
+
+            // ✅ Seed Toppings
+            modelBuilder.Entity<Topping>().HasData(
+                new Topping { Id = 1, Name = "Trân châu đen", Price = 5000 },
+                new Topping { Id = 2, Name = "Thạch rau câu", Price = 5000 },
+                new Topping { Id = 3, Name = "Pudding", Price = 5000 },
+                new Topping { Id = 4, Name = "Thạch dừa", Price = 5000 },
+                new Topping { Id = 5, Name = "Kem phô mai", Price = 5000 },
+                new Topping { Id = 6, Name = "Trứng cút", Price = 5000 }
             );
 
             // Seed Products

@@ -425,6 +425,65 @@ namespace QuanLiCafe.Migrations
                         });
                 });
 
+            modelBuilder.Entity("QuanLiCafe.Models.Topping", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Toppings", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Trân châu đen",
+                            Price = 5000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Thạch rau câu",
+                            Price = 5000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Pudding",
+                            Price = 5000m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Thạch dừa",
+                            Price = 5000m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Kem phô mai",
+                            Price = 5000m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Trứng cút",
+                            Price = 5000m
+                        });
+                });
+
             modelBuilder.Entity("QuanLiCafe.Models.User", b =>
                 {
                     b.Property<int>("Id")
