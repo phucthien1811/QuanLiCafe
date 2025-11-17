@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            lblloai = new Label();
+            tbxToping = new TextBox();
             nmSoLuong = new NumericUpDown();
             label7 = new Label();
             textBox2 = new TextBox();
@@ -48,7 +50,6 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             button2 = new Button();
             label8 = new Label();
-            tbxToping = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmSoLuong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(lblloai);
             panel1.Controls.Add(tbxToping);
             panel1.Controls.Add(nmSoLuong);
             panel1.Controls.Add(label7);
@@ -76,6 +78,23 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(501, 580);
             panel1.TabIndex = 0;
+            // 
+            // lblloai
+            // 
+            lblloai.AutoSize = true;
+            lblloai.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblloai.Location = new Point(232, 297);
+            lblloai.Name = "lblloai";
+            lblloai.Size = new Size(34, 20);
+            lblloai.TabIndex = 592;
+            lblloai.Text = "loại";
+            // 
+            // tbxToping
+            // 
+            tbxToping.Location = new Point(35, 327);
+            tbxToping.Name = "tbxToping";
+            tbxToping.Size = new Size(429, 27);
+            tbxToping.TabIndex = 591;
             // 
             // nmSoLuong
             // 
@@ -249,13 +268,6 @@
             label8.TabIndex = 2;
             label8.Text = "Tổng: ";
             // 
-            // tbxToping
-            // 
-            tbxToping.Location = new Point(35, 327);
-            tbxToping.Name = "tbxToping";
-            tbxToping.Size = new Size(429, 27);
-            tbxToping.TabIndex = 591;
-            // 
             // Details
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -300,5 +312,7 @@
         private Label label8;
         private NumericUpDown nmSoLuong;
         private TextBox tbxToping;
+        private Label label9;
+        private Label lblloai;
     }
 }

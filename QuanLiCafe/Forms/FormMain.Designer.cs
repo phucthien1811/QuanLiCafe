@@ -37,6 +37,7 @@
             menuDoUong = new ToolStripMenuItem();
             menuBan = new ToolStripMenuItem();
             menuKho = new ToolStripMenuItem();
+            menuToping = new ToolStripMenuItem();
             groupBox1 = new GroupBox();
             dtNgayOrder = new DateTimePicker();
             label7 = new Label();
@@ -51,6 +52,7 @@
             menuDoanhThuNgay = new ToolStripMenuItem();
             menuThongKeDoanhThuNV = new ToolStripMenuItem();
             menuLichSuHoaDon = new ToolStripMenuItem();
+            menuTKSP = new ToolStripMenuItem();
             btnTim = new Button();
             txtTenDoUong = new TextBox();
             lbTimdouong = new Label();
@@ -76,7 +78,6 @@
             MaDoUong = new DataGridViewTextBoxColumn();
             HinhAnh = new DataGridViewImageColumn();
             dtgvDoUong = new DataGridView();
-            menuToping = new ToolStripMenuItem();
             imageList1 = new ImageList(components);
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmSoLuong).BeginInit();
@@ -106,36 +107,43 @@
             btnDanhMuc.DropDownItems.AddRange(new ToolStripItem[] { menuLDU, menuDoUong, menuBan, menuKho, menuToping });
             btnDanhMuc.Image = (Image)resources.GetObject("btnDanhMuc.Image");
             btnDanhMuc.Name = "btnDanhMuc";
-            btnDanhMuc.Size = new Size(152, 27);
+            btnDanhMuc.Size = new Size(123, 27);
             btnDanhMuc.Text = "Danh mục";
             // 
             // menuLDU
             // 
             menuLDU.Name = "menuLDU";
-            menuLDU.Size = new Size(224, 28);
+            menuLDU.Size = new Size(195, 28);
             menuLDU.Text = "Loại đồ uống";
             menuLDU.Click += menuLDU_Click;
             // 
             // menuDoUong
             // 
             menuDoUong.Name = "menuDoUong";
-            menuDoUong.Size = new Size(224, 28);
+            menuDoUong.Size = new Size(195, 28);
             menuDoUong.Text = "Đồ uống";
             menuDoUong.Click += menuDoUong_Click;
             // 
             // menuBan
             // 
             menuBan.Name = "menuBan";
-            menuBan.Size = new Size(224, 28);
+            menuBan.Size = new Size(195, 28);
             menuBan.Text = "Bàn";
             menuBan.Click += menuBan_Click;
             // 
             // menuKho
             // 
             menuKho.Name = "menuKho";
-            menuKho.Size = new Size(224, 28);
+            menuKho.Size = new Size(195, 28);
             menuKho.Text = "Quản lý kho";
             menuKho.Click += menuKho_Click;
+            // 
+            // menuToping
+            // 
+            menuToping.Name = "menuToping";
+            menuToping.Size = new Size(195, 28);
+            menuToping.Text = "Toping";
+            menuToping.Click += menuToping_Click;
             // 
             // groupBox1
             // 
@@ -258,7 +266,7 @@
             // 
             // thốngKêToolStripMenuItem
             // 
-            thốngKêToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuDoanhThuNgay, menuThongKeDoanhThuNV, menuLichSuHoaDon });
+            thốngKêToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuDoanhThuNgay, menuThongKeDoanhThuNV, menuLichSuHoaDon, menuTKSP });
             thốngKêToolStripMenuItem.Image = (Image)resources.GetObject("thốngKêToolStripMenuItem.Image");
             thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
             thốngKêToolStripMenuItem.Size = new Size(115, 27);
@@ -267,23 +275,30 @@
             // menuDoanhThuNgay
             // 
             menuDoanhThuNgay.Name = "menuDoanhThuNgay";
-            menuDoanhThuNgay.Size = new Size(370, 28);
+            menuDoanhThuNgay.Size = new Size(379, 28);
             menuDoanhThuNgay.Text = "Thống kê doanh thu theo ngày";
             menuDoanhThuNgay.Click += menuDoanhThuNgay_Click;
             // 
             // menuThongKeDoanhThuNV
             // 
             menuThongKeDoanhThuNV.Name = "menuThongKeDoanhThuNV";
-            menuThongKeDoanhThuNV.Size = new Size(370, 28);
+            menuThongKeDoanhThuNV.Size = new Size(379, 28);
             menuThongKeDoanhThuNV.Text = "Thống kê doanh thu theo nhân viên";
             menuThongKeDoanhThuNV.Click += menuThongKeDoanhThuNV_Click;
             // 
             // menuLichSuHoaDon
             // 
             menuLichSuHoaDon.Name = "menuLichSuHoaDon";
-            menuLichSuHoaDon.Size = new Size(370, 28);
+            menuLichSuHoaDon.Size = new Size(379, 28);
             menuLichSuHoaDon.Text = "Xem lịch sử hóa đơn";
             menuLichSuHoaDon.Click += menuLichSuHoaDon_Click;
+            // 
+            // menuTKSP
+            // 
+            menuTKSP.Name = "menuTKSP";
+            menuTKSP.Size = new Size(379, 28);
+            menuTKSP.Text = "Biểu đồ thống kê sản phẩm bán chạy";
+            menuTKSP.Click += menuTKSP_Click;
             // 
             // btnTim
             // 
@@ -568,13 +583,6 @@
             dtgvDoUong.Size = new Size(705, 778);
             dtgvDoUong.TabIndex = 595;
             // 
-            // menuToping
-            // 
-            menuToping.Name = "menuToping";
-            menuToping.Size = new Size(224, 28);
-            menuToping.Text = "Toping";
-            menuToping.Click += menuToping_Click;
-            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -667,5 +675,6 @@
         private DataGridViewImageColumn HinhAnh;
         private DataGridView dtgvDoUong;
         private ToolStripMenuItem menuToping;
+        private ToolStripMenuItem menuTKSP;
     }
 }

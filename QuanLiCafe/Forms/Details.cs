@@ -16,6 +16,8 @@ namespace QuanLiCafe.Forms
         private Product _product;
         private string _selectedSize = "Vừa"; // Default
         private List<string> _selectedToppings = new List<string>();
+        private Dictionary<string, decimal> _selectedToppingPrices = new Dictionary<string, decimal>();
+        private Dictionary<string, int> _selectedToppingQuantities = new Dictionary<string, int>();
         private decimal _sizePrice = 0; // Giá cộng thêm theo size
         
         public int Quantity { get; private set; }
@@ -69,6 +71,15 @@ namespace QuanLiCafe.Forms
                            $"Giá gốc: {_product.Price.ToString("N0")} ₫";
             textBox2.ReadOnly = true;
             
+            // Cấu hình textbox topping
+            tbxToping.ReadOnly = true;
+            tbxToping.Text = "";
+            tbxToping.ForeColor = Color.Black;
+            
+            // Cấu hình label loại
+            lblloai.Text = "";
+            lblloai.ForeColor = Color.Black;
+            
             // Hiển thị giá
             UpdatePrice();
         }
@@ -99,22 +110,43 @@ namespace QuanLiCafe.Forms
 
         private void BtnChonTopping_Click(object sender, EventArgs e)
         {
-            // Mở form chọn topping
-            var toppingForm = new Toping();
+            // Mở form chọn topping và truyền danh sách đã chọn trước đó
+            var toppingForm = new Toping(_selectedToppings, _selectedToppingPrices, _selectedToppingQuantities);
+            
             if (toppingForm.ShowDialog() == DialogResult.OK)
             {
                 _selectedToppings = toppingForm.SelectedToppings;
+                _selectedToppingPrices = toppingForm.SelectedToppingPrices;
+                _selectedToppingQuantities = toppingForm.SelectedToppingQuantities;
                 
-                // Hiển thị topping đã chọn trong label6
+                // Hiển thị topping đã chọn trong textbox
                 if (_selectedToppings.Any())
                 {
-                    label6.Text = $"Topping: {string.Join(", ", _selectedToppings)}";
-                    label6.ForeColor = Color.Green;
+                    // Tạo danh sách topping kèm giá và số lượng
+                    var toppingWithDetails = _selectedToppings.Select(t =>
+                    {
+                        int qty = _selectedToppingQuantities[t];
+                        decimal price = _selectedToppingPrices[t];
+                        decimal total = price * qty;
+                        return qty > 1 
+                            ? $"{t} x{qty} ({total.ToString("N0")} ₫)"
+                            : $"{t} ({price.ToString("N0")} ₫)";
+                    });
+                    
+                    tbxToping.Text = string.Join(", ", toppingWithDetails);
+                    tbxToping.ForeColor = Color.Black;
+                    
+                    // Hiển thị số loại trong lblloai
+                    lblloai.Text = $"({_selectedToppings.Count} loại)";
+                    lblloai.ForeColor = Color.Black;
                 }
                 else
                 {
-                    label6.Text = "Topping: Chưa chọn";
-                    label6.ForeColor = Color.Black;
+                    tbxToping.Text = "";
+                    tbxToping.ForeColor = Color.Black;
+                    
+                    lblloai.Text = "";
+                    lblloai.ForeColor = Color.Black;
                 }
                 
                 UpdatePrice();
@@ -131,8 +163,14 @@ namespace QuanLiCafe.Forms
             // Tính giá: Giá gốc + Size + Topping
             decimal basePrice = _product.Price + _sizePrice;
             
-            // Giá topping (5k/topping)
-            decimal toppingPrice = _selectedToppings.Count * 5000;
+            // Giá topping (tính theo giá thực tế và số lượng từ database)
+            decimal toppingPrice = 0;
+            foreach (var topping in _selectedToppings)
+            {
+                decimal price = _selectedToppingPrices[topping];
+                int qty = _selectedToppingQuantities[topping];
+                toppingPrice += price * qty;
+            }
             
             decimal pricePerItem = basePrice + toppingPrice;
             int quantity = (int)nmSoLuong.Value;
@@ -156,7 +194,16 @@ namespace QuanLiCafe.Forms
             
             if (_selectedToppings.Any())
             {
-                noteDetails.Add($"Topping: {string.Join(", ", _selectedToppings)}");
+                // Hiển thị topping kèm giá và số lượng
+                var toppingDetails = _selectedToppings.Select(t =>
+                {
+                    int qty = _selectedToppingQuantities[t];
+                    decimal price = _selectedToppingPrices[t];
+                    return qty > 1
+                        ? $"{t} x{qty} ({(price * qty).ToString("N0")}₫)"
+                        : $"{t} ({price.ToString("N0")}₫)";
+                });
+                noteDetails.Add($"Topping: {string.Join(", ", toppingDetails)}");
             }
             
             if (!string.IsNullOrWhiteSpace(Note))

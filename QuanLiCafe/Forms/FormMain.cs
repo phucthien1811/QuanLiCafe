@@ -25,7 +25,7 @@ namespace QuanLiCafe.Forms
             _authService = new AuthService(_context);
 
             InitializeComponent();
-            
+
             // Đăng ký sự kiện FormClosing để kiểm tra trước khi đóng
             this.FormClosing += FormMain_FormClosing;
         }
@@ -34,7 +34,7 @@ namespace QuanLiCafe.Forms
         {
             // ===== XÓA TẤT CẢ BÀN ĐANG PHỤC VỤ KHI MỞ APP =====
             ResetAllServingTables();
-            
+
             // Load dữ liệu ban đầu
             LoadTables();
             LoadProducts();
@@ -506,10 +506,10 @@ namespace QuanLiCafe.Forms
             }
 
             _context.SaveChanges();
-            
+
             // Reload order từ database để đảm bảo dữ liệu đồng bộ
             LoadOrderForTable(_selectedTableId);
-            
+
             nmSoLuong.Value = 1;
         }
 
@@ -894,6 +894,20 @@ namespace QuanLiCafe.Forms
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi in hóa đơn:\n{ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void menuTKSP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var chartProductForm = new FormChartProduct();
+                chartProductForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở biểu đồ thống kê sản phẩm:\n{ex.Message}",
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
