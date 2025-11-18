@@ -395,8 +395,8 @@ secrets.json
 # ===================================
 
 # Ignore Data folder containing sensitive DB context files
-**/Data/CafeContext.cs
-**/Data/CafeContextFactory.cs
+# **/Data/CafeContext.cs
+# **/Data/CafeContextFactory.cs
 
 # Or ignore entire Data folder (uncomment if you want to ignore everything)
 # **/Data/

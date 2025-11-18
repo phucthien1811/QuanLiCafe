@@ -80,16 +80,18 @@ namespace ReportForm
                     .Include(o => o.Staff)
                     .Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate 
                                 && o.TotalAmount > 0
-                                && o.OrderDetails.Any())
+                                && o.OrderDetails.Any()
+                                && o.StaffId != null) // ✅ LỌC BỎ ORDER KHÔNG CÓ STAFF
                     .ToList(); // Execute query và load vào memory
                 
                 // Bước 2: Group và aggregate trong memory (LINQ to Objects)
                 var staffRevenue = orders
-                    .GroupBy(o => new { o.StaffId, o.Staff.Username })
+                    .Where(o => o.Staff != null) // ✅ THÊM FILTER NULL SAFETY
+                    .GroupBy(o => new { o.StaffId, StaffName = o.Staff!.Username }) // ✅ Dùng null-forgiving operator
                     .Select(g => new
                     {
                         StaffId = g.Key.StaffId,
-                        StaffName = g.Key.Username,
+                        StaffName = g.Key.StaffName,
                         TotalOrders = g.Count(),
                         TotalQuantity = g.Sum(o => o.OrderDetails.Sum(od => od.Quantity)),
                         TotalRevenue = g.Sum(o => o.TotalAmount)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLiCafe.Models;
+using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -21,12 +22,16 @@ namespace QuanLiCafe.Data
 
         public CafeContext(DbContextOptions<CafeContext> options) : base(options) { }
 
-        // ✅ Cấu hình kết nối SQL Server Express
+        // ✅ Cấu hình kết nối SQL Server Express từ App.config
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=CafeDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
+                string? connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString;
+                if (!string.IsNullOrEmpty(connectionString))
+                {
+                    optionsBuilder.UseSqlServer(connectionString);
+                }
             }
         }
 
@@ -105,6 +110,11 @@ namespace QuanLiCafe.Data
                 entity.Property(e => e.CreatedAt).IsRequired();
                 entity.Property(e => e.Discount).HasColumnType("decimal(5,2)").HasDefaultValue(0);
                 entity.Property(e => e.TotalAmount).HasColumnType("decimal(18,2)");
+                
+                // ✅ THÊM MỚI: Cấu hình các trường thanh toán
+                entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+                entity.Property(e => e.ReceivedAmount).HasColumnType("decimal(18,2)");
+                entity.Property(e => e.ChangeAmount).HasColumnType("decimal(18,2)");
 
                 entity.HasOne(e => e.Table)
                     .WithMany(t => t.Orders)
@@ -115,6 +125,13 @@ namespace QuanLiCafe.Data
                 entity.HasOne(e => e.Staff)
                     .WithMany(u => u.Orders)
                     .HasForeignKey(e => e.StaffId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .IsRequired(false); // Cho phép NULL
+                    
+                // ✅ THÊM MỚI: Quan hệ với Customer
+                entity.HasOne(e => e.Customer)
+                    .WithMany()
+                    .HasForeignKey(e => e.CustomerId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .IsRequired(false); // Cho phép NULL
             });

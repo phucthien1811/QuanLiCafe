@@ -97,7 +97,17 @@ namespace ReportForm
                     row.Cells["Ngay"].Value = detail.Order.CreatedAt.ToString("dd/MM/yyyy HH:mm");
                     row.Cells["MaPhieu"].Value = detail.Order.Id;
                     row.Cells["MaPhieuChiTiet"].Value = detail.Id;
-                    row.Cells["MaNV"].Value = detail.Order.StaffId + " - " + detail.Order.Staff.Username;
+                    
+                    // ✅ FIX: Kiểm tra null trước khi truy cập Staff
+                    if (detail.Order.Staff != null)
+                    {
+                        row.Cells["MaNV"].Value = detail.Order.StaffId + " - " + detail.Order.Staff.Username;
+                    }
+                    else
+                    {
+                        row.Cells["MaNV"].Value = detail.Order.StaffId?.ToString() ?? "N/A" + " - Nhân viên đã xóa";
+                    }
+                    
                     row.Cells["MaKH"].Value = "N/A"; // Nếu có bảng Customer thì map vào
                     row.Cells["MaDoUong"].Value = detail.ProductId;
                     row.Cells["TenDoUong"].Value = detail.Product.Name;

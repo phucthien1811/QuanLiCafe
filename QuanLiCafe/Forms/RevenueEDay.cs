@@ -74,15 +74,16 @@ namespace ReportForm
                 DateTime startDate = fromDate.Date; // 00:00:00
                 DateTime endDate = toDate.Date.AddDays(1).AddSeconds(-1); // 23:59:59
                 
-                // Lấy các đơn hàng trong khoảng thời gian
-                // Giả định: Các đơn có CreatedAt trong khoảng thời gian và đã được thanh toán
-                // (có TotalAmount > 0 và có OrderDetails)
+                // Lấy các đơn hàng đã thanh toán trong khoảng thời gian
                 var orders = _context.Orders
                     .Include(o => o.OrderDetails)
+                        .ThenInclude(od => od.Product)
+                    .Include(o => o.Staff)
                     .Include(o => o.Table)
                     .Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate 
                                 && o.TotalAmount > 0
-                                && o.OrderDetails.Any())
+                                && o.OrderDetails.Any()
+                                && !string.IsNullOrEmpty(o.PaymentMethod)) // Chỉ lấy đơn đã thanh toán
                     .OrderByDescending(o => o.CreatedAt)
                     .ToList();
                 
@@ -97,9 +98,29 @@ namespace ReportForm
                     // Tính tổng số lượng món trong đơn
                     int soLuong = order.OrderDetails.Sum(od => od.Quantity);
                     
+                    // Lấy danh sách sản phẩm
+                    string sanPham = string.Join(", ", order.OrderDetails.Select(od => $"{od.Product.Name} x{od.Quantity}"));
+                    
+                    // Lấy tên nhân viên
+                    string nhanVien = order.Staff != null 
+                        ? $"{order.StaffId} - {order.Staff.Username}" 
+                        : "N/A";
+                    
+                    // Lấy phương thức thanh toán
+                    string phuongThuc = order.PaymentMethod ?? "N/A";
+                    
+                    // Lấy tiền thối
+                    string tienThoi = order.ChangeAmount.HasValue 
+                        ? order.ChangeAmount.Value.ToString("N0") + " ₫"
+                        : "0 ₫";
+                    
                     row.Cells["STT"].Value = stt++;
                     row.Cells["NgayThanhToan"].Value = order.CreatedAt.ToString("dd/MM/yyyy HH:mm");
+                    row.Cells["NhanVien"].Value = nhanVien;
                     row.Cells["SoLuong"].Value = soLuong;
+                    row.Cells["SanPham"].Value = sanPham;
+                    row.Cells["PhuongThuc"].Value = phuongThuc;
+                    row.Cells["TienThoi"].Value = tienThoi;
                     row.Cells["TongTien"].Value = order.TotalAmount.ToString("N0") + " ₫";
                     row.Tag = order; // Lưu object order
                     
@@ -251,7 +272,7 @@ namespace ReportForm
                 var worksheet = package.Workbook.Worksheets.Add("Doanh thu theo ngày");
 
                 // Tiêu đề
-                worksheet.Cells["A1:D1"].Merge = true;
+                worksheet.Cells["A1:H1"].Merge = true;
                 worksheet.Cells["A1"].Value = "BÁO CÁO DOANH THU THEO NGÀY";
                 worksheet.Cells["A1"].Style.Font.Size = 16;
                 worksheet.Cells["A1"].Style.Font.Bold = true;
@@ -265,11 +286,15 @@ namespace ReportForm
                 int headerRow = 4;
                 worksheet.Cells[headerRow, 1].Value = "STT";
                 worksheet.Cells[headerRow, 2].Value = "Ngày thanh toán";
-                worksheet.Cells[headerRow, 3].Value = "Số lượng";
-                worksheet.Cells[headerRow, 4].Value = "Tổng tiền";
+                worksheet.Cells[headerRow, 3].Value = "Nhân viên";
+                worksheet.Cells[headerRow, 4].Value = "Số lượng";
+                worksheet.Cells[headerRow, 5].Value = "Sản phẩm";
+                worksheet.Cells[headerRow, 6].Value = "Phương thức";
+                worksheet.Cells[headerRow, 7].Value = "Tiền thối";
+                worksheet.Cells[headerRow, 8].Value = "Tổng tiền";
 
                 // Format header
-                using (var range = worksheet.Cells[headerRow, 1, headerRow, 4])
+                using (var range = worksheet.Cells[headerRow, 1, headerRow, 8])
                 {
                     range.Style.Font.Bold = true;
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
@@ -283,20 +308,24 @@ namespace ReportForm
                 {
                     worksheet.Cells[row, 1].Value = dgvRow.Cells["STT"].Value;
                     worksheet.Cells[row, 2].Value = dgvRow.Cells["NgayThanhToan"].Value;
-                    worksheet.Cells[row, 3].Value = dgvRow.Cells["SoLuong"].Value;
-                    worksheet.Cells[row, 4].Value = dgvRow.Cells["TongTien"].Value;
+                    worksheet.Cells[row, 3].Value = dgvRow.Cells["NhanVien"].Value;
+                    worksheet.Cells[row, 4].Value = dgvRow.Cells["SoLuong"].Value;
+                    worksheet.Cells[row, 5].Value = dgvRow.Cells["SanPham"].Value;
+                    worksheet.Cells[row, 6].Value = dgvRow.Cells["PhuongThuc"].Value;
+                    worksheet.Cells[row, 7].Value = dgvRow.Cells["TienThoi"].Value;
+                    worksheet.Cells[row, 8].Value = dgvRow.Cells["TongTien"].Value;
                     row++;
                 }
 
                 // Tổng cộng
-                worksheet.Cells[row + 1, 3].Value = "Tổng doanh thu:";
-                worksheet.Cells[row + 1, 3].Style.Font.Bold = true;
-                worksheet.Cells[row + 1, 4].Value = lb_TongTien.Text;
-                worksheet.Cells[row + 1, 4].Style.Font.Bold = true;
+                worksheet.Cells[row + 1, 7].Value = "Tổng doanh thu:";
+                worksheet.Cells[row + 1, 7].Style.Font.Bold = true;
+                worksheet.Cells[row + 1, 8].Value = lb_TongTien.Text;
+                worksheet.Cells[row + 1, 8].Style.Font.Bold = true;
 
-                worksheet.Cells[row + 2, 3].Value = "Số hóa đơn:";
-                worksheet.Cells[row + 2, 3].Style.Font.Bold = true;
-                worksheet.Cells[row + 2, 4].Value = dgv_HoaDon.Rows.Count;
+                worksheet.Cells[row + 2, 7].Value = "Số hóa đơn:";
+                worksheet.Cells[row + 2, 7].Style.Font.Bold = true;
+                worksheet.Cells[row + 2, 8].Value = dgv_HoaDon.Rows.Count;
 
                 // Auto-fit columns
                 worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
@@ -310,7 +339,7 @@ namespace ReportForm
         // Xuất PDF để in báo cáo
         private void ExportToPDF(string filePath)
         {
-            Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+            Document document = new Document(PageSize.A4.Rotate(), 25, 25, 30, 30); // Landscape cho nhiều cột
             
             try
             {
@@ -321,8 +350,8 @@ namespace ReportForm
                 string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
                 BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
                 iTextSharp.text.Font titleFont = new iTextSharp.text.Font(bf, 16, iTextSharp.text.Font.BOLD);
-                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(bf, 11, iTextSharp.text.Font.BOLD);
-                iTextSharp.text.Font normalFont = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.NORMAL);
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(bf, 9, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font normalFont = new iTextSharp.text.Font(bf, 8, iTextSharp.text.Font.NORMAL);
 
                 // Tiêu đề
                 Paragraph title = new Paragraph("BÁO CÁO DOANH THU THEO NGÀY", titleFont);
@@ -337,13 +366,13 @@ namespace ReportForm
                 dateRange.SpacingAfter = 10;
                 document.Add(dateRange);
 
-                // Tạo bảng
-                PdfPTable table = new PdfPTable(4);
+                // Tạo bảng với 8 cột
+                PdfPTable table = new PdfPTable(8);
                 table.WidthPercentage = 100;
-                table.SetWidths(new float[] { 10, 40, 20, 30 });
+                table.SetWidths(new float[] { 5, 12, 12, 8, 20, 12, 10, 12 });
 
                 // Header
-                string[] headers = { "STT", "Ngày thanh toán", "Số lượng", "Tổng tiền" };
+                string[] headers = { "STT", "Ngày thanh toán", "Nhân viên", "SL", "Sản phẩm", "Phương thức", "Tiền thối", "Tổng tiền" };
                 foreach (string header in headers)
                 {
                     PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
@@ -358,7 +387,11 @@ namespace ReportForm
                 {
                     table.AddCell(new Phrase(dgvRow.Cells["STT"].Value?.ToString() ?? "", normalFont));
                     table.AddCell(new Phrase(dgvRow.Cells["NgayThanhToan"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["NhanVien"].Value?.ToString() ?? "", normalFont));
                     table.AddCell(new Phrase(dgvRow.Cells["SoLuong"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["SanPham"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["PhuongThuc"].Value?.ToString() ?? "", normalFont));
+                    table.AddCell(new Phrase(dgvRow.Cells["TienThoi"].Value?.ToString() ?? "", normalFont));
                     table.AddCell(new Phrase(dgvRow.Cells["TongTien"].Value?.ToString() ?? "", normalFont));
                 }
 

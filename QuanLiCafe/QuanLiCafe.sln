@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLiCafe", "QuanLiCafe.csproj", "{9506B04C-9A67-F709-F5CF-922D35D5DAD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableForm", "Forms\TableForm.csproj", "{496E2FE4-A97D-122C-E9F7-D811DAEA30DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9506B04C-9A67-F709-F5CF-922D35D5DAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9506B04C-9A67-F709-F5CF-922D35D5DAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9506B04C-9A67-F709-F5CF-922D35D5DAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9506B04C-9A67-F709-F5CF-922D35D5DAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496E2FE4-A97D-122C-E9F7-D811DAEA30DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496E2FE4-A97D-122C-E9F7-D811DAEA30DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496E2FE4-A97D-122C-E9F7-D811DAEA30DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496E2FE4-A97D-122C-E9F7-D811DAEA30DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0DF03ED-B16E-4AFF-B720-2E9397B5BF0A}
+	EndGlobalSection
+EndGlobal

@@ -38,11 +38,15 @@
             lb_DenNgay = new Label();
             lb_TuNgay = new Label();
             lb_tieude = new Label();
-            TongTien = new DataGridViewTextBoxColumn();
-            SoLuong = new DataGridViewTextBoxColumn();
-            NgayThanhToan = new DataGridViewTextBoxColumn();
-            STT = new DataGridViewTextBoxColumn();
             dgv_HoaDon = new DataGridView();
+            STT = new DataGridViewTextBoxColumn();
+            NgayThanhToan = new DataGridViewTextBoxColumn();
+            NhanVien = new DataGridViewTextBoxColumn();
+            SoLuong = new DataGridViewTextBoxColumn();
+            SanPham = new DataGridViewTextBoxColumn();
+            PhuongThuc = new DataGridViewTextBoxColumn();
+            TienThoi = new DataGridViewTextBoxColumn();
+            TongTien = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgv_HoaDon).BeginInit();
             SuspendLayout();
             // 
@@ -154,26 +158,18 @@
             lb_tieude.Text = "Xem lịch sử hóa đơn bán hàng";
             lb_tieude.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // TongTien
+            // dgv_HoaDon
             // 
-            TongTien.HeaderText = "Tổng tiền";
-            TongTien.MinimumWidth = 6;
-            TongTien.Name = "TongTien";
-            TongTien.Width = 125;
-            // 
-            // SoLuong
-            // 
-            SoLuong.HeaderText = "Số Lượng";
-            SoLuong.MinimumWidth = 6;
-            SoLuong.Name = "SoLuong";
-            SoLuong.Width = 125;
-            // 
-            // NgayThanhToan
-            // 
-            NgayThanhToan.HeaderText = "Ngày thanh toán";
-            NgayThanhToan.MinimumWidth = 6;
-            NgayThanhToan.Name = "NgayThanhToan";
-            NgayThanhToan.Width = 150;
+            dgv_HoaDon.BackgroundColor = Color.White;
+            dgv_HoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_HoaDon.Columns.AddRange(new DataGridViewColumn[] { STT, NgayThanhToan, NhanVien, SoLuong, SanPham, PhuongThuc, TienThoi, TongTien });
+            dgv_HoaDon.Location = new Point(12, 241);
+            dgv_HoaDon.Margin = new Padding(3, 4, 3, 4);
+            dgv_HoaDon.Name = "dgv_HoaDon";
+            dgv_HoaDon.RowHeadersWidth = 51;
+            dgv_HoaDon.RowTemplate.Height = 24;
+            dgv_HoaDon.Size = new Size(1059, 396);
+            dgv_HoaDon.TabIndex = 24;
             // 
             // STT
             // 
@@ -182,18 +178,54 @@
             STT.Name = "STT";
             STT.Width = 75;
             // 
-            // dgv_HoaDon
+            // NgayThanhToan
             // 
-            dgv_HoaDon.BackgroundColor = Color.White;
-            dgv_HoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_HoaDon.Columns.AddRange(new DataGridViewColumn[] { STT, NgayThanhToan, SoLuong, TongTien });
-            dgv_HoaDon.Location = new Point(12, 241);
-            dgv_HoaDon.Margin = new Padding(3, 4, 3, 4);
-            dgv_HoaDon.Name = "dgv_HoaDon";
-            dgv_HoaDon.RowHeadersWidth = 51;
-            dgv_HoaDon.RowTemplate.Height = 24;
-            dgv_HoaDon.Size = new Size(1059, 396);
-            dgv_HoaDon.TabIndex = 24;
+            NgayThanhToan.HeaderText = "Ngày thanh toán";
+            NgayThanhToan.MinimumWidth = 6;
+            NgayThanhToan.Name = "NgayThanhToan";
+            NgayThanhToan.Width = 150;
+            // 
+            // NhanVien
+            // 
+            NhanVien.HeaderText = "Nhân viên";
+            NhanVien.MinimumWidth = 6;
+            NhanVien.Name = "NhanVien";
+            NhanVien.Width = 125;
+            // 
+            // SoLuong
+            // 
+            SoLuong.HeaderText = "SoLuong";
+            SoLuong.MinimumWidth = 6;
+            SoLuong.Name = "SoLuong";
+            SoLuong.Width = 125;
+            // 
+            // SanPham
+            // 
+            SanPham.HeaderText = "Sản phẩm";
+            SanPham.MinimumWidth = 6;
+            SanPham.Name = "SanPham";
+            SanPham.Width = 125;
+            // 
+            // PhuongThuc
+            // 
+            PhuongThuc.HeaderText = "Phương Thức";
+            PhuongThuc.MinimumWidth = 6;
+            PhuongThuc.Name = "PhuongThuc";
+            PhuongThuc.Width = 125;
+            // 
+            // TienThoi
+            // 
+            TienThoi.HeaderText = "Tiền Thối";
+            TienThoi.MinimumWidth = 6;
+            TienThoi.Name = "TienThoi";
+            TienThoi.Width = 125;
+            // 
+            // TongTien
+            // 
+            TongTien.HeaderText = "Tổng Tiền";
+            TongTien.MinimumWidth = 6;
+            TongTien.Name = "TongTien";
+            TongTien.Width = 125;
             // 
             // RevenueEDay
             // 
@@ -234,10 +266,14 @@
         private System.Windows.Forms.Label lb_DenNgay;
         private System.Windows.Forms.Label lb_TuNgay;
         private System.Windows.Forms.Label lb_tieude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TongTien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NgayThanhToan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridView dgv_HoaDon;
+        private DataGridViewTextBoxColumn STT;
+        private DataGridViewTextBoxColumn NgayThanhToan;
+        private DataGridViewTextBoxColumn NhanVien;
+        private DataGridViewTextBoxColumn SoLuong;
+        private DataGridViewTextBoxColumn SanPham;
+        private DataGridViewTextBoxColumn PhuongThuc;
+        private DataGridViewTextBoxColumn TienThoi;
+        private DataGridViewTextBoxColumn TongTien;
     }
 }

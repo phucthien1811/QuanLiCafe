@@ -586,35 +586,36 @@ namespace QuanLiCafe.Forms
                 return;
             }
 
-            var confirmMsg =
-                $"Xác nhận thanh toán?\n\n" +
-                $"Bàn: {btnBanDaChon.Text}\n" +
-                $"Tổng tiền: {lblTongTien.Text}\n" +
-                $"Ngày: {dtNgayOrder.Value:dd/MM/yyyy HH:mm}";
-
-            var result = MessageBox.Show(confirmMsg, "Thanh toán",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes) return;
-
-            var table = _context.Tables.Find(_selectedTableId);
-            if (table != null)
+            try
             {
-                table.Status = "Free";
+                // Tính tổng tiền trước khi giảm giá
+                decimal subtotal = _currentOrder.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+
+                // Mở form PaymentT để chọn phương thức thanh toán
+                var paymentForm = new win.PaymentT(_currentOrder, subtotal);
+                
+                if (paymentForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Thanh toán thành công
+                    MessageBox.Show("Thanh toán thành công!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Reset form
+                    _selectedTableId = 0;
+                    _currentOrder = null;
+                    btnBanDaChon.Text = "Chưa chọn bàn";
+                    dtgvHoaDon.Rows.Clear();
+                    lblTongTien.Text = "0 VNĐ";
+
+                    // Refresh danh sách bàn
+                    RefreshTablesWithCurrentFilter();
+                }
             }
-
-            _context.SaveChanges();
-
-            MessageBox.Show("Thanh toán thành công!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            _selectedTableId = 0;
-            _currentOrder = null;
-            btnBanDaChon.Text = "Chưa chọn bàn";
-            dtgvHoaDon.Rows.Clear();
-            lblTongTien.Text = "0 VNĐ";
-
-            RefreshTablesWithCurrentFilter();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi thanh toán:\n{ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // ===== TÌM KIẾM SẢN PHẨM =====

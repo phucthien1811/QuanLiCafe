@@ -1,34 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using QuanLiCafe.Data;
 using QuanLiCafe.Forms;
 using QuanLiCafe.Models;
 using QuanLiCafe.Helpers;
 using System;
-using System.IO;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace QuanLiCafe
 {
     internal static class Program
     {
-        public static IConfiguration Configuration { get; private set; } = null!;
         public static CafeContext DbContext { get; private set; } = null!;
-        public static User? CurrentUser { get; set; } // ✅ Thêm current user
+        public static User? CurrentUser { get; set; }
 
         [STAThread]
         static void Main()
         {
-            // Load appsettings.json
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            // ✅ Đọc connection string từ App.config
+            string? connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString;
 
-            Configuration = builder.Build();
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                MessageBox.Show("Không tìm thấy connection string trong App.config!", 
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Initialize DbContext
             var optionsBuilder = new DbContextOptionsBuilder<CafeContext>();
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(connectionString);
             DbContext = new CafeContext(optionsBuilder.Options);
 
             // ✅ Seed demo data (50 orders + BCrypt passwords)
